@@ -15,7 +15,7 @@
       <v-card color="shades" height="800">
         <v-container grid-list-md text-xs-center class="height-100">
           <v-layout row wrap class="height-100">
-            <boards-column></boards-column>
+            <boards-column v-for="(column, index) of columns" :key="index"></boards-column>
           </v-layout>
         </v-container>
       </v-card>
@@ -25,9 +25,22 @@
 
 <script>
 import BoardsColumn from '~/components/BoardsColumn.vue'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'boards',
+  computed: {
+    columns () { return this.$store.state.boards.columns }
+  },
+  methods: {
+    addTodo (e) {
+      this.$store.commit('boards/add', e.target.value)
+      e.target.value = ''
+    },
+    ...mapMutations({
+      toggle: 'boards/toggle'
+    })
+  },
   components: {
     'boards-column': BoardsColumn
   }
