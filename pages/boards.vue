@@ -22,7 +22,7 @@
           <v-layout row wrap class="height-100">
             <boards-column 
               v-for="(column, index) of columns" :key="index"
-              :notes="column.notes"
+              :column="column"
               >
               </boards-column>
           </v-layout>
