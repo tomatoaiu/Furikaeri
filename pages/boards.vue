@@ -13,7 +13,7 @@
           ></v-text-field>
           <v-btn
             class="subheading" flat color="light-blue"
-            @click="addTodo"
+            @click="addColumn"
             :disabled="!validAddColumn()"
           >
           ADD
@@ -60,7 +60,7 @@ export default {
     })
   },
   methods: {
-    addTodo () {
+    addColumn () {
       if (this.validAddColumn()) {
         this.$store.commit('boards/addColumn', { name: this.columnName })
         this.$refs.field.reset()
