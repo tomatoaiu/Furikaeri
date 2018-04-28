@@ -1,32 +1,5 @@
 export const state = () => ({
-  columns: [
-    {
-      name: 'aiueo1',
-      notes: [
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        },
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        },
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        }
-      ]
-    },
-    {
-      name: 'aiueo2',
-      notes: [
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        }
-      ]
-    }
-  ]
+  columns: []
 })
 
 export const mutations = {

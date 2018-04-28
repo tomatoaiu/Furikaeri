@@ -1,15 +1,13 @@
 <template>
   <v-flex xs12 sm4>
     <v-card style="height: 100%; overflow: scroll;">
-      <v-card-title class="pb-0 pt-0">
+      <v-card-title class="pb-0 pt-0 pr-0">
         <div class="title">{{ column.name }}</div>
         <v-spacer></v-spacer>
-        <v-card-actions>
-          <v-btn
-            class="subheading px-0" flat color="light-blue"
-            @click="addNote"
-          >
-          +
+        <v-card-actions class="pr-0">
+          <v-btn flat icon color="light-blue"
+           @click="addNote">
+            <v-icon>add</v-icon>
           </v-btn>
         </v-card-actions>
       </v-card-title>
