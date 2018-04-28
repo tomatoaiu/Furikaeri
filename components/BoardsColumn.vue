@@ -1,8 +1,17 @@
 <template>
   <v-flex xs12 sm4>
     <v-card style="height: 100%; overflow: scroll;">
-      <v-card-title>
+      <v-card-title class="pb-0 pt-0">
         <div class="title">{{ column.name }}</div>
+        <v-spacer></v-spacer>
+        <v-card-actions>
+          <v-btn
+            class="subheading px-0" flat color="light-blue"
+            @click="addNote"
+          >
+          +
+          </v-btn>
+        </v-card-actions>
       </v-card-title>
       <hr class="my-1">
       <v-container grid-list-md text-xs-center>
@@ -25,8 +34,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'borads-column',
-  props: ['column']
+  props: ['column'],
+  computed: {
+    ...mapGetters({
+      columnIndex: 'boards/getColumnIndex'
+    })
+  },
+  methods: {
+    addNote () {
+      let title = 'aiueo2'
+      let content = 'qwertyuiopasdfghjklzxcvbnm'
+      this.$store.commit('boards/addNote', {
+        title,
+        content,
+        index: this.columnIndex(this.column.name)
+      })
+    }
+  }
 }
 </script>
