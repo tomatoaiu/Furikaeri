@@ -34,27 +34,27 @@
 
 <script>
 import BoardsColumn from '~/components/BoardsColumn.vue'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'boards',
   computed: {
-    columns () { return this.$store.state.boards.columns }
+    columns () { return this.$store.state.boards.columns },
+    ...mapGetters({
+      existsColumn: 'boards/existsColumn'
+    })
   },
   methods: {
     addTodo (e) {
       let name = 'aiueo2'
-      while (this.includesColumn(name)) {
+      while (this.existsColumn(name)) {
         name = prompt('change name', '')
       }
       this.$store.commit('boards/addColumn', { name })
     },
     ...mapMutations({
       toggle: 'boards/toggle'
-    }),
-    includesColumn (name) {
-      return this.columns.some(col => col.name === name)
-    }
+    })
   },
   components: {
     'boards-column': BoardsColumn

@@ -53,5 +53,8 @@ export const mutations = {
 export const getters = {
   getColumnIndex: (state) => (columnName) => {
     return state.columns.findIndex(({name}) => name === columnName)
+  },
+  existsColumn: (state) => (columnName) => {
+    return state.columns.some(col => col.name === columnName)
   }
 }
