@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     addTodo (e) {
-      this.$store.commit('boards/add', 'TODO name')
+      this.$store.commit('boards/addColumn', 'TODO name')
     },
     ...mapMutations({
       toggle: 'boards/toggle'

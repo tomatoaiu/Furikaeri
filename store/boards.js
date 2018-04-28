@@ -46,7 +46,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  add (state, payload) {
+  addColumn (state, payload) {
     state.columns.push({
       name: 'test',
       notes: []
