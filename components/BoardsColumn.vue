@@ -8,14 +8,14 @@
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-card v-for="(item, index) of items" :key="index">
+            <v-card v-for="(note, index) of notes" :key="index">
               <v-card-title class="pt-1 pl-2 pb-1">
-                <div class="subheading">{{ item.title }}</div>
+                <div class="subheading">{{ note.title }}</div>
               </v-card-title>
               <v-card-text class="px-2 pt-1">
-                {{ item.subtitle }}
+                {{ note.content }}
               </v-card-text>
-              <div class="mb-3" v-if="index + 1 < items.length" :key="index"></div>
+              <div class="mb-3" v-if="index + 1 < notes.length" :key="index"></div>
             </v-card>
           </v-flex>
         </v-layout>
@@ -27,24 +27,25 @@
 <script>
 export default {
   name: 'borads-column',
+  props: ['notes'],
   data () {
     return {
       items: [
         {
           title: 'aiueo',
-          subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
+          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
         },
         {
           title: 'abcde',
-          subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
+          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
         },
         {
           title: 'kakuk',
-          subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
+          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
         },
         {
           title: 'sasisuseso',
-          subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
+          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
         }
       ]
     }

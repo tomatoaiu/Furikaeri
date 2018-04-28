@@ -20,7 +20,11 @@
       <v-card color="shades" height="800">
         <v-container grid-list-md text-xs-center class="height-100">
           <v-layout row wrap class="height-100">
-            <boards-column v-for="(column, index) of columns" :key="index"></boards-column>
+            <boards-column 
+              v-for="(column, index) of columns" :key="index"
+              :notes="column.notes"
+              >
+              </boards-column>
           </v-layout>
         </v-container>
       </v-card>
