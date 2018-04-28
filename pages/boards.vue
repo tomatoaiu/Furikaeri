@@ -10,6 +10,7 @@
             label="New Column Name"
             v-model="columnName"
             :rules="columnNameRules"
+            @keyup.enter.native="addColumn"
           ></v-text-field>
           <v-btn
             class="subheading" flat color="light-blue"
