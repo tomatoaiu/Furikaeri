@@ -6,7 +6,12 @@
           <div class="title">Something Board</div>
           <v-spacer></v-spacer>
           <v-card-actions>
-            <v-btn class="subheading" flat color="light-blue">ADD</v-btn>
+            <v-btn
+              class="subheading" flat color="light-blue"
+              @click="addTodo"
+            >
+            ADD
+            </v-btn>
           </v-card-actions>
         </v-toolbar>
       </v-card>
@@ -34,8 +39,7 @@ export default {
   },
   methods: {
     addTodo (e) {
-      this.$store.commit('boards/add', e.target.value)
-      e.target.value = ''
+      this.$store.commit('boards/add', 'TODO name')
     },
     ...mapMutations({
       toggle: 'boards/toggle'

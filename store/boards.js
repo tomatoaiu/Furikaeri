@@ -49,40 +49,15 @@ export const state = () => ({
           content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
         }
       ]
-    },
-    {
-      name: 'aiueo',
-      notes: [
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        },
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        },
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        },
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        },
-        {
-          title: 'abcde',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum maiores modi quidem veniam, expedita quis laboriosam, ullam facere adipisci, iusto, voluptate sapiente corrupti asperiores rem nemo numquam fuga ab at.'
-        }
-      ]
     }
   ]
 })
 
 export const mutations = {
-  add (state, text) {
+  add (state, payload) {
     state.columns.push({
-      text: text,
-      done: false
+      name: 'test',
+      notes: []
     })
   },
   remove (state, { todo }) {
