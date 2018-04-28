@@ -43,11 +43,18 @@ export default {
   },
   methods: {
     addTodo (e) {
-      this.$store.commit('boards/addColumn', 'TODO name')
+      let name = 'aiueo2'
+      while (this.includesColumn(name)) {
+        name = prompt('change name', '')
+      }
+      this.$store.commit('boards/addColumn', { name })
     },
     ...mapMutations({
       toggle: 'boards/toggle'
-    })
+    }),
+    includesColumn (name) {
+      return this.columns.some(col => col.name === name)
+    }
   },
   components: {
     'boards-column': BoardsColumn
