@@ -6,6 +6,7 @@
           <div class="title">Something Board</div>
           <v-spacer></v-spacer>
           <v-text-field
+            ref="field"
             label="New Column Name"
             v-model="columnName"
             :rules="columnNameRules"
@@ -62,11 +63,12 @@ export default {
     addTodo () {
       if (this.validAddColumn()) {
         this.$store.commit('boards/addColumn', { name: this.columnName })
+        this.$refs.field.reset()
       }
     },
     validAddColumn () {
-      const isBetween = this.columnName.length > 0 && this.columnName.length <= 40
-      if (this.columnName && isBetween && !this.existsColumn(this.columnName)) {
+      if (this.columnName && this.columnName.length > 0 &&
+        this.columnName.length <= 40 && !this.existsColumn(this.columnName)) {
         return true
       } else {
         return false
