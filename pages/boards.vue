@@ -5,14 +5,18 @@
         <v-toolbar color="white">
           <div class="title">Something Board</div>
           <v-spacer></v-spacer>
-          <v-card-actions>
-            <v-btn
-              class="subheading" flat color="light-blue"
-              @click="addTodo"
-            >
-            ADD
-            </v-btn>
-          </v-card-actions>
+          <v-text-field
+            label="New Column Name"
+            v-model="columnName"
+            :rules="columnNameRules"
+          ></v-text-field>
+          <v-btn
+            class="subheading" flat color="light-blue"
+            @click="addTodo"
+            :disabled="!validAddColumn()"
+          >
+          ADD
+          </v-btn>
         </v-toolbar>
       </v-card>
     </v-flex>
@@ -38,6 +42,16 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'boards',
+  data () {
+    return {
+      columnName: '',
+      columnNameRules: [
+        v => (v && v.length > 0) || 'Name must be more than 0 characters',
+        v => (v && v.length <= 40) || 'Name must be less than 40 characters',
+        v => (!this.existsColumn(v)) || 'Name must not be duplication column name'
+      ]
+    }
+  },
   computed: {
     columns () { return this.$store.state.boards.columns },
     ...mapGetters({
@@ -45,12 +59,18 @@ export default {
     })
   },
   methods: {
-    addTodo (e) {
-      let name = 'aiueo2'
-      while (this.existsColumn(name)) {
-        name = prompt('change name', '')
+    addTodo () {
+      if (this.validAddColumn()) {
+        this.$store.commit('boards/addColumn', { name: this.columnName })
       }
-      this.$store.commit('boards/addColumn', { name })
+    },
+    validAddColumn () {
+      const isBetween = this.columnName.length > 0 && this.columnName.length <= 40
+      if (this.columnName && isBetween && !this.existsColumn(this.columnName)) {
+        return true
+      } else {
+        return false
+      }
     },
     ...mapMutations({
       toggle: 'boards/toggle'
