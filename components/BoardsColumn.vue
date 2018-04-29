@@ -56,15 +56,24 @@
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-card v-for="(note, index) of column.notes" :key="index">
-              <v-card-title class="pt-1 pl-2 pb-1">
-                <div class="subheading">{{ note.title }}</div>
-              </v-card-title>
-              <v-card-text class="px-2 pt-1">
-                {{ note.content }}
-              </v-card-text>
-              <div class="mb-3" v-if="index + 1 < column.notes.length" :key="index"></div>
-            </v-card>
+            <draggable v-model="notes" :options="{group:'note', animation: 400}">
+              <v-card v-for="(note, index) of notes" :key="index">
+                <v-card-title class="pt-1 pl-2 pb-1 pr-0">
+                  <div class="subheading">{{ note.title }}</div>
+                  <v-spacer></v-spacer>
+                  <v-btn color="light-blue" small flat icon><v-icon size="15">keyboard_arrow_up</v-icon></v-btn>
+                  <v-btn color="light-blue" small flat icon><v-icon size="15">keyboard_arrow_down</v-icon></v-btn>
+                  <v-btn color="light-blue" small flat icon><v-icon size="15">mode_edit</v-icon></v-btn>
+                  <v-btn color="light-blue" small flat icon><v-icon size="15">settings</v-icon></v-btn>
+                </v-card-title>
+                <v-card-text class="px-2 pt-1">
+                  <p class="text-xs-left">
+                    {{ note.content }}
+                  </p>
+                </v-card-text>
+                <div class="mb-3" v-if="index + 1 < notes.length" :key="index"></div>
+              </v-card>
+            </draggable>
           </v-flex>
         </v-layout>
       </v-container>
@@ -73,6 +82,7 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -90,8 +100,21 @@ export default {
   },
   computed: {
     ...mapGetters({
-      columnIndex: 'boards/getColumnIndex'
-    })
+      columnIndex: 'boards/getColumnIndex',
+      getNotes: 'boards/getNotes'
+    }),
+    notes: {
+      get () {
+        return this.getNotes(this.columnIndex(this.column.name))
+      },
+      set (list) {
+        console.table(list)
+        this.$store.commit('boards/setNote', {
+          index: this.columnIndex(this.column.name),
+          note: list
+        })
+      }
+    }
   },
   methods: {
     addNote () {
@@ -117,6 +140,9 @@ export default {
         return false
       }
     }
+  },
+  components: {
+    draggable
   }
 }
 </script>

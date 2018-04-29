@@ -55,9 +55,8 @@
           <v-layout row wrap class="height-100 overflow-scroll">
             <boards-column 
               v-for="(column, index) of columns" :key="index"
-              :column="column"
-              >
-              </boards-column>
+              :column="column">
+            </boards-column>
           </v-layout>
         </v-container>
       </v-card>
@@ -87,8 +86,8 @@ export default {
     }
   },
   computed: {
-    columns () { return this.$store.state.boards.columns },
     ...mapGetters({
+      columns: 'boards/columns',
       existsColumn: 'boards/existsColumn'
     })
   },
