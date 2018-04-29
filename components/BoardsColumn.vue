@@ -56,7 +56,7 @@
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex xs12>
-            <draggable v-model="notes" :options="{group:'note', animation: 400}">
+            <draggable v-model="notes" :options="{group:'note', animation: 400}" style="min-height: 3em;">
               <v-card v-for="(note, index) of notes" :key="index">
                 <v-card-title class="pt-1 pl-2 pb-1 pr-0">
                   <div class="subheading">{{ note.title }}</div>
@@ -103,6 +103,7 @@ export default {
     }),
     notes: {
       get () {
+        console.table(this.getNotes(this.columnIndex(this.column.name)))
         return this.getNotes(this.columnIndex(this.column.name))
       },
       set (list) {
