@@ -2,30 +2,57 @@
   <v-layout row wrap>
     <v-flex xs12 mb-3>
       <v-card color="shades">
-        <v-toolbar color="white">
+        <v-toolbar color="white" v-resize="onResize">
           <div class="title">Something Board</div>
           <v-spacer></v-spacer>
           <v-text-field
+            v-if="windowSize.x >= 600"
             ref="field"
             label="New Column Name"
             v-model="columnName"
             :rules="columnNameRules"
             @keyup.enter.native="addColumn"
+            v-on:blur="clearInput"
           ></v-text-field>
-          <v-btn
-            class="subheading" flat color="light-blue"
-            @click="addColumn"
-            :disabled="!validAddColumn()"
-          >
-          ADD
-          </v-btn>
+          <v-dialog v-model="dialog" persistent max-width="500px"
+          v-else>
+            <v-btn color="light-blue" flat small dark slot="activator"
+            >Add Column</v-btn>
+            <v-card>
+              <v-card-title>
+                <span class="headline">Please input new column name</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container grid-list-md>
+                  <v-layout wrap>
+                    <v-flex xs12>
+                      <v-text-field
+                        ref="modalField"
+                        label="New name column"
+                        v-model="columnName"
+                        :rules="columnNameRules"
+                      ></v-text-field>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="light-blue" flat @click.native="closeModal">Cancel</v-btn>
+                  <v-btn color="light-blue" flat 
+                    @click.native="addColumnOnMobail"
+                    :disabled="!validAddColumn()"
+                    >ADD</v-btn>
+                </v-card-actions>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
         </v-toolbar>
       </v-card>
     </v-flex>
     <v-flex xs12>
       <v-card color="shades" height="800">
         <v-container grid-list-md text-xs-center class="height-100">
-          <v-layout row wrap class="height-100">
+          <v-layout row wrap class="height-100 overflow-scroll">
             <boards-column 
               v-for="(column, index) of columns" :key="index"
               :column="column"
@@ -46,6 +73,11 @@ export default {
   name: 'boards',
   data () {
     return {
+      dialog: false,
+      windowSize: {
+        x: 0,
+        y: 0
+      },
       columnName: '',
       columnNameRules: [
         v => (v && v.length > 0) || 'Name must be more than 0 characters',
@@ -60,12 +92,28 @@ export default {
       existsColumn: 'boards/existsColumn'
     })
   },
+  mounted () {
+    this.onResize()
+  },
   methods: {
+    onResize () {
+      this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+    },
     addColumn () {
       if (this.validAddColumn()) {
         this.$store.commit('boards/addColumn', { name: this.columnName })
         this.$refs.field.reset()
       }
+    },
+    addColumnOnMobail () {
+      if (this.validAddColumn()) {
+        this.$store.commit('boards/addColumn', { name: this.columnName })
+        this.closeModal()
+      }
+    },
+    closeModal () {
+      this.$refs.modalField.reset()
+      this.dialog = false
     },
     validAddColumn () {
       if (this.columnName && this.columnName.length > 0 &&
@@ -74,6 +122,12 @@ export default {
       } else {
         return false
       }
+    },
+    clearInput () {
+      this.$refs.field.reset()
+    },
+    getScreenWidth () {
+      return this.$vuetify.breakpoint.width
     },
     ...mapMutations({
       toggle: 'boards/toggle'
@@ -88,6 +142,10 @@ export default {
 <style scoped>
 .height-100 {
   height: 100%;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 </style>
 
