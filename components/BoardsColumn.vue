@@ -5,10 +5,51 @@
         <div class="title">{{ column.name }}</div>
         <v-spacer></v-spacer>
         <v-card-actions class="pr-0">
-          <v-btn flat icon color="light-blue"
-           @click="addNote">
-            <v-icon>add</v-icon>
-          </v-btn>
+          <v-dialog v-model="dialog" persistent max-width="500px">
+            <v-btn color="light-blue" flat icon slot="activator"><v-icon>add</v-icon></v-btn>
+            <v-card>
+              <v-card-title>
+                <span class="headline">Note</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container grid-list-md>
+                  <v-layout wrap>
+                    <v-flex xs12>
+                      <v-text-field
+                      ref="titleField"
+                        label="title"
+                        v-model="title"
+                        :rules="titleRules"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field
+                        label="context"
+                        v-model="content"
+                        multi-line
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                      <v-select
+                        label="type"
+                        :items="['success', 'info', 'warning', 'error']"
+                      ></v-select>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat
+                  @click.native="closeModal"
+                  >Cancel</v-btn>
+                <v-btn color="blue darken-1" flat
+                  @click.native="addNote"
+                  :disabled="!validAddNote()"
+                  >ADD</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-card-actions>
       </v-card-title>
       <hr class="my-1">
@@ -37,6 +78,16 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'borads-column',
   props: ['column'],
+  data () {
+    return {
+      dialog: false,
+      title: '',
+      content: '',
+      titleRules: [
+        v => (v && v.length > 0) || 'Name must be more than 0 characters'
+      ]
+    }
+  },
   computed: {
     ...mapGetters({
       columnIndex: 'boards/getColumnIndex'
@@ -44,13 +95,27 @@ export default {
   },
   methods: {
     addNote () {
-      let title = 'aiueo2'
-      let content = 'qwertyuiopasdfghjklzxcvbnm'
-      this.$store.commit('boards/addNote', {
-        title,
-        content,
-        index: this.columnIndex(this.column.name)
-      })
+      let title = this.title
+      let content = this.content
+      if (this.validAddNote()) {
+        this.$store.commit('boards/addNote', {
+          title,
+          content,
+          index: this.columnIndex(this.column.name)
+        })
+        this.closeModal()
+      }
+    },
+    closeModal () {
+      this.$refs.titleField.reset()
+      this.dialog = false
+    },
+    validAddNote () {
+      if (this.title && this.title.length > 0) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }
