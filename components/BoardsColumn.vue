@@ -61,8 +61,6 @@
                 <v-card-title class="pt-1 pl-2 pb-1 pr-0">
                   <div class="subheading">{{ note.title }}</div>
                   <v-spacer></v-spacer>
-                  <v-btn color="light-blue" small flat icon><v-icon size="15">keyboard_arrow_up</v-icon></v-btn>
-                  <v-btn color="light-blue" small flat icon><v-icon size="15">keyboard_arrow_down</v-icon></v-btn>
                   <v-btn color="light-blue" small flat icon><v-icon size="15">mode_edit</v-icon></v-btn>
                   <v-btn color="light-blue" small flat icon><v-icon size="15">settings</v-icon></v-btn>
                 </v-card-title>
