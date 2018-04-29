@@ -15,7 +15,10 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
-  plugins: ['~/plugins/vuetify.js'],
+  plugins: [
+    '~/plugins/vuetify.js',
+    { src: '~/plugins/vuedraggable', ssr: false }
+  ],
   css: [
     '~/assets/style/app.styl'
   ],
@@ -28,7 +31,8 @@ module.exports = {
   */
   build: {
     vendor: [
-      '~/plugins/vuetify.js'
+      '~/plugins/vuetify.js',
+      '~/plugins/vuedraggable'
     ],
     extractCSS: true,
     /*
