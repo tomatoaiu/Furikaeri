@@ -119,7 +119,7 @@ export default {
       columnDialog: false,
       noteDialog: false,
       noteTitle: '',
-      content: '',
+      noteContent: '',
       titleRules: [
         v => (v && v.length > 0) || 'Name must be more than 0 characters'
       ]
