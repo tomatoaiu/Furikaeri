@@ -44,16 +44,16 @@
                   <v-layout wrap>
                     <v-flex xs12>
                       <v-text-field
-                      ref="titleField"
+                        ref="noteTitleField"
                         label="title"
-                        v-model="title"
+                        v-model="noteTitle"
                         :rules="titleRules"
                         ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                       <v-text-field
                         label="context"
-                        v-model="content"
+                        v-model="noteContent"
                         multi-line
                       ></v-text-field>
                     </v-flex>
@@ -118,7 +118,7 @@ export default {
     return {
       columnDialog: false,
       noteDialog: false,
-      title: '',
+      noteTitle: '',
       content: '',
       titleRules: [
         v => (v && v.length > 0) || 'Name must be more than 0 characters'
@@ -146,19 +146,17 @@ export default {
   },
   methods: {
     addNote () {
-      let title = this.title
-      let content = this.content
       if (this.validAddNote()) {
         this.$store.commit('boards/addNote', {
-          title,
-          content,
+          title: this.noteTitle,
+          content: this.noteContent,
           index: this.columnIndex(this.column.name)
         })
         this.closeModal()
       }
     },
     closeModal () {
-      this.$refs.titleField.reset()
+      this.$refs.noteTitleField.reset()
       this.noteDialog = false
     },
     closeColumnModal () {
@@ -169,7 +167,7 @@ export default {
       this.closeColumnModal()
     },
     validAddNote () {
-      if (this.title && this.title.length > 0) {
+      if (this.noteTitle && this.noteTitle.length > 0) {
         return true
       } else {
         return false
