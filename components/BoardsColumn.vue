@@ -86,17 +86,11 @@
           <v-flex xs12>
             <draggable v-model="notes" :options="{group:'note', animation: 400}" style="min-height: 3em;">
               <v-card v-for="(note, index) of notes" :key="index">
-                <v-card-title class="pt-1 pl-2 pb-1 pr-0">
-                  <div class="subheading">{{ note.title }}</div>
-                  <v-spacer></v-spacer>
-                  <v-btn color="light-blue" small flat icon><v-icon size="15">mode_edit</v-icon></v-btn>
-                  <v-btn color="light-blue" small flat icon><v-icon size="15">settings</v-icon></v-btn>
-                </v-card-title>
-                <v-card-text class="px-2 pt-1">
-                  <p class="text-xs-left">
-                    {{ note.content }}
-                  </p>
-                </v-card-text>
+                <boards-note
+                  :name="column.name"
+                  :note="note"
+                  :index="index">
+                </boards-note>
                 <div class="mb-3" v-if="index + 1 < notes.length" :key="index"></div>
               </v-card>
             </draggable>
@@ -108,6 +102,7 @@
 </template>
 
 <script>
+import Note from '~/components/Note.vue'
 import draggable from 'vuedraggable'
 import { mapGetters } from 'vuex'
 
@@ -175,7 +170,8 @@ export default {
     }
   },
   components: {
-    draggable
+    draggable,
+    'boards-note': Note
   }
 }
 </script>

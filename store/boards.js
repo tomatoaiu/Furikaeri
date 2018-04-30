@@ -72,6 +72,9 @@ export const mutations = {
   setNote (state, { index, note }) {
     state.columns[index].notes = note
   },
+  setNoteContent  (state, { columnIndex, noteIndex, content }) {
+    state.columns[columnIndex].notes[noteIndex].content = content
+  },
   removeColumn (state, { index }) {
     state.columns.splice(index, 1)
   }
