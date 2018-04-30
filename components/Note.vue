@@ -17,6 +17,7 @@
     </v-card-text>
     <v-text-field
       v-else
+      ref="noteContent"
       multi-line
       v-model="editingNoteContent"
       v-on:blur="setNoteContent(index, editingNoteContent)">
@@ -44,6 +45,7 @@ export default {
   methods: {
     applyEditableNoteContent () {
       this.editableNoteContent = true
+      this.$nextTick(() => this.$refs.noteContent.focus())
     },
     notApplyEditableNoteContent () {
       this.editableNoteContent = false
