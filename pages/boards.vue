@@ -66,7 +66,7 @@
 
 <script>
 import BoardsColumn from '~/components/BoardsColumn.vue'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'boards',
@@ -127,10 +127,7 @@ export default {
     },
     getScreenWidth () {
       return this.$vuetify.breakpoint.width
-    },
-    ...mapMutations({
-      toggle: 'boards/toggle'
-    })
+    }
   },
   components: {
     'boards-column': BoardsColumn
