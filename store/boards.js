@@ -75,6 +75,9 @@ export const mutations = {
   remove (state, { todo }) {
     state.columns.splice(state.columns.indexOf(todo), 1)
   },
+  removeColumn (state, { index }) {
+    state.columns.splice(index, 1)
+  },
   toggle (state, todo) {
     todo.done = !todo.done
   }

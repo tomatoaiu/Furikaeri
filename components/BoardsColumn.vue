@@ -4,8 +4,36 @@
       <v-card-title class="pb-0 pt-0 pr-0">
         <div class="title">{{ column.name }}</div>
         <v-spacer></v-spacer>
+
         <v-card-actions class="pr-0">
-          <v-dialog v-model="dialog" persistent max-width="500px">
+          <v-dialog v-model="columnDialog" persistent max-width="500px">
+            <v-btn color="light-blue" small flat icon slot="activator"><v-icon size="17">cancel</v-icon></v-btn>
+            <v-card>
+              <v-card-title>
+                <span class="headline">Column</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container grid-list-md>
+                  <v-layout wrap>
+                    <v-flex xs12>
+                      <p>Do you want to delete this column?</p>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat
+                  @click.native="closeColumnModal"
+                  >Cancel</v-btn>
+                <v-btn color="blue darken-1" flat
+                  @click.native="deleteColumnModal"
+                  >Delete</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          
+          <v-dialog v-model="noteDialog" persistent max-width="500px">
             <v-btn color="light-blue" flat icon slot="activator"><v-icon>add</v-icon></v-btn>
             <v-card>
               <v-card-title>
@@ -88,7 +116,8 @@ export default {
   props: ['column'],
   data () {
     return {
-      dialog: false,
+      columnDialog: false,
+      noteDialog: false,
       title: '',
       content: '',
       titleRules: [
@@ -130,7 +159,14 @@ export default {
     },
     closeModal () {
       this.$refs.titleField.reset()
-      this.dialog = false
+      this.noteDialog = false
+    },
+    closeColumnModal () {
+      this.columnDialog = false
+    },
+    deleteColumnModal () {
+      this.$store.commit('boards/removeColumn', { columnName: this.columnIndex(this.column.name) })
+      this.closeColumnModal()
     },
     validAddNote () {
       if (this.title && this.title.length > 0) {
