@@ -7,7 +7,7 @@
 
         <v-card-actions class="pr-0">
           <v-dialog v-model="columnDialog" persistent max-width="500px">
-            <v-btn color="light-blue" small flat icon slot="activator"><v-icon size="17">cancel</v-icon></v-btn>
+            <v-btn :color="baseColor" small flat icon slot="activator"><v-icon size="17">cancel</v-icon></v-btn>
             <v-card>
               <v-card-title>
                 <span class="headline">Column</span>
@@ -23,10 +23,10 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat
+                <v-btn :color="baseColor" flat
                   @click.native="closeColumnModal"
                   >Cancel</v-btn>
-                <v-btn color="blue darken-1" flat
+                <v-btn :color="baseColor" flat
                   @click.native="deleteColumnModal"
                   >Delete</v-btn>
               </v-card-actions>
@@ -34,7 +34,7 @@
           </v-dialog>
           
           <v-dialog v-model="noteDialog" persistent max-width="500px">
-            <v-btn color="light-blue" flat icon slot="activator"><v-icon>add</v-icon></v-btn>
+            <v-btn :color="baseColor" flat icon slot="activator"><v-icon>add</v-icon></v-btn>
             <v-card>
               <v-card-title>
                 <span class="headline">Note</span>
@@ -68,10 +68,10 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat
+                <v-btn :color="baseColor" flat
                   @click.native="closeModal"
                   >Cancel</v-btn>
-                <v-btn color="blue darken-1" flat
+                <v-btn :color="baseColor" flat
                   @click.native="addNote"
                   :disabled="!validAddNote()"
                   >ADD</v-btn>
@@ -123,7 +123,8 @@ export default {
   computed: {
     ...mapGetters({
       columnIndex: 'boards/getColumnIndex',
-      getNotes: 'boards/getNotes'
+      getNotes: 'boards/getNotes',
+      baseColor: 'color/baseColor'
     }),
     notes: {
       get () {

@@ -13,18 +13,20 @@
           :nudge-right="40"
           min-width="290px"
           :return-value.sync="date"
+          :color="baseColor"
         >
           <v-text-field
+            :color="baseColor"
             slot="activator"
             label="Picker in menu"
             v-model="date"
             prepend-icon="event"
             readonly
           ></v-text-field>
-          <v-date-picker v-model="date" no-title scrollable>
+          <v-date-picker v-model="date" no-title scrollable :color="baseColor">
             <v-spacer></v-spacer>
-            <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-            <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+            <v-btn flat :color="baseColor" @click="menu = false">Cancel</v-btn>
+            <v-btn flat :color="baseColor" @click="$refs.menu.save(date)">OK</v-btn>
           </v-date-picker>
         </v-menu>
       </v-flex>
@@ -104,6 +106,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
@@ -111,6 +115,11 @@ export default {
       menu: false,
       chips: ['Programming', 'Playing video games', 'Watching', 'Sleeping']
     }
+  },
+  computed: {
+    ...mapGetters({
+      baseColor: 'color/baseColor'
+    })
   },
   methods: {
     remove (item) {

@@ -13,10 +13,11 @@
             :rules="columnNameRules"
             @keyup.enter.native="addColumn"
             v-on:blur="clearInput"
+            :color="baseColor"
           ></v-text-field>
           <v-dialog v-model="dialog" persistent max-width="500px"
           v-else>
-            <v-btn color="light-blue" flat small dark slot="activator"
+            <v-btn :color="baseColor" flat small dark slot="activator"
             >Add Column</v-btn>
             <v-card>
               <v-card-title>
@@ -37,8 +38,8 @@
                 </v-container>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="light-blue" flat @click.native="closeModal">Cancel</v-btn>
-                  <v-btn color="light-blue" flat 
+                  <v-btn :color="baseColor" flat @click.native="closeModal">Cancel</v-btn>
+                  <v-btn :color="baseColor" flat 
                     @click.native="addColumnOnMobail"
                     :disabled="!validAddColumn()"
                     >ADD</v-btn>
@@ -88,7 +89,8 @@ export default {
   computed: {
     ...mapGetters({
       columns: 'boards/columns',
-      existsColumn: 'boards/existsColumn'
+      existsColumn: 'boards/existsColumn',
+      baseColor: 'color/baseColor'
     })
   },
   mounted () {

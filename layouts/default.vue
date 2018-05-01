@@ -26,7 +26,7 @@
     </v-navigation-drawer>
     <v-toolbar fixed app
       :clipped-left="clipped"
-      color="light-blue"
+      :color="baseColor"
     >
       <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       <v-btn
@@ -83,23 +83,29 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' },
-          { icon: 'view_column', title: 'Boards', to: '/boards' },
-          { icon: 'replay', title: 'KPT', to: '/kpt' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Furikaeri'
-      }
+import { mapGetters } from 'vuex'
+export default {
+  data () {
+    return {
+      clipped: false,
+      drawer: true,
+      fixed: false,
+      items: [
+        { icon: 'apps', title: 'Welcome', to: '/' },
+        { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' },
+        { icon: 'view_column', title: 'Boards', to: '/boards' },
+        { icon: 'replay', title: 'KPT', to: '/kpt' }
+      ],
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: 'Furikaeri'
     }
+  },
+  computed: {
+    ...mapGetters({
+      baseColor: 'color/baseColor'
+    })
   }
+}
 </script>
