@@ -48,7 +48,10 @@
               close
               @input="remove(data.item)"
               :selected="data.selected"
+              :color="kptColor.keep"
+              text-color="white"
             >
+              <v-avatar :color="kptColor.keepAvatar">K</v-avatar>
               <strong>{{ data.item }}</strong>&nbsp;
               <span>(interest)</span>
             </v-chip>
@@ -71,7 +74,10 @@
               close
               @input="remove(data.item)"
               :selected="data.selected"
+              :color="kptColor.problem"
+              text-color="white"
             >
+              <v-avatar :color="kptColor.problemAvatar">P</v-avatar>
               <strong>{{ data.item }}</strong>&nbsp;
               <span>(interest)</span>
             </v-chip>
@@ -94,7 +100,10 @@
               close
               @input="remove(data.item)"
               :selected="data.selected"
+              :color="kptColor.try"
+              text-color="white"
             >
+              <v-avatar :color="kptColor.tryAvatar">T</v-avatar>
               <strong>{{ data.item }}</strong>&nbsp;
               <span>(interest)</span>
             </v-chip>
@@ -118,7 +127,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      baseColor: 'color/baseColor'
+      baseColor: 'color/baseColor',
+      kptColor: 'color/kptColor'
     })
   },
   methods: {
