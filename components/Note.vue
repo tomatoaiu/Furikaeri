@@ -3,11 +3,11 @@
     <v-card-title class="pt-1 pl-2 pb-1 pr-0">
       <div class="subheading">{{ note.title }}</div>
       <v-spacer></v-spacer>
-      <v-btn color="light-blue" small flat icon
+      <v-btn :color="baseColor" small flat icon
         @click="applyEditableNoteContent(index)">
         <v-icon size="15">mode_edit</v-icon>
       </v-btn>
-      <v-btn color="light-blue" small flat icon><v-icon size="15">settings</v-icon></v-btn>
+      <v-btn :color="baseColor" small flat icon><v-icon size="15">settings</v-icon></v-btn>
     </v-card-title>
     <v-card-text class="px-2 pt-1"
       v-if="!editableNoteContent">
@@ -39,7 +39,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      columnIndex: 'boards/getColumnIndex'
+      columnIndex: 'boards/getColumnIndex',
+      baseColor: 'color/baseColor'
     })
   },
   methods: {
