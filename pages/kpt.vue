@@ -35,18 +35,18 @@
       <v-flex xs12 md4>
         <p class="display-2">KEEP</p>
         <v-select
-          label="Your favorite hobbies"
+          label="KEEP"
           chips
           tags
           solo
           prepend-icon=""
           append-icon=""
-          v-model="chips"
+          v-model="kptKeep"
         >
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="remove(data.item)"
+              @input="removeKeep(data.item)"
               :selected="data.selected"
               :color="kptColor.keep"
               text-color="white"
@@ -61,18 +61,18 @@
       <v-flex xs12 md4>
         <p class="display-2">PROBLEM</p>
         <v-select
-          label="Your favorite hobbies"
+          label="PROBLEM"
           chips
           tags
           solo
           prepend-icon=""
           append-icon=""
-          v-model="chips"
+          v-model="kptProblem"
         >
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="remove(data.item)"
+              @input="removeProblem(data.item)"
               :selected="data.selected"
               :color="kptColor.problem"
               text-color="white"
@@ -87,18 +87,18 @@
       <v-flex xs12 md4>
         <p class="display-2">TRY</p>
         <v-select
-          label="Your favorite hobbies"
+          label="TRY"
           chips
           tags
           solo
           prepend-icon=""
           append-icon=""
-          v-model="chips"
+          v-model="kptTry"
         >
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="remove(data.item)"
+              @input="removeTry(data.item)"
               :selected="data.selected"
               :color="kptColor.try"
               text-color="white"
@@ -120,21 +120,91 @@ import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      date: null,
-      menu: false,
-      chips: ['Programming', 'Playing video games', 'Watching', 'Sleeping']
+      menu: false
     }
   },
   computed: {
     ...mapGetters({
       baseColor: 'color/baseColor',
-      kptColor: 'color/kptColor'
-    })
+      kptColor: 'color/kptColor',
+      kpt: 'kpt/kpt',
+      kptWithDate: 'kpt/kptWithDate'
+    }),
+    date: {
+      get () {
+        return new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+      }
+    },
+    kptKeep: {
+      get () {
+        return this.getEachKpt('keep')
+      },
+      set (list) {
+        this.setEachKpt('kpt/setKeep', list)
+      }
+    },
+    kptProblem: {
+      get () {
+        return this.getEachKpt('problem')
+      },
+      set (list) {
+        this.setEachKpt('kpt/setProblem', list)
+      }
+    },
+    kptTry: {
+      get () {
+        return this.getEachKpt('try')
+      },
+      set (list) {
+        this.setEachKpt('kpt/setTry', list)
+      }
+    }
+  },
+  watch: {
+    date (next, prev) {
+      if (!this.hasDate(next)) {
+        this.setNewKpt(next)
+      }
+    }
   },
   methods: {
-    remove (item) {
-      this.chips.splice(this.chips.indexOf(item), 1)
-      this.chips = [...this.chips]
+    removeEachKpt (kptWord, item) {
+      this.$store.commit(kptWord, { date: this.date, item })
+    },
+    removeKeep (item) {
+      this.removeEachKpt('kpt/removeKeep', item)
+    },
+    removeProblem (item) {
+      this.removeEachKpt('kpt/removeProblem', item)
+    },
+    removeTry (item) {
+      this.removeEachKpt('kpt/removeTry', item)
+    },
+    hasDate (date) {
+      if (date in this.kpt) {
+        return true
+      } else {
+        return false
+      }
+    },
+    getEachKpt (kptWord) {
+      if (this.hasDate(this.date)) {
+        return this.kpt[this.date][kptWord]
+      }
+    },
+    setEachKpt (mutationWord, list) {
+      if (this.hasDate(this.date)) {
+        this.$store.commit(mutationWord, { date: this.date, list })
+      } else {
+        this.setNewKpt(this.date)
+        this.$store.commit(mutationWord, { date: this.date, list })
+      }
+    },
+    setNewKpt (date) {
+      this.$store.commit('kpt/setKpt', {
+        date,
+        content: { keep: [], problem: [], try: [] }
+      })
     }
   }
 }
