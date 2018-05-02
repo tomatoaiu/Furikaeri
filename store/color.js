@@ -1,6 +1,14 @@
 export const state = () => ({
   color: {
-    base: 'light-blue'
+    base: 'light-blue',
+    kpt: {
+      keep: 'light-green',
+      keepAvatar: 'green',
+      problem: 'red darken-1',
+      problemAvatar: 'red darken-4',
+      try: 'orange',
+      tryAvatar: 'deep-orange'
+    }
   }
 })
 
@@ -11,5 +19,6 @@ export const mutations = {
 }
 
 export const getters = {
-  baseColor: state => state.color.base
+  baseColor: state => state.color.base,
+  kptColor: state => state.color.kpt
 }
