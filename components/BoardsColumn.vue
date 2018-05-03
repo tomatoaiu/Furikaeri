@@ -128,11 +128,9 @@ export default {
     }),
     notes: {
       get () {
-        console.table(this.getNotes(this.columnIndex(this.column.name)))
         return this.getNotes(this.columnIndex(this.column.name))
       },
       set (list) {
-        console.table(list)
         this.$store.commit('boards/setNote', {
           index: this.columnIndex(this.column.name),
           note: list
