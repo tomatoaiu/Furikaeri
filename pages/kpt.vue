@@ -23,7 +23,12 @@
             prepend-icon="event"
             readonly
           ></v-text-field>
-          <v-date-picker v-model="date" no-title scrollable :color="baseColor">
+          <v-date-picker
+            v-model="date"
+            no-title scrollable
+            :color="baseColor"
+            event-color="green"
+            :events="registerDates">
             <v-spacer></v-spacer>
             <v-btn flat :color="baseColor" @click="menu = false">Cancel</v-btn>
             <v-btn flat :color="baseColor" @click="$refs.menu.save(date)">OK</v-btn>
@@ -120,7 +125,9 @@ import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      menu: false
+      menu: false,
+      date: undefined,
+      registerDates: undefined
     }
   },
   computed: {
@@ -130,11 +137,6 @@ export default {
       kpt: 'kpt/kpt',
       kptWithDate: 'kpt/kptWithDate'
     }),
-    date: {
-      get () {
-        return new Date().toJSON().slice(0, 10).replace(/-/g, '-')
-      }
-    },
     kptKeep: {
       get () {
         return this.getEachKpt('keep')
@@ -166,6 +168,10 @@ export default {
         this.setNewKpt(next)
       }
     }
+  },
+  mounted () {
+    this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    this.setRegisterDates()
   },
   methods: {
     removeEachKpt (kptWord, item) {
@@ -205,6 +211,11 @@ export default {
         date,
         content: { keep: [], problem: [], try: [] }
       })
+      this.setRegisterDates()
+      console.log(this.registerDates)
+    },
+    setRegisterDates () {
+      this.registerDates = Object.keys(this.kpt)
     }
   }
 }
