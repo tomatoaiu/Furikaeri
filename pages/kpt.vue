@@ -57,8 +57,7 @@
               text-color="white"
             >
               <v-avatar :color="kptColor.keepAvatar">K</v-avatar>
-              <strong>{{ data.item }}</strong>&nbsp;
-              <span>(interest)</span>
+              <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
         </v-select>
@@ -83,8 +82,7 @@
               text-color="white"
             >
               <v-avatar :color="kptColor.problemAvatar">P</v-avatar>
-              <strong>{{ data.item }}</strong>&nbsp;
-              <span>(interest)</span>
+              <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
         </v-select>
@@ -109,8 +107,7 @@
               text-color="white"
             >
               <v-avatar :color="kptColor.tryAvatar">T</v-avatar>
-              <strong>{{ data.item }}</strong>&nbsp;
-              <span>(interest)</span>
+              <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
         </v-select>
