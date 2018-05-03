@@ -212,7 +212,6 @@ export default {
         content: { keep: [], problem: [], try: [] }
       })
       this.setRegisterDates()
-      console.log(this.registerDates)
     },
     setRegisterDates () {
       this.registerDates = Object.keys(this.kpt)
