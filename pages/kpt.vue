@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-layout row wrap>
-      <v-flex xs11 sm5>
+      <v-flex xs12 sm5>
         <v-menu
           ref="menu"
           lazy
@@ -35,6 +35,17 @@
           </v-date-picker>
         </v-menu>
       </v-flex>
+      <v-spacer />
+      <v-flex xs2 sm2>
+        <v-btn flat icon :color="baseColor"
+         @click="toYesterday">
+          <v-icon>keyboard_arrow_left</v-icon>
+        </v-btn>
+        <v-btn flat icon :color="baseColor"
+          @click="toTomorrow">
+          <v-icon>keyboard_arrow_right</v-icon>
+        </v-btn>
+      </v-flex>
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12 md4>
@@ -57,8 +68,7 @@
               text-color="white"
             >
               <v-avatar :color="kptColor.keepAvatar">K</v-avatar>
-              <strong>{{ data.item }}</strong>&nbsp;
-              <span>(interest)</span>
+              <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
         </v-select>
@@ -83,8 +93,7 @@
               text-color="white"
             >
               <v-avatar :color="kptColor.problemAvatar">P</v-avatar>
-              <strong>{{ data.item }}</strong>&nbsp;
-              <span>(interest)</span>
+              <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
         </v-select>
@@ -109,8 +118,7 @@
               text-color="white"
             >
               <v-avatar :color="kptColor.tryAvatar">T</v-avatar>
-              <strong>{{ data.item }}</strong>&nbsp;
-              <span>(interest)</span>
+              <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
         </v-select>
@@ -215,6 +223,17 @@ export default {
     },
     setRegisterDates () {
       this.registerDates = Object.keys(this.kpt)
+    },
+    toTomorrow () {
+      this.toNextDay(1)
+    },
+    toYesterday () {
+      this.toNextDay(-1)
+    },
+    toNextDay (direction) {
+      const date = new Date(this.date)
+      date.setDate(date.getDate() + direction)
+      this.date = date.toJSON().slice(0, 10).replace(/-/g, '-')
     }
   }
 }
