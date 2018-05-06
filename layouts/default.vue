@@ -91,8 +91,7 @@ export default {
       drawer: true,
       fixed: false,
       items: [
-        { icon: 'apps', title: 'Welcome', to: '/' },
-        { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' },
+        { icon: 'apps', title: 'Usage', to: '/' },
         { icon: 'view_column', title: 'Boards', to: '/boards' },
         { icon: 'replay', title: 'KPT', to: '/kpt' }
       ],
