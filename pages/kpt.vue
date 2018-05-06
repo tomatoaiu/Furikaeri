@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-layout row wrap>
-      <v-flex xs11 sm5>
+      <v-flex xs12 sm5>
         <v-menu
           ref="menu"
           lazy
@@ -34,6 +34,17 @@
             <v-btn flat :color="baseColor" @click="$refs.menu.save(date)">OK</v-btn>
           </v-date-picker>
         </v-menu>
+      </v-flex>
+      <v-spacer />
+      <v-flex xs2 sm2>
+        <v-btn flat icon :color="baseColor"
+         @click="toYesterday">
+          <v-icon>keyboard_arrow_left</v-icon>
+        </v-btn>
+        <v-btn flat icon :color="baseColor"
+          @click="toTomorrow">
+          <v-icon>keyboard_arrow_right</v-icon>
+        </v-btn>
       </v-flex>
     </v-layout>
     <v-layout row wrap>
@@ -212,6 +223,17 @@ export default {
     },
     setRegisterDates () {
       this.registerDates = Object.keys(this.kpt)
+    },
+    toTomorrow () {
+      this.toNextDay(1)
+    },
+    toYesterday () {
+      this.toNextDay(-1)
+    },
+    toNextDay (direction) {
+      const date = new Date(this.date)
+      date.setDate(date.getDate() + direction)
+      this.date = date.toJSON().slice(0, 10).replace(/-/g, '-')
     }
   }
 }
