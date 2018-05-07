@@ -36,7 +36,15 @@
         </v-menu>
       </v-flex>
       <v-spacer />
-      <v-flex xs2 sm2>
+      <v-flex xs3 sm3>
+        <v-btn flat icon :color="baseColor"
+         @click="toNextWeek">
+          <v-icon>keyboard_arrow_up</v-icon>
+        </v-btn>
+        <v-btn flat icon :color="baseColor"
+         @click="toLastWeek">
+          <v-icon>keyboard_arrow_down</v-icon>
+        </v-btn>
         <v-btn flat icon :color="baseColor"
          @click="toYesterday">
           <v-icon>keyboard_arrow_left</v-icon>
@@ -229,6 +237,12 @@ export default {
     },
     toYesterday () {
       this.toNextDay(-1)
+    },
+    toNextWeek () {
+      this.toNextDay(7)
+    },
+    toLastWeek () {
+      this.toNextDay(-7)
     },
     toNextDay (direction) {
       const date = new Date(this.date)
