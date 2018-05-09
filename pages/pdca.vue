@@ -75,7 +75,7 @@
               :color="pdcaColor.plan"
               text-color="white"
             >
-              <v-avatar :color="pdcaColor.planAvatar">K</v-avatar>
+              <v-avatar :color="pdcaColor.planAvatar">P</v-avatar>
               <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
@@ -100,7 +100,7 @@
               :color="pdcaColor.do"
               text-color="white"
             >
-              <v-avatar :color="pdcaColor.doAvatar">P</v-avatar>
+              <v-avatar :color="pdcaColor.doAvatar">D</v-avatar>
               <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
@@ -125,7 +125,7 @@
               :color="pdcaColor.check"
               text-color="white"
             >
-              <v-avatar :color="pdcaColor.checkAvatar">T</v-avatar>
+              <v-avatar :color="pdcaColor.checkAvatar">C</v-avatar>
               <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
