@@ -49,12 +49,9 @@
       </v-btn>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <v-avatar color="white" size="40" title="user">
+        <img src="~/static/v.png" alt="avatar">
+      </v-avatar>
     </v-toolbar>
     <v-content>
       <v-container>
