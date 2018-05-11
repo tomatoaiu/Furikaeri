@@ -9,6 +9,14 @@ export const state = () => ({
       try: 'orange',
       tryAvatar: 'deep-orange'
     },
+    ywt: {
+      yattakoto: 'light-green',
+      yattakotoAvatar: 'green',
+      wakattakoto: 'red darken-1',
+      wakattakotoAvatar: 'red darken-4',
+      tsuginiyarukoto: 'orange',
+      tsuginiyarukotoAvatar: 'deep-orange'
+    },
     pdca: {
       plan: 'light-green',
       planAvatar: 'green',
@@ -31,5 +39,6 @@ export const mutations = {
 export const getters = {
   baseColor: state => state.color.base,
   kptColor: state => state.color.kpt,
+  ywtColor: state => state.color.ywt,
   pdcaColor: state => state.color.pdca
 }

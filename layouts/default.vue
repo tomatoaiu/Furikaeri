@@ -91,6 +91,7 @@ export default {
         { icon: 'apps', title: 'Usage', to: '/' },
         { icon: 'view_column', title: 'Boards', to: '/boards' },
         { icon: 'replay', title: 'KPT', to: '/kpt' },
+        { icon: 'replay', title: 'YWT', to: '/ywt' },
         { icon: 'replay', title: 'PDCA', to: '/pdca' },
         { icon: 'apps', title: 'Calendar', to: '/calendar' }
       ],
