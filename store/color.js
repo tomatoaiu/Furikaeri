@@ -17,6 +17,16 @@ export const state = () => ({
       tsuginiyarukoto: 'orange',
       tsuginiyarukotoAvatar: 'deep-orange'
     },
+    fourLinesDiary: {
+      fact: 'light-green',
+      factAvatar: 'green',
+      awareness: 'red darken-1',
+      awarenessAvatar: 'red darken-4',
+      lesson: 'orange',
+      lessonAvatar: 'deep-orange',
+      declaration: 'blue',
+      declarationAvatar: 'blue darken-4'
+    },
     pdca: {
       plan: 'light-green',
       planAvatar: 'green',
@@ -40,5 +50,6 @@ export const getters = {
   baseColor: state => state.color.base,
   kptColor: state => state.color.kpt,
   ywtColor: state => state.color.ywt,
+  fourLinesDiaryColor: state => state.color.fourLinesDiary,
   pdcaColor: state => state.color.pdca
 }
