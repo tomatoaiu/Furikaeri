@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeKeep(data.item)"
+              @input="removeFact(data.item)"
               :selected="data.selected"
               :color="fourLinesDiaryColor.fact"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeProblem(data.item)"
+              @input="removeAwareness(data.item)"
               :selected="data.selected"
               :color="fourLinesDiaryColor.awareness"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeTry(data.item)"
+              @input="removeLesson(data.item)"
               :selected="data.selected"
               :color="fourLinesDiaryColor.lesson"
               text-color="white"
@@ -145,7 +145,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeTry(data.item)"
+              @input="removeDeclaration(data.item)"
               :selected="data.selected"
               :color="fourLinesDiaryColor.declaration"
               text-color="white"
@@ -225,17 +225,17 @@ export default {
     removeEaceFourLinesDiary (fourLinesDiaryWord, item) {
       this.$store.commit(fourLinesDiaryWord, { date: this.date, item })
     },
-    removePlan (item) {
-      this.removeEaceFourLinesDiary('fourLinesDiary/removePlan', item)
+    removeFact (item) {
+      this.removeEaceFourLinesDiary('fourLinesDiary/removeFact', item)
     },
-    removeDo (item) {
-      this.removeEaceFourLinesDiary('fourLinesDiary/removeDo', item)
+    removeAwareness (item) {
+      this.removeEaceFourLinesDiary('fourLinesDiary/removeAwareness', item)
     },
-    removeCheck (item) {
-      this.removeEaceFourLinesDiary('fourLinesDiary/removeCheck', item)
+    removeLesson (item) {
+      this.removeEaceFourLinesDiary('fourLinesDiary/removeLesson', item)
     },
-    removeAction (item) {
-      this.removeEaceFourLinesDiary('fourLinesDiary/removeAction', item)
+    removeDeclaration (item) {
+      this.removeEaceFourLinesDiary('fourLinesDiary/removeDeclaration', item)
     },
     hasDate (date) {
       if (date in this.fourLinesDiary) {
