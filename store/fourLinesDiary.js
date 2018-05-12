@@ -1,5 +1,5 @@
 export const state = () => ({
-  diary: {
+  fourLinesDiary: {
     '2018-05-01': {
       fact: ['everyday commit to github'],
       awareness: ['diet'],
@@ -16,35 +16,35 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setFourLineDiary (state, { date, content }) {
-    state.diary[date] = content
+  setFourLinesDiary (state, { date, content }) {
+    state.fourLinesDiary[date] = content
   },
   setFact (state, { date, list }) {
-    state.diary[date].fact = list
+    state.fourLinesDiary[date].fact = list
   },
   setAwareness (state, { date, list }) {
-    state.diary[date].awareness = list
+    state.fourLinesDiary[date].awareness = list
   },
   setLesson (state, { date, list }) {
-    state.diary[date].lesson = list
+    state.fourLinesDiary[date].lesson = list
   },
   setDeclaration (state, { date, list }) {
-    state.diary[date].declaration = list
+    state.fourLinesDiary[date].declaration = list
   },
   removeFact (state, { date, item }) {
-    state.diary[date].fact.splice(state.diary[date].keep.indexOf(item), 1)
+    state.fourLinesDiary[date].fact.splice(state.fourLinesDiary[date].keep.indexOf(item), 1)
   },
   removeAwareness (state, { date, item }) {
-    state.diary[date].awareness.splice(state.diary[date].awareness.indexOf(item), 1)
+    state.fourLinesDiary[date].awareness.splice(state.fourLinesDiary[date].awareness.indexOf(item), 1)
   },
   removeLesson (state, { date, item }) {
-    state.diary[date].lesson.splice(state.diary[date].lesson.indexOf(item), 1)
+    state.fourLinesDiary[date].lesson.splice(state.fourLinesDiary[date].lesson.indexOf(item), 1)
   },
   removeDeclaration (state, { date, item }) {
-    state.diary[date].declaration.splice(state.diary[date].declaration.indexOf(item), 1)
+    state.fourLinesDiary[date].declaration.splice(state.fourLinesDiary[date].declaration.indexOf(item), 1)
   }
 }
 
 export const getters = {
-  fourLinesDiary: state => state.diary
+  fourLinesDiary: state => state.fourLinesDiary
 }
