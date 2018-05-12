@@ -32,7 +32,7 @@ export const mutations = {
     state.fourLinesDiary[date].declaration = list
   },
   removeFact (state, { date, item }) {
-    state.fourLinesDiary[date].fact.splice(state.fourLinesDiary[date].keep.indexOf(item), 1)
+    state.fourLinesDiary[date].fact.splice(state.fourLinesDiary[date].fact.indexOf(item), 1)
   },
   removeAwareness (state, { date, item }) {
     state.fourLinesDiary[date].awareness.splice(state.fourLinesDiary[date].awareness.indexOf(item), 1)
