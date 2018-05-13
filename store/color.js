@@ -27,6 +27,18 @@ export const state = () => ({
       declaration: 'blue',
       declarationAvatar: 'blue darken-4'
     },
+    lamda: {
+      look: 'light-green',
+      lookAvatar: 'green',
+      ask: 'red darken-1',
+      askAvatar: 'red darken-4',
+      model: 'orange',
+      modelAvatar: 'deep-orange',
+      discuss: 'blue',
+      discussAvatar: 'blue darken-4',
+      act: 'purple lighten-4',
+      actAvatar: 'purple lighten-1'
+    },
     pdca: {
       plan: 'light-green',
       planAvatar: 'green',
@@ -51,5 +63,6 @@ export const getters = {
   kptColor: state => state.color.kpt,
   ywtColor: state => state.color.ywt,
   fourLinesDiaryColor: state => state.color.fourLinesDiary,
+  lamda: state => state.color.lamda,
   pdcaColor: state => state.color.pdca
 }
