@@ -63,6 +63,6 @@ export const getters = {
   kptColor: state => state.color.kpt,
   ywtColor: state => state.color.ywt,
   fourLinesDiaryColor: state => state.color.fourLinesDiary,
-  lamda: state => state.color.lamda,
+  lamdaColor: state => state.color.lamda,
   pdcaColor: state => state.color.pdca
 }
