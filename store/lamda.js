@@ -21,31 +21,31 @@ export const mutations = {
   setLamda (state, { date, content }) {
     state.lamda[date] = content
   },
-  setFact (state, { date, list }) {
+  setLook (state, { date, list }) {
     state.lamda[date].look = list
   },
-  setAwareness (state, { date, list }) {
+  setAsk (state, { date, list }) {
     state.lamda[date].ask = list
   },
-  setLesson (state, { date, list }) {
+  setModel (state, { date, list }) {
     state.lamda[date].model = list
   },
-  setDeclaration (state, { date, list }) {
+  setDiscuss (state, { date, list }) {
     state.lamda[date].discuss = list
   },
   setAct (state, { date, list }) {
     state.lamda[date].act = list
   },
-  removeFact (state, { date, item }) {
+  removeLook (state, { date, item }) {
     state.lamda[date].look.splice(state.lamda[date].look.indexOf(item), 1)
   },
-  removeAwareness (state, { date, item }) {
+  removeAsk (state, { date, item }) {
     state.lamda[date].ask.splice(state.lamda[date].ask.indexOf(item), 1)
   },
-  removeLesson (state, { date, item }) {
+  removeModel (state, { date, item }) {
     state.lamda[date].model.splice(state.lamda[date].model.indexOf(item), 1)
   },
-  removeDeclaration (state, { date, item }) {
+  removeDiscuss (state, { date, item }) {
     state.lamda[date].discuss.splice(state.lamda[date].discuss.indexOf(item), 1)
   },
   removeAct (state, { date, item }) {
