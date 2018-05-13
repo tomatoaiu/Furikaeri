@@ -93,6 +93,7 @@ export default {
         { icon: 'replay', title: 'KPT', to: '/kpt' },
         { icon: 'replay', title: 'YWT', to: '/ywt' },
         { icon: 'replay', title: '4LinesDiary', to: '/fourLinesDiary' },
+        { icon: 'replay', title: 'LAMDA', to: '/lamda' },
         { icon: 'replay', title: 'PDCA', to: '/pdca' },
         { icon: 'apps', title: 'Calendar', to: '/calendar' }
       ],
