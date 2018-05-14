@@ -39,6 +39,16 @@ export const state = () => ({
       act: 'purple lighten-4',
       actAvatar: 'purple lighten-1'
     },
+    experientialLearning: {
+      concreateExperience: 'light-green',
+      concreateExperienceAvatar: 'green',
+      reflectiveObservation: 'red darken-1',
+      reflectiveObservationAvatar: 'red darken-4',
+      abstractConceptualization: 'orange',
+      abstractConceptualizationAvatar: 'deep-orange',
+      activeExperimentation: 'blue',
+      activeExperimentationAvatar: 'blue darken-4'
+    },
     pdca: {
       plan: 'light-green',
       planAvatar: 'green',
@@ -64,5 +74,6 @@ export const getters = {
   ywtColor: state => state.color.ywt,
   fourLinesDiaryColor: state => state.color.fourLinesDiary,
   lamdaColor: state => state.color.lamda,
+  experientialLearningColor: state => state.color.experientialLearning,
   pdcaColor: state => state.color.pdca
 }
