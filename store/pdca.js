@@ -32,7 +32,7 @@ export const mutations = {
     state.pdca[date].action = list
   },
   removePlan (state, { date, item }) {
-    state.pdca[date].plan.splice(state.pdca[date].keep.indexOf(item), 1)
+    state.pdca[date].plan.splice(state.pdca[date].plan.indexOf(item), 1)
   },
   removeDo (state, { date, item }) {
     state.pdca[date].do.splice(state.pdca[date].do.indexOf(item), 1)
