@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeKeep(data.item)"
+              @input="removePlan(data.item)"
               :selected="data.selected"
               :color="pdcaColor.plan"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeProblem(data.item)"
+              @input="removeDo(data.item)"
               :selected="data.selected"
               :color="pdcaColor.do"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeTry(data.item)"
+              @input="removeCheck(data.item)"
               :selected="data.selected"
               :color="pdcaColor.check"
               text-color="white"
@@ -145,7 +145,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeTry(data.item)"
+              @input="removeAction(data.item)"
               :selected="data.selected"
               :color="pdcaColor.action"
               text-color="white"
