@@ -32,6 +32,5 @@ For detailed explanation on how things work, check out the [Nuxt.js](https://git
 ## Deploy
 firebase
 
-
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftomatoaiu%2FFurikaeri.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftomatoaiu%2FFurikaeri?ref=badge_large)
