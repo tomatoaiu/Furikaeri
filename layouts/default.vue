@@ -74,7 +74,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
-      <span>&copy; 2018</span>
+      <span>&copy; 2018 <a href="https://github.com/tomatoaiu" target="_blank">tomatoaiu</a></span>
     </v-footer>
   </v-app>
 </template>
