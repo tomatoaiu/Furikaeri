@@ -17,19 +17,19 @@ export const mutations = {
   setGapAnalysis (state, { date, content }) {
     state.gapAnalysis[date] = content
   },
-  setAsIs (state, { date, list }) {
+  setAsis (state, { date, list }) {
     state.gapAnalysis[date].asis = list
   },
-  setToBe (state, { date, list }) {
+  setTobe (state, { date, list }) {
     state.gapAnalysis[date].tobe = list
   },
   setGap (state, { date, list }) {
     state.gapAnalysis[date].gap = list
   },
-  removeAsIs (state, { date, item }) {
+  removeAsis (state, { date, item }) {
     state.gapAnalysis[date].asis.splice(state.gapAnalysis[date].asis.indexOf(item), 1)
   },
-  removeToBe (state, { date, item }) {
+  removeTobe (state, { date, item }) {
     state.gapAnalysis[date].tobe.splice(state.gapAnalysis[date].tobe.indexOf(item), 1)
   },
   removeGap (state, { date, item }) {
