@@ -1,4 +1,6 @@
 # furikaeri-web
+[![Dependency Status](https://beta.gemnasium.com/badges/github.com/tomatoaiu/Furikaeri.svg)](https://beta.gemnasium.com/projects/github.com/tomatoaiu/Furikaeri)
+
 Let's Furikaeri  
 [Web Site](https://lets-furikaeri.firebaseapp.com/)
 > Nuxt.js + Vuetify.js project
