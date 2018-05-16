@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 
 module.exports = {
   /*
@@ -47,6 +48,9 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+      config.plugins.push(
+        new webpack.EnvironmentPlugin(['APIKEY', 'AUTHDOMAIN', 'DATABASEURL', 'PROJECTID', 'STORAGEBUCKET'])
+      )
     }
   }
 }
