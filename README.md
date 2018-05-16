@@ -1,5 +1,4 @@
 # furikaeri-web
-[![Dependency Status](https://beta.gemnasium.com/badges/github.com/tomatoaiu/Furikaeri.svg)](https://beta.gemnasium.com/projects/github.com/tomatoaiu/Furikaeri)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftomatoaiu%2FFurikaeri.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftomatoaiu%2FFurikaeri?ref=badge_shield)
 
 Let's Furikaeri  
