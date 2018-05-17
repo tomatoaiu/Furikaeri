@@ -49,9 +49,22 @@
       </v-btn>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-avatar color="white" size="40" title="user">
-        <img src="~/static/v.png" alt="avatar">
-      </v-avatar>
+      <div v-if="!isSignUp">
+        <v-btn outline small dark @click="callAuth">
+          sign in / sign up
+        </v-btn>
+      </div>
+      <v-menu v-else bottom offset-y>
+        <v-avatar slot="activator" color="white" size="40" title="user">
+          <img :src="user.icon" alt="avatar">
+        </v-avatar>
+        <v-list>
+          <v-list-tile v-for="(item, i) in userLinks" :key="i" @click="">
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+      
     </v-toolbar>
     <v-content>
       <v-container>
@@ -80,7 +93,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -102,12 +116,23 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Furikaeri'
+      title: 'Furikaeri',
+      showAvatar: false,
+      userLinks: [
+        { title: 'SIGN OUT' }
+      ]
     }
   },
   computed: {
     ...mapGetters({
-      baseColor: 'color/baseColor'
+      baseColor: 'color/baseColor',
+      user: 'user/user',
+      isSignUp: 'user/isSignUp'
+    })
+  },
+  methods: {
+    ...mapActions({
+      callAuth: 'user/callAuth'
     })
   }
 }

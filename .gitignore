@@ -12,3 +12,6 @@ dist
 
 # Text Editor
 .vscode
+
+# env
+.envrc
