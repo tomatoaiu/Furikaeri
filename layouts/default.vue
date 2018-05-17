@@ -48,9 +48,16 @@
         <v-icon>remove</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title"></v-toolbar-title>
-      <p>{{ user }}</p>
       <v-spacer></v-spacer>
-      <v-avatar color="white" size="40" title="user" @click="callAuth">
+      <div v-if="!isSignUp">
+        <v-btn outline small dark>
+          sign in
+        </v-btn>
+        <v-btn outline small dark @click="callAuth">
+          sign up
+        </v-btn>
+      </div>
+      <v-avatar v-else color="white" size="40" title="user" @click="callAuth">
         <img src="~/static/v.png" alt="avatar">
       </v-avatar>
     </v-toolbar>
@@ -104,13 +111,15 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Furikaeri'
+      title: 'Furikaeri',
+      showAvatar: false
     }
   },
   computed: {
     ...mapGetters({
       baseColor: 'color/baseColor',
-      user: 'user/user'
+      user: 'user/user',
+      isSignUp: 'user/isSignUp'
     })
   },
   methods: {

@@ -20,5 +20,12 @@ export const actions = {
 }
 
 export const getters = {
-  user: state => state.user
+  user: state => state.user,
+  isSignUp: (state) => {
+    if (state.user) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
