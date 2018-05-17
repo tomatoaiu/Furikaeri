@@ -48,7 +48,7 @@
         <v-icon>remove</v-icon>
       </v-btn>
       <v-toolbar-title v-text="title"></v-toolbar-title>
-      <p>{{ user.nam }}</p>
+      <p>{{ user }}</p>
       <v-spacer></v-spacer>
       <v-avatar color="white" size="40" title="user" @click="callAuth">
         <img src="~/static/v.png" alt="avatar">
@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import auth from '~/plugins/auth'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -113,13 +112,6 @@ export default {
       baseColor: 'color/baseColor',
       user: 'user/user'
     })
-  },
-  async mounted () {
-    if (process.browser) {
-      if (!this.user) {
-        await auth()
-      }
-    }
   },
   methods: {
     ...mapActions({

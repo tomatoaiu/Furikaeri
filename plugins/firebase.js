@@ -7,7 +7,8 @@ if (!firebase.apps.length) {
       authDomain: process.env.AUTHDOMAIN,
       databaseURL: process.env.DATABASEURL,
       projectId: process.env.PROJECTID,
-      storageBucket: process.env.STORAGEBUCKET
+      storageBucket: process.env.STORAGEBUCKET,
+      messagingSenderId: process.env.MESSAGINGSENDERID
     }
   )
 }
