@@ -50,16 +50,21 @@
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <div v-if="!isSignUp">
-        <v-btn outline small dark>
-          sign in
-        </v-btn>
         <v-btn outline small dark @click="callAuth">
-          sign up
+          sign in / sign up
         </v-btn>
       </div>
-      <v-avatar v-else color="white" size="40" title="user" @click="callAuth">
-        <img src="~/static/v.png" alt="avatar">
-      </v-avatar>
+      <v-menu v-else bottom offset-y>
+        <v-avatar slot="activator" color="white" size="40" title="user">
+          <img :src="user.icon" alt="avatar">
+        </v-avatar>
+        <v-list>
+          <v-list-tile v-for="(item, i) in userLinks" :key="i" @click="">
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+      
     </v-toolbar>
     <v-content>
       <v-container>
@@ -112,7 +117,10 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Furikaeri',
-      showAvatar: false
+      showAvatar: false,
+      userLinks: [
+        { title: 'SIGN OUT' }
+      ]
     }
   },
   computed: {
