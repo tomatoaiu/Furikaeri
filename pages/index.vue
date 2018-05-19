@@ -3,11 +3,8 @@
     <div v-if="isLoaded">
       <div>
         loaded
-        <br />{{ credential.displayName }}
-        <br />{{ credential.email }}
-        <br /><img :src="credential.photoURL" /></div>
-        <button @click="setUser()">set user</button>
       </div>
+    </div>
     <div v-else>loading</div>
   </div>
 </template>
