@@ -157,7 +157,7 @@ export default {
       this.columnDialog = false
     },
     deleteColumnModal () {
-      this.$store.commit('boards/removeColumn', { columnName: this.columnIndex(this.column.name) })
+      this.$store.commit('boards/removeColumn', { index: this.columnIndex(this.column.name) })
       this.closeColumnModal()
     },
     validAddNote () {
