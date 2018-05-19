@@ -1,5 +1,25 @@
 # Change Log
 
+## [v0.1.1](https://github.com/tomatoaiu/Furikaeri/tree/v0.1.1) (2018-05-19)
+[Full Changelog](https://github.com/tomatoaiu/Furikaeri/compare/v0.1.0...v0.1.1)
+
+**Fixed bugs:**
+
+- When the second or more columns are deleted, the first column disappears [\#35](https://github.com/tomatoaiu/Furikaeri/issues/35)
+
+**Closed issues:**
+
+- Update Readme v0.1.0 [\#19](https://github.com/tomatoaiu/Furikaeri/issues/19)
+
+**Merged pull requests:**
+
+- Feat/auth [\#38](https://github.com/tomatoaiu/Furikaeri/pull/38) ([tomatoaiu](https://github.com/tomatoaiu))
+- Feat/board [\#37](https://github.com/tomatoaiu/Furikaeri/pull/37) ([tomatoaiu](https://github.com/tomatoaiu))
+- refactor: isSignUp [\#34](https://github.com/tomatoaiu/Furikaeri/pull/34) ([tomatoaiu](https://github.com/tomatoaiu))
+- Feat/auth [\#32](https://github.com/tomatoaiu/Furikaeri/pull/32) ([tomatoaiu](https://github.com/tomatoaiu))
+- Add a Codacy badge to README.md [\#31](https://github.com/tomatoaiu/Furikaeri/pull/31) ([codacy-badger](https://github.com/codacy-badger))
+- Add license scan report and status [\#28](https://github.com/tomatoaiu/Furikaeri/pull/28) ([fossabot](https://github.com/fossabot))
+
 ## [v0.1.0](https://github.com/tomatoaiu/Furikaeri/tree/v0.1.0) (2018-05-15)
 **Merged pull requests:**
 
