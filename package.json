@@ -1,6 +1,6 @@
 {
   "name": "furikaeri-web",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Nuxt.js + Vuetify.js project",
   "author": "Shunsuke Toba <boushi_sukaimu@yahoo.co.jp>",
   "private": true,
