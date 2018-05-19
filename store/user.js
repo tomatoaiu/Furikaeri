@@ -4,13 +4,18 @@ const userRef = db.ref('/user')
 const provider = new firebase.auth.GoogleAuthProvider()
 
 export const state = () => ({
-  user: null
+  user: {
+    name: '',
+    email: '',
+    icon: ''
+  }
 })
 
 export const mutations = {
-  SET_CREDENTAIL (state, { user }) {
-    console.log(user)
-    state.user = user
+  setUser (state, user) {
+    state.user.name = user.displayName
+    state.user.email = user.email
+    state.user.icon = user.photoURL
   }
 }
 
@@ -25,7 +30,11 @@ export const actions = {
       email: user.email,
       icon: user.photoURL
     })
-    // commit('SET_CREDENTAIL', { user })
+    commit('setUser', {
+      displayName: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL
+    })
     console.log(user)
   }
 }

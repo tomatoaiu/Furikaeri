@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div v-if="isLoaded">loaded
-      <br />{{ credential.displayName }}
-      <br />{{ credential.email }}
-      <br /><img :src="credential.photoURL" /></div>
+    <div v-if="isLoaded">
+      <div>
+        loaded
+        <br />{{ credential.displayName }}
+        <br />{{ credential.email }}
+        <br /><img :src="credential.photoURL" /></div>
+        <button @click="setUser()">set user</button>
+      </div>
     <div v-else>loading</div>
   </div>
 </template>
@@ -20,16 +24,13 @@ export default {
     }
   },
   async mounted () {
-    if (process.browser) {
-      if (!this.user) {
-        this.credential = await auth()
-        console.log(this.credential)
-      }
-      await Promise.all([
-        this.user ? Promise.resolve() : this.setCredential({ user: this.credential || null })
-      ])
-      this.isLoaded = true
+    if (!this.user) {
+      this.credential = await auth()
     }
+    await Promise.all([
+      this.user ? Promise.resolve() : this.setCredential({ user: this.credential || null })
+    ])
+    this.isLoaded = true
   },
   methods: {
     ...mapActions({
