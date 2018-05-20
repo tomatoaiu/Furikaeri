@@ -26,6 +26,9 @@
                     :rules="noteTitleRules"
                     ></v-text-field>
                 </v-flex>
+                <v-btn outline :color="baseColor" @click="removeNote">
+                  Delete Note
+                </v-btn>
               </v-layout>
             </v-container>
           </v-card-text>
@@ -79,6 +82,7 @@ export default {
   computed: {
     ...mapGetters({
       columnIndex: 'boards/getColumnIndex',
+      noteIndex: 'boards/getNoteIndex',
       baseColor: 'color/baseColor'
     })
   },
@@ -115,6 +119,13 @@ export default {
       } else {
         return false
       }
+    },
+    removeNote () {
+      this.$store.commit('boards/removeNote', {
+        columnIndex: this.columnIndex(this.name),
+        noteIndex: this.noteIndex(this.columnIndex(this.name), this.noteTitle)
+      })
+      this.closeConfigDialog()
     }
   }
 }
