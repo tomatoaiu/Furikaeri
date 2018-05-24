@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeKeep(data.item)"
+              @input="removeKeep(({ date, item: data.item }))"
               :selected="data.selected"
               :color="kptColor.keep"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeProblem(data.item)"
+              @input="removeProblem(({ date, item: data.item }))"
               :selected="data.selected"
               :color="kptColor.problem"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeTry(data.item)"
+              @input="removeTry(({ date, item: data.item }))"
               :selected="data.selected"
               :color="kptColor.try"
               text-color="white"
@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -158,7 +158,7 @@ export default {
         return this.getEachKpt('keep')
       },
       set (list) {
-        this.setEachKpt('kpt/setKeep', list)
+        this.setKeep({ date: this.date, list })
       }
     },
     kptProblem: {
@@ -166,7 +166,7 @@ export default {
         return this.getEachKpt('problem')
       },
       set (list) {
-        this.setEachKpt('kpt/setProblem', list)
+        this.setProblem({ date: this.date, list })
       }
     },
     kptTry: {
@@ -174,7 +174,7 @@ export default {
         return this.getEachKpt('try')
       },
       set (list) {
-        this.setEachKpt('kpt/setTry', list)
+        this.setTry({ date: this.date, list })
       }
     }
   },
@@ -187,21 +187,21 @@ export default {
   },
   mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    if (!this.hasDate(this.date)) {
+      this.setNewKpt(this.date)
+    }
     this.setRegisterDates()
   },
   methods: {
-    removeEachKpt (kptWord, item) {
-      this.$store.commit(kptWord, { date: this.date, item })
-    },
-    removeKeep (item) {
-      this.removeEachKpt('kpt/removeKeep', item)
-    },
-    removeProblem (item) {
-      this.removeEachKpt('kpt/removeProblem', item)
-    },
-    removeTry (item) {
-      this.removeEachKpt('kpt/removeTry', item)
-    },
+    ...mapActions({
+      setKpt: 'kpt/setKpt',
+      setKeep: 'kpt/setKeep',
+      setProblem: 'kpt/setProblem',
+      setTry: 'kpt/setTry',
+      removeKeep: 'kpt/removeKeep',
+      removeProblem: 'kpt/removeProblem',
+      removeTry: 'kpt/removeTry'
+    }),
     hasDate (date) {
       if (date in this.kpt) {
         return true
@@ -214,16 +214,8 @@ export default {
         return this.kpt[this.date][kptWord]
       }
     },
-    setEachKpt (mutationWord, list) {
-      if (this.hasDate(this.date)) {
-        this.$store.commit(mutationWord, { date: this.date, list })
-      } else {
-        this.setNewKpt(this.date)
-        this.$store.commit(mutationWord, { date: this.date, list })
-      }
-    },
     setNewKpt (date) {
-      this.$store.commit('kpt/setKpt', {
+      this.setKpt({
         date,
         content: { keep: [], problem: [], try: [] }
       })
