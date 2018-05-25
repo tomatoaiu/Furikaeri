@@ -26,7 +26,7 @@
                     :rules="noteTitleRules"
                     ></v-text-field>
                 </v-flex>
-                <v-btn outline :color="baseColor" @click="removeNote">
+                <v-btn outline :color="baseColor" @click="removeCurrentNote">
                   Delete Note
                 </v-btn>
               </v-layout>
@@ -38,7 +38,7 @@
               @click.native="closeConfigDialog"
               >Cancel</v-btn>
             <v-btn :color="baseColor" flat
-              @click.native="setNoteTitle(index)"
+              @click.native="changeNoteTitle(index)"
               :disabled="!validNoteTitle()"
               >SET</v-btn>
           </v-card-actions>
@@ -57,13 +57,13 @@
       ref="noteContent"
       multi-line
       v-model="editingNoteContent"
-      v-on:blur="setNoteContent(index, editingNoteContent)">
+      v-on:blur="changeNoteContent(index, editingNoteContent)">
     </v-text-field>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'boards-note',
@@ -87,6 +87,11 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      setNoteTitle: 'boards/setNoteTitle',
+      setNoteContent: 'boards/setNoteContent',
+      removeNote: 'boards/removeNote'
+    }),
     applyEditableNoteContent () {
       this.editableNoteContent = true
       this.$nextTick(() => this.$refs.noteContent.focus())
@@ -94,16 +99,16 @@ export default {
     notApplyEditableNoteContent () {
       this.editableNoteContent = false
     },
-    setNoteTitle (index) {
-      this.$store.commit('boards/setNoteTitle', {
+    changeNoteTitle (index) {
+      this.setNoteTitle({
         columnIndex: this.columnIndex(this.name),
         noteIndex: index,
         title: this.noteTitle
       })
       this.closeConfigDialog()
     },
-    setNoteContent (index, content) {
-      this.$store.commit('boards/setNoteContent', {
+    changeNoteContent (index, content) {
+      this.setNoteContent({
         columnIndex: this.columnIndex(this.name),
         noteIndex: index,
         content: content
@@ -120,8 +125,8 @@ export default {
         return false
       }
     },
-    removeNote () {
-      this.$store.commit('boards/removeNote', {
+    removeCurrentNote () {
+      this.removeNote({
         columnIndex: this.columnIndex(this.name),
         noteIndex: this.noteIndex(this.columnIndex(this.name), this.noteTitle)
       })

@@ -72,7 +72,7 @@
                   @click.native="closeModal"
                   >Cancel</v-btn>
                 <v-btn :color="baseColor" flat
-                  @click.native="addNote"
+                  @click.native="addNewNote"
                   :disabled="!validAddNote()"
                   >ADD</v-btn>
               </v-card-actions>
@@ -104,7 +104,7 @@
 <script>
 import Note from '~/components/Note.vue'
 import draggable from 'vuedraggable'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'borads-column',
@@ -131,7 +131,7 @@ export default {
         return this.getNotes(this.columnIndex(this.column.name))
       },
       set (list) {
-        this.$store.commit('boards/setNote', {
+        this.setNote({
           index: this.columnIndex(this.column.name),
           note: list
         })
@@ -139,9 +139,14 @@ export default {
     }
   },
   methods: {
-    addNote () {
+    ...mapActions({
+      setNote: 'boards/setNote',
+      addNote: 'boards/addNote',
+      removeColumn: 'boards/removeColumn'
+    }),
+    addNewNote () {
       if (this.validAddNote()) {
-        this.$store.commit('boards/addNote', {
+        this.addNote({
           title: this.noteTitle,
           content: this.noteContent,
           index: this.columnIndex(this.column.name)
@@ -157,7 +162,9 @@ export default {
       this.columnDialog = false
     },
     deleteColumnModal () {
-      this.$store.commit('boards/removeColumn', { index: this.columnIndex(this.column.name) })
+      this.removeColumn({
+        index: this.columnIndex(this.column.name)
+      })
       this.closeColumnModal()
     },
     validAddNote () {
