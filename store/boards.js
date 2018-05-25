@@ -54,35 +54,62 @@ export const state = () => ({
 })
 
 export const mutations = {
-  addColumn (state, payload) {
+  ADD_COLUMN (state, { name }) {
     state.columns.push({
-      name: payload.name,
+      name: name,
       notes: []
     })
   },
-  addNote (state, { title, content, index }) {
+  ADD_NOTE (state, { title, content, index }) {
     state.columns[index].notes.push({
       title,
       content
     })
   },
-  setColumn (state, { index, column }) {
+  SET_COLUMN (state, { index, column }) {
     state.columns[index] = column
   },
-  setNote (state, { index, note }) {
+  SET_NOTE (state, { index, note }) {
     state.columns[index].notes = note
   },
-  setNoteTitle  (state, { columnIndex, noteIndex, title }) {
+  SET_NOTE_TITLE  (state, { columnIndex, noteIndex, title }) {
     state.columns[columnIndex].notes[noteIndex].title = title
   },
-  setNoteContent  (state, { columnIndex, noteIndex, content }) {
+  SET_NOTE_CONTENT  (state, { columnIndex, noteIndex, content }) {
     state.columns[columnIndex].notes[noteIndex].content = content
   },
-  removeColumn (state, { index }) {
+  REMOVE_COLUMN (state, { index }) {
     state.columns.splice(index, 1)
   },
-  removeNote (state, { columnIndex, noteIndex }) {
+  REMOVE_NOTE (state, { columnIndex, noteIndex }) {
     state.columns[columnIndex].notes.splice(noteIndex, 1)
+  }
+}
+
+export const actions = {
+  addColumn ({ commit }, { name }) {
+    commit('ADD_COLUMN', { name })
+  },
+  addNote ({ commit }, { title, content, index }) {
+    commit('ADD_NOTE', { title, content, index })
+  },
+  setColumn ({ commit }, { index, column }) {
+    commit('SET_COLUMN', { index, column })
+  },
+  setNote ({ commit }, { index, note }) {
+    commit('SET_NOTE', { index, note })
+  },
+  setNoteTitle ({ commit }, { columnIndex, noteIndex, title }) {
+    commit('SET_NOTE_TITLE', { columnIndex, noteIndex, title })
+  },
+  setNoteContent ({ commit }, { columnIndex, noteIndex, content }) {
+    commit('SET_NOTE_CONTENT', { columnIndex, noteIndex, content })
+  },
+  removeColumn ({ commit }, { index }) {
+    commit('REMOVE_COLUMN', { index })
+  },
+  removeNote ({ commit }, { columnIndex, noteIndex }) {
+    commit('REMOVE_NOTE', { columnIndex, noteIndex })
   }
 }
 

@@ -11,7 +11,7 @@
             label="New Column Name"
             v-model="columnName"
             :rules="columnNameRules"
-            @keyup.enter.native="addColumn"
+            @keyup.enter.native="addNewColumn"
             v-on:blur="clearInput"
             :color="baseColor"
           ></v-text-field>
@@ -67,7 +67,7 @@
 
 <script>
 import BoardsColumn from '~/components/BoardsColumn.vue'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'boards',
@@ -97,18 +97,21 @@ export default {
     this.onResize()
   },
   methods: {
+    ...mapActions({
+      addColumn: 'boards/addColumn'
+    }),
     onResize () {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight }
     },
-    addColumn () {
+    addNewColumn () {
       if (this.validAddColumn()) {
-        this.$store.commit('boards/addColumn', { name: this.columnName })
+        this.addColumn({ name: this.columnName })
         this.$refs.field.reset()
       }
     },
     addColumnOnMobail () {
       if (this.validAddColumn()) {
-        this.$store.commit('boards/addColumn', { name: this.columnName })
+        this.addColumn({ name: this.columnName })
         this.closeModal()
       }
     },
