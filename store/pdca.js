@@ -16,32 +16,62 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setPdca (state, { date, content }) {
+  SET_PDCA (state, { date, content }) {
     state.pdca[date] = content
   },
-  setPlan (state, { date, list }) {
+  SET_PLAN (state, { date, list }) {
     state.pdca[date].plan = list
   },
-  setDo (state, { date, list }) {
+  SET_DO (state, { date, list }) {
     state.pdca[date].do = list
   },
-  setCheck (state, { date, list }) {
+  SET_CHECK (state, { date, list }) {
     state.pdca[date].check = list
   },
-  setAction (state, { date, list }) {
+  SET_ACTION (state, { date, list }) {
     state.pdca[date].action = list
   },
-  removePlan (state, { date, item }) {
+  REMOVE_PLAN (state, { date, item }) {
     state.pdca[date].plan.splice(state.pdca[date].plan.indexOf(item), 1)
   },
-  removeDo (state, { date, item }) {
+  REMOVE_DO (state, { date, item }) {
     state.pdca[date].do.splice(state.pdca[date].do.indexOf(item), 1)
   },
-  removeCheck (state, { date, item }) {
+  REMOVE_CHECK (state, { date, item }) {
     state.pdca[date].check.splice(state.pdca[date].check.indexOf(item), 1)
   },
-  removeAction (state, { date, item }) {
+  REMOVE_ACTION (state, { date, item }) {
     state.pdca[date].action.splice(state.pdca[date].action.indexOf(item), 1)
+  }
+}
+
+export const actions = {
+  setPdca ({ commit }, { date, content }) {
+    commit('SET_PDCA', { date, content })
+  },
+  setPlan ({ commit }, { date, list }) {
+    commit('SET_PLAN', { date, list })
+  },
+  setDo ({ commit }, { date, list }) {
+    commit('SET_DO', { date, list })
+  },
+  setCheck ({ commit }, { date, list }) {
+    commit('SET_CHECK', { date, list })
+  },
+  setAction ({ commit }, { date, list }) {
+    commit('SET_ACTION', { date, list })
+  },
+  removePlan ({ commit }, { date, item }) {
+    commit('REMOVE_PLAN', { date, item })
+  },
+  removeDo ({ commit }, { date, item }) {
+    commit('REMOVE_DO', { date, item })
+  },
+  removeCheck ({ commit }, { date, item }) {
+    commit('REMOVE_CHECK', { date, item })
+  },
+  removeAction ({ commit }, { date, item }) {
+    commit('REMOVE_ACTION', { date, item })
   }
 }
 

@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removePlan(data.item)"
+              @input="removePlan({ date, item: data.item })"
               :selected="data.selected"
               :color="pdcaColor.plan"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeDo(data.item)"
+              @input="removeDo({ date, item: data.item })"
               :selected="data.selected"
               :color="pdcaColor.do"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeCheck(data.item)"
+              @input="removeCheck({ date, item: data.item })"
               :selected="data.selected"
               :color="pdcaColor.check"
               text-color="white"
@@ -145,7 +145,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeAction(data.item)"
+              @input="removeAction({ date, item: data.item })"
               :selected="data.selected"
               :color="pdcaColor.action"
               text-color="white"
@@ -161,7 +161,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -182,7 +182,7 @@ export default {
         return this.getEachPdca('plan')
       },
       set (list) {
-        this.setEacePdca('pdca/setPlan', list)
+        this.setPlan({ date: this.date, list })
       }
     },
     pdcaDo: {
@@ -190,7 +190,7 @@ export default {
         return this.getEachPdca('do')
       },
       set (list) {
-        this.setEacePdca('pdca/setDo', list)
+        this.setDo({ date: this.date, list })
       }
     },
     pdcaCheck: {
@@ -198,7 +198,7 @@ export default {
         return this.getEachPdca('check')
       },
       set (list) {
-        this.setEacePdca('pdca/setCheck', list)
+        this.setCheck({ date: this.date, list })
       }
     },
     pdcaAction: {
@@ -206,7 +206,7 @@ export default {
         return this.getEachPdca('action')
       },
       set (list) {
-        this.setEacePdca('pdca/setAction', list)
+        this.setAction({ date: this.date, list })
       }
     }
   },
@@ -219,24 +219,23 @@ export default {
   },
   mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    if (!this.hasDate(this.date)) {
+      this.setNewPdca(this.date)
+    }
     this.setRegisterDates()
   },
   methods: {
-    removeEacePdca (pdcaWord, item) {
-      this.$store.commit(pdcaWord, { date: this.date, item })
-    },
-    removePlan (item) {
-      this.removeEacePdca('pdca/removePlan', item)
-    },
-    removeDo (item) {
-      this.removeEacePdca('pdca/removeDo', item)
-    },
-    removeCheck (item) {
-      this.removeEacePdca('pdca/removeCheck', item)
-    },
-    removeAction (item) {
-      this.removeEacePdca('pdca/removeAction', item)
-    },
+    ...mapActions({
+      setPdca: 'pdca/setPdca',
+      setPlan: 'pdca/setPlan',
+      setDo: 'pdca/setDo',
+      setCheck: 'pdca/setCheck',
+      setAction: 'pdca/setAction',
+      removePlan: 'pdca/removePlan',
+      removeDo: 'pdca/removeDo',
+      removeCheck: 'pdca/removeCheck',
+      removeAction: 'pdca/removeAction'
+    }),
     hasDate (date) {
       if (date in this.pdca) {
         return true
@@ -249,16 +248,8 @@ export default {
         return this.pdca[this.date][pdcaWord]
       }
     },
-    setEacePdca (mutationWord, list) {
-      if (this.hasDate(this.date)) {
-        this.$store.commit(mutationWord, { date: this.date, list })
-      } else {
-        this.setNewPdca(this.date)
-        this.$store.commit(mutationWord, { date: this.date, list })
-      }
-    },
     setNewPdca (date) {
-      this.$store.commit('pdca/setPdca', {
+      this.setPdca({
         date,
         content: { plan: [], do: [], check: [], action: [] }
       })
