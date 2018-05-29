@@ -65,12 +65,12 @@
           solo
           prepend-icon=""
           append-icon=""
-          v-model="fourLinesDiaryPlan"
+          v-model="fourLinesDiaryFact"
         >
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeFact(data.item)"
+              @input="removeFact({ date, item: data.item })"
               :selected="data.selected"
               :color="fourLinesDiaryColor.fact"
               text-color="white"
@@ -90,12 +90,12 @@
           solo
           prepend-icon=""
           append-icon=""
-          v-model="fourLinesDiaryDo"
+          v-model="fourLinesDiaryAwareness"
         >
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeAwareness(data.item)"
+              @input="removeAwareness({ date, item: data.item })"
               :selected="data.selected"
               :color="fourLinesDiaryColor.awareness"
               text-color="white"
@@ -115,12 +115,12 @@
           solo
           prepend-icon=""
           append-icon=""
-          v-model="fourLinesDiaryCheck"
+          v-model="fourLinesDiaryLesson"
         >
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeLesson(data.item)"
+              @input="removeLesson({ date, item: data.item })"
               :selected="data.selected"
               :color="fourLinesDiaryColor.lesson"
               text-color="white"
@@ -140,12 +140,12 @@
           solo
           prepend-icon=""
           append-icon=""
-          v-model="fourLinesDiaryAction"
+          v-model="fourLinesDiaryDeclaration"
         >
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeDeclaration(data.item)"
+              @input="removeDeclaration({ date, item: data.item })"
               :selected="data.selected"
               :color="fourLinesDiaryColor.declaration"
               text-color="white"
@@ -161,7 +161,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -177,36 +177,36 @@ export default {
       fourLinesDiaryColor: 'color/fourLinesDiaryColor',
       fourLinesDiary: 'fourLinesDiary/fourLinesDiary'
     }),
-    fourLinesDiaryPlan: {
+    fourLinesDiaryFact: {
       get () {
         return this.getEachFourLinesDiary('fact')
       },
       set (list) {
-        this.setEaceFourLinesDiary('fourLinesDiary/setPlan', list)
+        this.setFact({ date: this.date, list })
       }
     },
-    fourLinesDiaryDo: {
+    fourLinesDiaryAwareness: {
       get () {
         return this.getEachFourLinesDiary('awareness')
       },
       set (list) {
-        this.setEaceFourLinesDiary('fourLinesDiary/setDo', list)
+        this.setAwareness({ date: this.date, list })
       }
     },
-    fourLinesDiaryCheck: {
+    fourLinesDiaryLesson: {
       get () {
         return this.getEachFourLinesDiary('lesson')
       },
       set (list) {
-        this.setEaceFourLinesDiary('fourLinesDiary/setCheck', list)
+        this.setLesson({ date: this.date, list })
       }
     },
-    fourLinesDiaryAction: {
+    fourLinesDiaryDeclaration: {
       get () {
         return this.getEachFourLinesDiary('declaration')
       },
       set (list) {
-        this.setEaceFourLinesDiary('fourLinesDiary/setAction', list)
+        this.setDeclaration({ date: this.date, list })
       }
     }
   },
@@ -219,24 +219,23 @@ export default {
   },
   mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    if (!this.hasDate(this.date)) {
+      this.setNewFourLinesDiary(this.date)
+    }
     this.setRegisterDates()
   },
   methods: {
-    removeEaceFourLinesDiary (fourLinesDiaryWord, item) {
-      this.$store.commit(fourLinesDiaryWord, { date: this.date, item })
-    },
-    removeFact (item) {
-      this.removeEaceFourLinesDiary('fourLinesDiary/removeFact', item)
-    },
-    removeAwareness (item) {
-      this.removeEaceFourLinesDiary('fourLinesDiary/removeAwareness', item)
-    },
-    removeLesson (item) {
-      this.removeEaceFourLinesDiary('fourLinesDiary/removeLesson', item)
-    },
-    removeDeclaration (item) {
-      this.removeEaceFourLinesDiary('fourLinesDiary/removeDeclaration', item)
-    },
+    ...mapActions({
+      setFourLinesDiary: 'fourLinesDiary/setFourLinesDiary',
+      setFact: 'fourLinesDiary/setFact',
+      setAwareness: 'fourLinesDiary/setAwareness',
+      setLesson: 'fourLinesDiary/setLesson',
+      setDeclaration: 'fourLinesDiary/setDeclaration',
+      removeFact: 'fourLinesDiary/removeFact',
+      removeAwareness: 'fourLinesDiary/removeAwareness',
+      removeLesson: 'fourLinesDiary/removeLesson',
+      removeDeclaration: 'fourLinesDiary/removeDeclaration'
+    }),
     hasDate (date) {
       if (date in this.fourLinesDiary) {
         return true
@@ -249,16 +248,8 @@ export default {
         return this.fourLinesDiary[this.date][fourLinesDiaryWord]
       }
     },
-    setEaceFourLinesDiary (mutationWord, list) {
-      if (this.hasDate(this.date)) {
-        this.$store.commit(mutationWord, { date: this.date, list })
-      } else {
-        this.setNewFourLinesDiary(this.date)
-        this.$store.commit(mutationWord, { date: this.date, list })
-      }
-    },
     setNewFourLinesDiary (date) {
-      this.$store.commit('fourLinesDiary/setFourLinesDiary', {
+      this.setFourLinesDiary({
         date,
         content: { fact: [], awareness: [], lesson: [], declaration: [] }
       })

@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeKeep(data.item)"
+              @input="removeYattakoto(({ date, item: data.item }))"
               :selected="data.selected"
               :color="ywtColor.yattakoto"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeProblem(data.item)"
+              @input="removeWakattakoto(({ date, item: data.item }))"
               :selected="data.selected"
               :color="ywtColor.wakattakoto"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeTry(data.item)"
+              @input="removeTsuginiyarukoto(({ date, item: data.item }))"
               :selected="data.selected"
               :color="ywtColor.tsuginiyarukoto"
               text-color="white"
@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -157,7 +157,7 @@ export default {
         return this.getEachYwt('yattakoto')
       },
       set (list) {
-        this.setEachYwt('ywt/setYattakoto', list)
+        this.setYattakoto({ date: this.date, list })
       }
     },
     ywtWakattakoto: {
@@ -165,7 +165,7 @@ export default {
         return this.getEachYwt('wakattakoto')
       },
       set (list) {
-        this.setEachYwt('ywt/setWakattakoto', list)
+        this.setWakattakoto({ date: this.date, list })
       }
     },
     ywtTsuginiyarukoto: {
@@ -173,7 +173,7 @@ export default {
         return this.getEachYwt('tsuginiyarukoto')
       },
       set (list) {
-        this.setEachYwt('ywt/setTsuginiyarukoto', list)
+        this.setTsuginiyarukoto({ date: this.date, list })
       }
     }
   },
@@ -186,21 +186,21 @@ export default {
   },
   mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    if (!this.hasDate(this.date)) {
+      this.setNewYwt(this.date)
+    }
     this.setRegisterDates()
   },
   methods: {
-    removeEachYwt (ywtWord, item) {
-      this.$store.commit(ywtWord, { date: this.date, item })
-    },
-    removeKeep (item) {
-      this.removeEachYwt('ywt/removeYattakoto', item)
-    },
-    removeProblem (item) {
-      this.removeEachYwt('ywt/removeWakattakoto', item)
-    },
-    removeTry (item) {
-      this.removeEachYwt('ywt/removeTsuginiyarukoto', item)
-    },
+    ...mapActions({
+      setYwt: 'ywt/setYwt',
+      setYattakoto: 'ywt/setYattakoto',
+      setWakattakoto: 'ywt/setWakattakoto',
+      setTsuginiyarukoto: 'ywt/setTsuginiyarukoto',
+      removeYattakoto: 'ywt/removeYattakoto',
+      removeWakattakoto: 'ywt/removeWakattakoto',
+      removeTsuginiyarukoto: 'ywt/removeTsuginiyarukoto'
+    }),
     hasDate (date) {
       if (date in this.ywt) {
         return true
@@ -213,16 +213,8 @@ export default {
         return this.ywt[this.date][ywtWord]
       }
     },
-    setEachYwt (mutationWord, list) {
-      if (this.hasDate(this.date)) {
-        this.$store.commit(mutationWord, { date: this.date, list })
-      } else {
-        this.setNewYwt(this.date)
-        this.$store.commit(mutationWord, { date: this.date, list })
-      }
-    },
     setNewYwt (date) {
-      this.$store.commit('ywt/setYwt', {
+      this.setYwt({
         date,
         content: { yattakoto: [], wakattakoto: [], tsuginiyarukoto: [] }
       })
