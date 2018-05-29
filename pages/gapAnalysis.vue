@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeAsis(data.item)"
+              @input="removeAsis({ date, item: data.item })"
               :selected="data.selected"
               :color="gapAnalysisColor.asis"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeToBe(data.item)"
+              @input="removeTobe({ date, item: data.item })"
               :selected="data.selected"
               :color="gapAnalysisColor.tobe"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeGap(data.item)"
+              @input="removeGap({ date, item: data.item })"
               :selected="data.selected"
               :color="gapAnalysisColor.gap"
               text-color="white"
@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -157,7 +157,7 @@ export default {
         return this.getEachGapAnalysis('asis')
       },
       set (list) {
-        this.setEachGapAnalysis('gapAnalysis/setAsis', list)
+        this.setAsis({ date: this.date, list })
       }
     },
     gapAnalysisTobe: {
@@ -165,7 +165,7 @@ export default {
         return this.getEachGapAnalysis('tobe')
       },
       set (list) {
-        this.setEachGapAnalysis('gapAnalysis/setTobe', list)
+        this.setTobe({ date: this.date, list })
       }
     },
     gapAnalysisGap: {
@@ -173,7 +173,7 @@ export default {
         return this.getEachGapAnalysis('gap')
       },
       set (list) {
-        this.setEachGapAnalysis('gapAnalysis/setGap', list)
+        this.setGap({ date: this.date, list })
       }
     }
   },
@@ -189,18 +189,15 @@ export default {
     this.setRegisterDates()
   },
   methods: {
-    removeEachGapAnalysis (gapAnalysisWord, item) {
-      this.$store.commit(gapAnalysisWord, { date: this.date, item })
-    },
-    removeAsis (item) {
-      this.removeEachGapAnalysis('gapAnalysis/removeAsis', item)
-    },
-    removeToBe (item) {
-      this.removeEachGapAnalysis('gapAnalysis/removeTobe', item)
-    },
-    removeGap (item) {
-      this.removeEachGapAnalysis('gapAnalysis/removeGap', item)
-    },
+    ...mapActions({
+      setGapAnalysis: 'gapAnalysis/setGapAnalysis',
+      setAsis: 'gapAnalysis/setAsis',
+      setTobe: 'gapAnalysis/setTobe',
+      setGap: 'gapAnalysis/setGap',
+      removeAsis: 'gapAnalysis/removeAsis',
+      removeTobe: 'gapAnalysis/removeTobe',
+      removeGap: 'gapAnalysis/removeGap'
+    }),
     hasDate (date) {
       if (date in this.gapAnalysis) {
         return true
@@ -213,16 +210,8 @@ export default {
         return this.gapAnalysis[this.date][gapAnalysisWord]
       }
     },
-    setEachGapAnalysis (mutationWord, list) {
-      if (this.hasDate(this.date)) {
-        this.$store.commit(mutationWord, { date: this.date, list })
-      } else {
-        this.setNewGapAnalysis(this.date)
-        this.$store.commit(mutationWord, { date: this.date, list })
-      }
-    },
     setNewGapAnalysis (date) {
-      this.$store.commit('gapAnalysis/setGapAnalysis', {
+      this.setGapAnalysis({
         date,
         content: { asis: [], tobe: [], gap: [] }
       })
