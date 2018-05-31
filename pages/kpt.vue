@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeKeep(({ date, item: data.item }))"
+              @input="removeKeep({ date, item: data.item })"
               :selected="data.selected"
               :color="kptColor.keep"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeProblem(({ date, item: data.item }))"
+              @input="removeProblem({ date, item: data.item })"
               :selected="data.selected"
               :color="kptColor.problem"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeTry(({ date, item: data.item }))"
+              @input="removeTry({ date, item: data.item })"
               :selected="data.selected"
               :color="kptColor.try"
               text-color="white"
