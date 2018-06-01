@@ -18,38 +18,74 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setLamda (state, { date, content }) {
+  SET_LAMDA (state, { date, content }) {
     state.lamda[date] = content
   },
-  setLook (state, { date, list }) {
+  SET_LOOK (state, { date, list }) {
     state.lamda[date].look = list
   },
-  setAsk (state, { date, list }) {
+  SET_ASK (state, { date, list }) {
     state.lamda[date].ask = list
   },
-  setModel (state, { date, list }) {
+  SET_MODEL (state, { date, list }) {
     state.lamda[date].model = list
   },
-  setDiscuss (state, { date, list }) {
+  SET_DISCUSS (state, { date, list }) {
     state.lamda[date].discuss = list
   },
-  setAct (state, { date, list }) {
+  SET_ACT (state, { date, list }) {
     state.lamda[date].act = list
   },
-  removeLook (state, { date, item }) {
+  REMOVE_LOOK (state, { date, item }) {
     state.lamda[date].look.splice(state.lamda[date].look.indexOf(item), 1)
   },
-  removeAsk (state, { date, item }) {
+  REMOVE_ASK (state, { date, item }) {
     state.lamda[date].ask.splice(state.lamda[date].ask.indexOf(item), 1)
   },
-  removeModel (state, { date, item }) {
+  REMOVE_MODEL (state, { date, item }) {
     state.lamda[date].model.splice(state.lamda[date].model.indexOf(item), 1)
   },
-  removeDiscuss (state, { date, item }) {
+  REMOVE_DISCUSS (state, { date, item }) {
     state.lamda[date].discuss.splice(state.lamda[date].discuss.indexOf(item), 1)
   },
-  removeAct (state, { date, item }) {
+  REMOVE_ACT (state, { date, item }) {
     state.lamda[date].act.splice(state.lamda[date].act.indexOf(item), 1)
+  }
+}
+
+export const actions = {
+  setLamda ({ commit }, { date, content }) {
+    commit('SET_LAMDA', { date, content })
+  },
+  setLook ({ commit }, { date, list }) {
+    commit('SET_LOOK', { date, list })
+  },
+  setAsk ({ commit }, { date, list }) {
+    commit('SET_ASK', { date, list })
+  },
+  setModel ({ commit }, { date, list }) {
+    commit('SET_MODEL', { date, list })
+  },
+  setDiscuss ({ commit }, { date, list }) {
+    commit('SET_DISCUSS', { date, list })
+  },
+  setAct ({ commit }, { date, list }) {
+    commit('SET_ACT', { date, list })
+  },
+  removeLook ({ commit }, { date, item }) {
+    commit('REMOVE_LOOK', { date, item })
+  },
+  removeAsk ({ commit }, { date, item }) {
+    commit('REMOVE_ASK', { date, item })
+  },
+  removeModel ({ commit }, { date, item }) {
+    commit('REMOVE_MODEL', { date, item })
+  },
+  removeDiscuss ({ commit }, { date, item }) {
+    commit('REMOVE_DISCUSS', { date, item })
+  },
+  removeAct ({ commit }, { date, item }) {
+    commit('REMOVE_ACT', { date, item })
   }
 }
 
