@@ -1,20 +1,15 @@
 export const state = () => ({
   kpt: {
-    '2018-05-01': {
-      keep: ['everyday commit to github'],
-      problem: ['diet'],
-      try: ['work for 10 minutes']
-    },
-    '2018-05-03': {
-      keep: ['say hello'],
-      problem: ['study'],
-      try: ['work for 1000 minutes']
-    }
   }
 })
 
 export const mutations = {
-  SET_KPT (state, { date, content }) {
+  SET_KPT (state) {
+    if ('kpt' in window.localStorage) {
+      state.kpt = (JSON.parse(window.localStorage.getItem('kpt'))).kpt || {}
+    }
+  },
+  ADD_KPT (state, { date, content }) {
     state.kpt[date] = content
   },
   SET_KEEP (state, { date, list }) {
@@ -38,8 +33,11 @@ export const mutations = {
 }
 
 export const actions = {
-  setKpt ({ commit }, { date, content }) {
-    commit('SET_KPT', { date, content })
+  setKpt ({ commit }) {
+    commit('SET_KPT')
+  },
+  addKpt ({ commit }, { date, content }) {
+    commit('ADD_KPT', { date, content })
   },
   setKeep ({ commit }, { date, list }) {
     commit('SET_KEEP', { date, list })
