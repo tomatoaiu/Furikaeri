@@ -14,7 +14,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  SET_KPT (state, { date, content }) {
+  ADD_KPT (state, { date, content }) {
     state.kpt[date] = content
   },
   SET_KEEP (state, { date, list }) {
@@ -38,8 +38,8 @@ export const mutations = {
 }
 
 export const actions = {
-  setKpt ({ commit }, { date, content }) {
-    commit('SET_KPT', { date, content })
+  addKpt ({ commit }, { date, content }) {
+    commit('ADD_KPT', { date, content })
   },
   setKeep ({ commit }, { date, list }) {
     commit('SET_KEEP', { date, list })
