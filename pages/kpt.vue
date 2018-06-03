@@ -196,7 +196,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      setKpt: 'kpt/setKpt',
+      addKpt: 'kpt/addKpt',
       setKeep: 'kpt/setKeep',
       setProblem: 'kpt/setProblem',
       setTry: 'kpt/setTry',
@@ -217,7 +217,7 @@ export default {
       }
     },
     setNewKpt (date) {
-      this.setKpt({
+      this.addKpt({
         date,
         content: { keep: [], problem: [], try: [] }
       })
