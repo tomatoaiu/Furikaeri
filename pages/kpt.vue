@@ -188,6 +188,7 @@ export default {
     }
   },
   mounted () {
+    this.setKpt()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewKpt(this.date)
@@ -196,6 +197,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      setKpt: 'kpt/setKpt',
       addKpt: 'kpt/addKpt',
       setKeep: 'kpt/setKeep',
       setProblem: 'kpt/setProblem',
