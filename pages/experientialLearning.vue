@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeConcreateExperience(data.item)"
+              @input="removeConcreateExperience({ date, item: data.item })"
               :selected="data.selected"
               :color="experientialLearningColor.concreateExperience"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeReflectiveObservation(data.item)"
+              @input="removeReflectiveObservation({ date, item: data.item })"
               :selected="data.selected"
               :color="experientialLearningColor.reflectiveObservation"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeAbstractConceptualization(data.item)"
+              @input="removeAbstractConceptualization({ date, item: data.item })"
               :selected="data.selected"
               :color="experientialLearningColor.abstractConceptualization"
               text-color="white"
@@ -145,7 +145,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeActiveExperimentation(data.item)"
+              @input="removeActiveExperimentation({ date, item: data.item })"
               :selected="data.selected"
               :color="experientialLearningColor.activeExperimentation"
               text-color="white"
@@ -161,9 +161,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import FurikaeriDate from '~/mixins/FurikaeriDate'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  mixins: [ FurikaeriDate ],
   data () {
     return {
       menu: false,
@@ -182,7 +184,7 @@ export default {
         return this.getEachExperientialLearning('concreateExperience')
       },
       set (list) {
-        this.setEaceExperientialLearning('experientialLearning/setConcreateExperience', list)
+        this.setConcreateExperience({ date: this.date, list })
       }
     },
     experientialLearningReflectiveObservation: {
@@ -190,7 +192,7 @@ export default {
         return this.getEachExperientialLearning('reflectiveObservation')
       },
       set (list) {
-        this.setEaceExperientialLearning('experientialLearning/setReflectiveObservation', list)
+        this.setReflectiveObservation({ date: this.date, list })
       }
     },
     experientialLearningAbstractConceptualization: {
@@ -198,7 +200,7 @@ export default {
         return this.getEachExperientialLearning('abstractConceptualization')
       },
       set (list) {
-        this.setEaceExperientialLearning('experientialLearning/setAbstractConceptualization', list)
+        this.setAbstractConceptualization({ date: this.date, list })
       }
     },
     experientialLearningActiveExperimentation: {
@@ -206,7 +208,7 @@ export default {
         return this.getEachExperientialLearning('activeExperimentation')
       },
       set (list) {
-        this.setEaceExperientialLearning('experientialLearning/setActiveExperimentation', list)
+        this.setActiveExperimentation({ date: this.date, list })
       }
     }
   },
@@ -222,21 +224,17 @@ export default {
     this.setRegisterDates()
   },
   methods: {
-    removeEaceExperientialLearning (experientialLearningWord, item) {
-      this.$store.commit(experientialLearningWord, { date: this.date, item })
-    },
-    removeConcreateExperience (item) {
-      this.removeEaceExperientialLearning('experientialLearning/removeConcreateExperience', item)
-    },
-    removeReflectiveObservation (item) {
-      this.removeEaceExperientialLearning('experientialLearning/removeReflectiveObservation', item)
-    },
-    removeAbstractConceptualization (item) {
-      this.removeEaceExperientialLearning('experientialLearning/removeAbstractConceptualization', item)
-    },
-    removeActiveExperimentation (item) {
-      this.removeEaceExperientialLearning('experientialLearning/removeActiveExperimentation', item)
-    },
+    ...mapActions({
+      setExperientialLearning: 'experientialLearning/setExperientialLearning',
+      setConcreateExperience: 'experientialLearning/setConcreateExperience',
+      setReflectiveObservation: 'experientialLearning/setReflectiveObservation',
+      setAbstractConceptualization: 'experientialLearning/setAbstractConceptualization',
+      setActiveExperimentation: 'experientialLearning/setActiveExperimentation',
+      removeConcreateExperience: 'experientialLearning/removeConcreateExperience',
+      removeReflectiveObservation: 'experientialLearning/removeReflectiveObservation',
+      removeAbstractConceptualization: 'experientialLearning/removeAbstractConceptualization',
+      removeActiveExperimentation: 'experientialLearning/removeActiveExperimentation'
+    }),
     hasDate (date) {
       if (date in this.experientialLearning) {
         return true
@@ -258,7 +256,7 @@ export default {
       }
     },
     setNewExperientialLearning (date) {
-      this.$store.commit('experientialLearning/setExperientialLearning', {
+      this.setExperientialLearning({
         date,
         content: { concreateExperience: [], reflectiveObservation: [], abstractConceptualization: [], activeExperimentation: [] }
       })
@@ -266,23 +264,6 @@ export default {
     },
     setRegisterDates () {
       this.registerDates = Object.keys(this.experientialLearning)
-    },
-    toTomorrow () {
-      this.toNextDay(1)
-    },
-    toYesterday () {
-      this.toNextDay(-1)
-    },
-    toNextWeek () {
-      this.toNextDay(7)
-    },
-    toLastWeek () {
-      this.toNextDay(-7)
-    },
-    toNextDay (direction) {
-      const date = new Date(this.date)
-      date.setDate(date.getDate() + direction)
-      this.date = date.toJSON().slice(0, 10).replace(/-/g, '-')
     }
   }
 }

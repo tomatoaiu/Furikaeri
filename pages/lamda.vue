@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeLook(data.item)"
+              @input="removeLook({ date: this.date, list })"
               :selected="data.selected"
               :color="lamdaColor.look"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeAsk(data.item)"
+              @input="removeAsk({ date: this.date, list })"
               :selected="data.selected"
               :color="lamdaColor.ask"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeModel(data.item)"
+              @input="removeModel({ date: this.date, list })"
               :selected="data.selected"
               :color="lamdaColor.model"
               text-color="white"
@@ -145,7 +145,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeDiscuss(data.item)"
+              @input="removeDiscuss({ date: this.date, list })"
               :selected="data.selected"
               :color="lamdaColor.discuss"
               text-color="white"
@@ -170,7 +170,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeAct(data.item)"
+              @input="removeAct({ date: this.date, list })"
               :selected="data.selected"
               :color="lamdaColor.act"
               text-color="white"
@@ -186,9 +186,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import FurikaeriDate from '~/mixins/FurikaeriDate'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  mixins: [ FurikaeriDate ],
   data () {
     return {
       menu: false,
@@ -207,7 +209,7 @@ export default {
         return this.getEachLamda('look')
       },
       set (list) {
-        this.setEaceLamda('lamda/setLook', list)
+        this.setLook({ date: this.date, list })
       }
     },
     lamdaAsk: {
@@ -215,7 +217,7 @@ export default {
         return this.getEachLamda('ask')
       },
       set (list) {
-        this.setEaceLamda('lamda/setAsk', list)
+        this.setAsk({ date: this.date, list })
       }
     },
     lamdaModel: {
@@ -223,7 +225,7 @@ export default {
         return this.getEachLamda('model')
       },
       set (list) {
-        this.setEaceLamda('lamda/setModel', list)
+        this.setModel({ date: this.date, list })
       }
     },
     lamdaDiscuss: {
@@ -231,7 +233,7 @@ export default {
         return this.getEachLamda('discuss')
       },
       set (list) {
-        this.setEaceLamda('lamda/setDiscuss', list)
+        this.setDiscuss({ date: this.date, list })
       }
     },
     lamdaAct: {
@@ -239,7 +241,7 @@ export default {
         return this.getEachLamda('act')
       },
       set (list) {
-        this.setEaceLamda('lamda/setAct', list)
+        this.setAct({ date: this.date, list })
       }
     }
   },
@@ -252,27 +254,25 @@ export default {
   },
   mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    if (!this.hasDate(this.date)) {
+      this.setNewLamda(this.date)
+    }
     this.setRegisterDates()
   },
   methods: {
-    removeEaceLamda (lamdaWord, item) {
-      this.$store.commit(lamdaWord, { date: this.date, item })
-    },
-    removeLook (item) {
-      this.removeEaceLamda('lamda/removeLook', item)
-    },
-    removeAsk (item) {
-      this.removeEaceLamda('lamda/removeAsk', item)
-    },
-    removeModel (item) {
-      this.removeEaceLamda('lamda/removeModel', item)
-    },
-    removeDiscuss (item) {
-      this.removeEaceLamda('lamda/removeDiscuss', item)
-    },
-    removeAct (item) {
-      this.removeEaceLamda('lamda/removeAct', item)
-    },
+    ...mapActions({
+      setLamda: 'lamda/setLamda',
+      setLook: 'lamda/setLook',
+      setAsk: 'lamda/setAsk',
+      setModel: 'lamda/setModel',
+      setDiscuss: 'lamda/setDiscuss',
+      setAct: 'lamda/setAct',
+      removeLook: 'lamda/removeLook',
+      removeAsk: 'lamda/removeAsk',
+      removeModel: 'lamda/removeModel',
+      removeDiscuss: 'lamda/removeDiscuss',
+      removeAct: 'lamda/removeAct'
+    }),
     hasDate (date) {
       if (date in this.lamda) {
         return true
@@ -294,7 +294,7 @@ export default {
       }
     },
     setNewLamda (date) {
-      this.$store.commit('lamda/setLamda', {
+      this.setLamda({
         date,
         content: { look: [], ask: [], model: [], discuss: [], act: [] }
       })
@@ -302,23 +302,6 @@ export default {
     },
     setRegisterDates () {
       this.registerDates = Object.keys(this.lamda)
-    },
-    toTomorrow () {
-      this.toNextDay(1)
-    },
-    toYesterday () {
-      this.toNextDay(-1)
-    },
-    toNextWeek () {
-      this.toNextDay(7)
-    },
-    toLastWeek () {
-      this.toNextDay(-7)
-    },
-    toNextDay (direction) {
-      const date = new Date(this.date)
-      date.setDate(date.getDate() + direction)
-      this.date = date.toJSON().slice(0, 10).replace(/-/g, '-')
     }
   }
 }
