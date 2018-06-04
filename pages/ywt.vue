@@ -187,6 +187,7 @@ export default {
     }
   },
   mounted () {
+    this.setYwt()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewYwt(this.date)
@@ -195,6 +196,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      setYwt: 'ywt/setYwt',
       addYwt: 'ywt/addYwt',
       setYattakoto: 'ywt/setYattakoto',
       setWakattakoto: 'ywt/setWakattakoto',
