@@ -14,7 +14,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  SET_YWT (state, { date, content }) {
+  ADD_YWT (state, { date, content }) {
     state.ywt[date] = content
   },
   SET_YATTAKOTO (state, { date, list }) {
@@ -38,8 +38,8 @@ export const mutations = {
 }
 
 export const actions = {
-  setYwt ({ commit }, { date, content }) {
-    commit('SET_YWT', { date, content })
+  addYwt ({ commit }, { date, content }) {
+    commit('ADD_YWT', { date, content })
   },
   setYattakoto ({ commit }, { date, list }) {
     commit('SET_YATTAKOTO', { date, list })

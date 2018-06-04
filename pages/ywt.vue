@@ -195,7 +195,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      setYwt: 'ywt/setYwt',
+      addYwt: 'ywt/addYwt',
       setYattakoto: 'ywt/setYattakoto',
       setWakattakoto: 'ywt/setWakattakoto',
       setTsuginiyarukoto: 'ywt/setTsuginiyarukoto',
@@ -216,7 +216,7 @@ export default {
       }
     },
     setNewYwt (date) {
-      this.setYwt({
+      this.addYwt({
         date,
         content: { yattakoto: [], wakattakoto: [], tsuginiyarukoto: [] }
       })
