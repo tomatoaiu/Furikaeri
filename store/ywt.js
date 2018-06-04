@@ -1,20 +1,15 @@
 export const state = () => ({
   ywt: {
-    '2018-05-10': {
-      yattakoto: ['everyday commit to github'],
-      wakattakoto: ['diet'],
-      tsuginiyarukoto: ['work for 10 minutes']
-    },
-    '2018-05-11': {
-      yattakoto: ['say hello'],
-      wakattakoto: ['study'],
-      tsuginiyarukoto: ['programming']
-    }
   }
 })
 
 export const mutations = {
-  SET_YWT (state, { date, content }) {
+  SET_YWT (state) {
+    if ('ywt' in window.localStorage) {
+      state.ywt = (JSON.parse(window.localStorage.getItem('ywt'))).ywt || {}
+    }
+  },
+  ADD_YWT (state, { date, content }) {
     state.ywt[date] = content
   },
   SET_YATTAKOTO (state, { date, list }) {
@@ -38,8 +33,11 @@ export const mutations = {
 }
 
 export const actions = {
-  setYwt ({ commit }, { date, content }) {
-    commit('SET_YWT', { date, content })
+  setYwt ({ commit }) {
+    commit('SET_YWT')
+  },
+  addYwt ({ commit }, { date, content }) {
+    commit('ADD_YWT', { date, content })
   },
   setYattakoto ({ commit }, { date, list }) {
     commit('SET_YATTAKOTO', { date, list })
