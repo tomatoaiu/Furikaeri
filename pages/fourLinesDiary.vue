@@ -220,6 +220,7 @@ export default {
     }
   },
   mounted () {
+    this.setFourLinesDiary()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewFourLinesDiary(this.date)
@@ -229,6 +230,7 @@ export default {
   methods: {
     ...mapActions({
       setFourLinesDiary: 'fourLinesDiary/setFourLinesDiary',
+      addFourLinesDiary: 'fourLinesDiary/addFourLinesDiary',
       setFact: 'fourLinesDiary/setFact',
       setAwareness: 'fourLinesDiary/setAwareness',
       setLesson: 'fourLinesDiary/setLesson',
@@ -251,7 +253,7 @@ export default {
       }
     },
     setNewFourLinesDiary (date) {
-      this.setFourLinesDiary({
+      this.addFourLinesDiary({
         date,
         content: { fact: [], awareness: [], lesson: [], declaration: [] }
       })
