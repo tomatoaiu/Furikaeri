@@ -1,24 +1,15 @@
 export const state = () => ({
   lamda: {
-    '2018-05-01': {
-      look: ['everyday commit to github'],
-      ask: ['diet'],
-      model: ['work for 10 minutes'],
-      discuss: ['work for 10 minutes'],
-      act: ['work for 10 minutes']
-    },
-    '2018-05-03': {
-      look: ['lookda'],
-      ask: ['askda'],
-      model: ['modelwosuruzo'],
-      discuss: ['discusssimasita'],
-      act: ['work for 10 minutes']
-    }
   }
 })
 
 export const mutations = {
-  SET_LAMDA (state, { date, content }) {
+  SET_LAMDA (state) {
+    if ('lamda' in window.localStorage) {
+      state.lamda = (JSON.parse(window.localStorage.getItem('lamda'))).lamda || {}
+    }
+  },
+  ADD_LAMDA (state, { date, content }) {
     state.lamda[date] = content
   },
   SET_LOOK (state, { date, list }) {
@@ -54,8 +45,11 @@ export const mutations = {
 }
 
 export const actions = {
-  setLamda ({ commit }, { date, content }) {
-    commit('SET_LAMDA', { date, content })
+  setLamda ({ commit }) {
+    commit('SET_LAMDA')
+  },
+  addLamda ({ commit }, { date, content }) {
+    commit('ADD_LAMDA', { date, content })
   },
   setLook ({ commit }, { date, list }) {
     commit('SET_LOOK', { date, list })

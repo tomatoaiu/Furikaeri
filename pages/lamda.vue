@@ -253,6 +253,7 @@ export default {
     }
   },
   mounted () {
+    this.setLamda()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewLamda(this.date)
@@ -262,6 +263,7 @@ export default {
   methods: {
     ...mapActions({
       setLamda: 'lamda/setLamda',
+      addLamda: 'lamda/addLamda',
       setLook: 'lamda/setLook',
       setAsk: 'lamda/setAsk',
       setModel: 'lamda/setModel',
@@ -285,16 +287,8 @@ export default {
         return this.lamda[this.date][lamdaWord]
       }
     },
-    setEaceLamda (mutationWord, list) {
-      if (this.hasDate(this.date)) {
-        this.$store.commit(mutationWord, { date: this.date, list })
-      } else {
-        this.setNewLamda(this.date)
-        this.$store.commit(mutationWord, { date: this.date, list })
-      }
-    },
     setNewLamda (date) {
-      this.setLamda({
+      this.addLamda({
         date,
         content: { look: [], ask: [], model: [], discuss: [], act: [] }
       })
