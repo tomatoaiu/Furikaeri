@@ -287,14 +287,6 @@ export default {
         return this.lamda[this.date][lamdaWord]
       }
     },
-    setEaceLamda (mutationWord, list) {
-      if (this.hasDate(this.date)) {
-        this.$store.commit(mutationWord, { date: this.date, list })
-      } else {
-        this.setNewLamda(this.date)
-        this.$store.commit(mutationWord, { date: this.date, list })
-      }
-    },
     setNewLamda (date) {
       this.addLamda({
         date,
