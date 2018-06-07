@@ -14,7 +14,10 @@ export const state = () => ({
 })
 
 export const mutations = {
-  SET_GAP_ANALYSIS (state, { date, content }) {
+  SET_GAP_ANALYSIS (state, { gapAnalysis }) {
+    state.gapAnalysis = gapAnalysis
+  },
+  ADD_GAP_ANALYSIS (state, { date, content }) {
     state.gapAnalysis[date] = content
   },
   SET_ASIS (state, { date, list }) {
@@ -38,8 +41,11 @@ export const mutations = {
 }
 
 export const actions = {
-  setGapAnalysis ({ commit }, { date, content }) {
-    commit('SET_GAP_ANALYSIS', { date, content })
+  setGapAnalysis ({ commit }, gapAnalysis) {
+    commit('SET_GAP_ANALYSIS', { gapAnalysis })
+  },
+  addGapAnalysis ({ commit }, { date, content }) {
+    commit('ADD_GAP_ANALYSIS', { date, content })
   },
   setAsis ({ commit }, { date, list }) {
     commit('SET_ASIS', { date, list })

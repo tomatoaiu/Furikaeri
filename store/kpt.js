@@ -1,13 +1,10 @@
 export const state = () => ({
-  kpt: {
-  }
+  kpt: {}
 })
 
 export const mutations = {
-  SET_KPT (state) {
-    if ('kpt' in window.localStorage) {
-      state.kpt = (JSON.parse(window.localStorage.getItem('kpt'))).kpt || {}
-    }
+  SET_KPT (state, { kpt }) {
+    state.kpt = kpt
   },
   ADD_KPT (state, { date, content }) {
     state.kpt[date] = content
@@ -33,8 +30,8 @@ export const mutations = {
 }
 
 export const actions = {
-  setKpt ({ commit }) {
-    commit('SET_KPT')
+  setKpt ({ commit }, kpt) {
+    commit('SET_KPT', { kpt })
   },
   addKpt ({ commit }, { date, content }) {
     commit('ADD_KPT', { date, content })

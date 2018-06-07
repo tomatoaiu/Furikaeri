@@ -162,10 +162,11 @@
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
+import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  mixins: [ FurikaeriDate ],
+  mixins: [ FurikaeriDate, FurikaeriLocalStorage ],
   data () {
     return {
       menu: false,
@@ -220,6 +221,7 @@ export default {
     }
   },
   mounted () {
+    this.initFurikaeriLocalStorage()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewExperientialLearning(this.date)
@@ -228,7 +230,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      setExperientialLearning: 'experientialLearning/setExperientialLearning',
+      addExperientialLearning: 'experientialLearning/addExperientialLearning',
       setConcreateExperience: 'experientialLearning/setConcreateExperience',
       setReflectiveObservation: 'experientialLearning/setReflectiveObservation',
       setAbstractConceptualization: 'experientialLearning/setAbstractConceptualization',
@@ -259,7 +261,7 @@ export default {
       }
     },
     setNewExperientialLearning (date) {
-      this.setExperientialLearning({
+      this.addExperientialLearning({
         date,
         content: { concreateExperience: [], reflectiveObservation: [], abstractConceptualization: [], activeExperimentation: [] }
       })

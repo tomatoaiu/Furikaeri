@@ -162,10 +162,11 @@
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
+import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  mixins: [ FurikaeriDate ],
+  mixins: [ FurikaeriDate, FurikaeriLocalStorage ],
   data () {
     return {
       menu: false,
@@ -220,7 +221,7 @@ export default {
     }
   },
   mounted () {
-    this.setFourLinesDiary()
+    this.initFurikaeriLocalStorage()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewFourLinesDiary(this.date)
@@ -229,7 +230,6 @@ export default {
   },
   methods: {
     ...mapActions({
-      setFourLinesDiary: 'fourLinesDiary/setFourLinesDiary',
       addFourLinesDiary: 'fourLinesDiary/addFourLinesDiary',
       setFact: 'fourLinesDiary/setFact',
       setAwareness: 'fourLinesDiary/setAwareness',

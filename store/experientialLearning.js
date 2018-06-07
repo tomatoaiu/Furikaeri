@@ -1,22 +1,12 @@
 export const state = () => ({
-  experientialLearning: {
-    '2018-05-01': {
-      concreateExperience: ['everyday commit to github'],
-      reflectiveObservation: ['diet'],
-      abstractConceptualization: ['work for 10 minutes'],
-      activeExperimentation: ['work for 10 minutes']
-    },
-    '2018-05-03': {
-      concreateExperience: ['concreateExperienceda'],
-      reflectiveObservation: ['reflectiveObservationda'],
-      abstractConceptualization: ['abstractConceptualizationwosuruzo'],
-      activeExperimentation: ['activeExperimentationsimasita']
-    }
-  }
+  experientialLearning: {}
 })
 
 export const mutations = {
-  SET_EXPERIENTAIL_LEARNING (state, { date, content }) {
+  SET_EXPERIENTAIL_LEARNING (state, { experientialLearning }) {
+    state.experientialLearning = experientialLearning
+  },
+  ADD_EXPERIENTAIL_LEARNING (state, { date, content }) {
     state.experientialLearning[date] = content
   },
   SET_CONCREATE_EXPERIENCE (state, { date, list }) {
@@ -46,7 +36,10 @@ export const mutations = {
 }
 
 export const actions = {
-  setExperientialLearning ({ commit }, { date, content }) {
+  setExperientialLearning ({ commit }, experientialLearning) {
+    commit('SET_EXPERIENTAIL_LEARNING', { experientialLearning })
+  },
+  addExperientialLearning ({ commit }, { date, content }) {
     commit('SET_EXPERIENTAIL_LEARNING', { date, content })
   },
   setConcreateExperience ({ commit }, { date, list }) {

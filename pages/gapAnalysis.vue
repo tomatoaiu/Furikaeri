@@ -137,10 +137,11 @@
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
+import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  mixins: [ FurikaeriDate ],
+  mixins: [ FurikaeriDate, FurikaeriLocalStorage ],
   data () {
     return {
       menu: false,
@@ -187,12 +188,13 @@ export default {
     }
   },
   mounted () {
+    this.initFurikaeriLocalStorage()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     this.setRegisterDates()
   },
   methods: {
     ...mapActions({
-      setGapAnalysis: 'gapAnalysis/setGapAnalysis',
+      addGapAnalysis: 'gapAnalysis/addGapAnalysis',
       setAsis: 'gapAnalysis/setAsis',
       setTobe: 'gapAnalysis/setTobe',
       setGap: 'gapAnalysis/setGap',
@@ -213,7 +215,7 @@ export default {
       }
     },
     setNewGapAnalysis (date) {
-      this.setGapAnalysis({
+      this.addGapAnalysis({
         date,
         content: { asis: [], tobe: [], gap: [] }
       })

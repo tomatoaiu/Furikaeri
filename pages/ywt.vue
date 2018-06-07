@@ -137,10 +137,11 @@
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
+import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  mixins: [ FurikaeriDate ],
+  mixins: [ FurikaeriDate, FurikaeriLocalStorage ],
   data () {
     return {
       menu: false,
@@ -187,7 +188,7 @@ export default {
     }
   },
   mounted () {
-    this.setYwt()
+    this.initFurikaeriLocalStorage()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewYwt(this.date)
@@ -196,7 +197,6 @@ export default {
   },
   methods: {
     ...mapActions({
-      setYwt: 'ywt/setYwt',
       addYwt: 'ywt/addYwt',
       setYattakoto: 'ywt/setYattakoto',
       setWakattakoto: 'ywt/setWakattakoto',
