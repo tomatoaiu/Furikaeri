@@ -36,11 +36,11 @@ export const mutations = {
 }
 
 export const actions = {
-  setPdca ({ commit }, { date, content }) {
-    commit('SET_PDCA', { date, content })
+  setPdca ({ commit }, pdca) {
+    commit('SET_PDCA', { pdca })
   },
-  addPdca ({ commit }, pdca) {
-    commit('ADD_PDCA', { pdca })
+  addPdca ({ commit }, { date, content }) {
+    commit('ADD_PDCA', { date, content })
   },
   setPlan ({ commit }, { date, list }) {
     commit('SET_PLAN', { date, list })

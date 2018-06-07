@@ -40,7 +40,7 @@ export const actions = {
     commit('SET_EXPERIENTAIL_LEARNING', { experientialLearning })
   },
   addExperientialLearning ({ commit }, { date, content }) {
-    commit('SET_EXPERIENTAIL_LEARNING', { date, content })
+    commit('ADD_EXPERIENTAIL_LEARNING', { date, content })
   },
   setConcreateExperience ({ commit }, { date, list }) {
     commit('SET_CONCREATE_EXPERIENCE', { date, list })
