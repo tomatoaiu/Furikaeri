@@ -221,6 +221,9 @@ export default {
   },
   mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    if (!this.hasDate(this.date)) {
+      this.setNewExperientialLearning(this.date)
+    }
     this.setRegisterDates()
   },
   methods: {
