@@ -1,22 +1,12 @@
 export const state = () => ({
-  pdca: {
-    '2018-05-01': {
-      plan: ['everyday commit to github'],
-      do: ['diet'],
-      check: ['work for 10 minutes'],
-      action: ['work for 10 minutes']
-    },
-    '2018-05-03': {
-      plan: ['planda'],
-      do: ['doda'],
-      check: ['checkwosuruzo'],
-      action: ['actionsimasita']
-    }
-  }
+  pdca: {}
 })
 
 export const mutations = {
-  SET_PDCA (state, { date, content }) {
+  SET_PDCA (state, { pdca }) {
+    state.pdca = pdca
+  },
+  ADD_PDCA (state, { date, content }) {
     state.pdca[date] = content
   },
   SET_PLAN (state, { date, list }) {
@@ -48,6 +38,9 @@ export const mutations = {
 export const actions = {
   setPdca ({ commit }, { date, content }) {
     commit('SET_PDCA', { date, content })
+  },
+  addPdca ({ commit }, pdca) {
+    commit('ADD_PDCA', { pdca })
   },
   setPlan ({ commit }, { date, list }) {
     commit('SET_PLAN', { date, list })

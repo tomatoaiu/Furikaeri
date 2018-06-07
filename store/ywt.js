@@ -1,13 +1,10 @@
 export const state = () => ({
-  ywt: {
-  }
+  ywt: {}
 })
 
 export const mutations = {
-  SET_YWT (state) {
-    if ('ywt' in window.localStorage) {
-      state.ywt = (JSON.parse(window.localStorage.getItem('ywt'))).ywt || {}
-    }
+  SET_YWT (state, { ywt }) {
+    state.ywt = ywt
   },
   ADD_YWT (state, { date, content }) {
     state.ywt[date] = content
@@ -33,8 +30,8 @@ export const mutations = {
 }
 
 export const actions = {
-  setYwt ({ commit }) {
-    commit('SET_YWT')
+  setYwt ({ commit }, ywt) {
+    commit('SET_YWT', { ywt })
   },
   addYwt ({ commit }, { date, content }) {
     commit('ADD_YWT', { date, content })

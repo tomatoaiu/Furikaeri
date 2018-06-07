@@ -1,25 +1,10 @@
 export const state = () => ({
-  fourLinesDiary: {
-    '2018-05-01': {
-      fact: ['everyday commit to github'],
-      awareness: ['diet'],
-      lesson: ['work for 10 minutes'],
-      declaration: ['work for 10 minutes']
-    },
-    '2018-05-03': {
-      fact: ['factda'],
-      awareness: ['awarenessda'],
-      lesson: ['lessonwosuruzo'],
-      declaration: ['declarationsimasita']
-    }
-  }
+  fourLinesDiary: {}
 })
 
 export const mutations = {
-  SET_FOUR_LINES_DIARY (state) {
-    if ('fourLinesDiary' in window.localStorage) {
-      state.fourLinesDiary = (JSON.parse(window.localStorage.getItem('fourLinesDiary'))).fourLinesDiary || {}
-    }
+  SET_FOUR_LINES_DIARY (state, { fourLinesDiary }) {
+    state.fourLinesDiary = fourLinesDiary
   },
   ADD_FOUR_LINES_DIARY (state, { date, content }) {
     state.fourLinesDiary[date] = content
@@ -51,8 +36,8 @@ export const mutations = {
 }
 
 export const actions = {
-  setFourLinesDiary ({ commit }) {
-    commit('SET_FOUR_LINES_DIARY')
+  setFourLinesDiary ({ commit }, fourLinesDiary) {
+    commit('SET_FOUR_LINES_DIARY', { fourLinesDiary })
   },
   addFourLinesDiary ({ commit }, { date, content }) {
     commit('ADD_FOUR_LINES_DIARY', { date, content })

@@ -137,10 +137,11 @@
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
+import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  mixins: [ FurikaeriDate ],
+  mixins: [ FurikaeriDate, FurikaeriLocalStorage ],
   data () {
     return {
       menu: false,
@@ -188,7 +189,7 @@ export default {
     }
   },
   mounted () {
-    this.setKpt()
+    this.initFurikaeriLocalStorage()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewKpt(this.date)
@@ -197,7 +198,6 @@ export default {
   },
   methods: {
     ...mapActions({
-      setKpt: 'kpt/setKpt',
       addKpt: 'kpt/addKpt',
       setKeep: 'kpt/setKeep',
       setProblem: 'kpt/setProblem',

@@ -162,10 +162,11 @@
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
+import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  mixins: [ FurikaeriDate ],
+  mixins: [ FurikaeriDate, FurikaeriLocalStorage ],
   data () {
     return {
       menu: false,
@@ -220,6 +221,7 @@ export default {
     }
   },
   mounted () {
+    this.initFurikaeriLocalStorage()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (!this.hasDate(this.date)) {
       this.setNewPdca(this.date)
@@ -228,7 +230,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      setPdca: 'pdca/setPdca',
+      addPdca: 'pdca/addPdca',
       setPlan: 'pdca/setPlan',
       setDo: 'pdca/setDo',
       setCheck: 'pdca/setCheck',
@@ -251,7 +253,7 @@ export default {
       }
     },
     setNewPdca (date) {
-      this.setPdca({
+      this.addPdca({
         date,
         content: { plan: [], do: [], check: [], action: [] }
       })

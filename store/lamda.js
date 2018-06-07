@@ -4,10 +4,8 @@ export const state = () => ({
 })
 
 export const mutations = {
-  SET_LAMDA (state) {
-    if ('lamda' in window.localStorage) {
-      state.lamda = (JSON.parse(window.localStorage.getItem('lamda'))).lamda || {}
-    }
+  SET_LAMDA (state, { lamda }) {
+    state.lamda = lamda
   },
   ADD_LAMDA (state, { date, content }) {
     state.lamda[date] = content
@@ -45,8 +43,8 @@ export const mutations = {
 }
 
 export const actions = {
-  setLamda ({ commit }) {
-    commit('SET_LAMDA')
+  setLamda ({ commit }, lamda) {
+    commit('SET_LAMDA', { lamda })
   },
   addLamda ({ commit }, { date, content }) {
     commit('ADD_LAMDA', { date, content })
