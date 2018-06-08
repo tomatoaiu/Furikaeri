@@ -1,5 +1,43 @@
 # Change Log
 
+## [v0.1.2](https://github.com/tomatoaiu/Furikaeri/tree/v0.1.2) (2018-06-08)
+[Full Changelog](https://github.com/tomatoaiu/Furikaeri/compare/v0.1.1...v0.1.2)
+
+**Implemented enhancements:**
+
+- Added function to delete note [\#36](https://github.com/tomatoaiu/Furikaeri/issues/36)
+
+**Fixed bugs:**
+
+- When localStorage is empty, \[in\] can not be used [\#60](https://github.com/tomatoaiu/Furikaeri/issues/60)
+- When doing two or more furikaeri, one data disappears [\#56](https://github.com/tomatoaiu/Furikaeri/issues/56)
+
+**Merged pull requests:**
+
+- fix: 60 can-not-use-in: [\#64](https://github.com/tomatoaiu/Furikaeri/pull/64) ([tomatoaiu](https://github.com/tomatoaiu))
+- fix: typo [\#63](https://github.com/tomatoaiu/Furikaeri/pull/63) ([tomatoaiu](https://github.com/tomatoaiu))
+- fix: 56 get-local-storage: [\#62](https://github.com/tomatoaiu/Furikaeri/pull/62) ([tomatoaiu](https://github.com/tomatoaiu))
+- fix: added the check hasdate [\#61](https://github.com/tomatoaiu/Furikaeri/pull/61) ([tomatoaiu](https://github.com/tomatoaiu))
+- docs: add version to title [\#59](https://github.com/tomatoaiu/Furikaeri/pull/59) ([tomatoaiu](https://github.com/tomatoaiu))
+- Feat/lamda [\#58](https://github.com/tomatoaiu/Furikaeri/pull/58) ([tomatoaiu](https://github.com/tomatoaiu))
+- feat: set four lines dairy to localstorage [\#57](https://github.com/tomatoaiu/Furikaeri/pull/57) ([tomatoaiu](https://github.com/tomatoaiu))
+- Feat/ywt [\#55](https://github.com/tomatoaiu/Furikaeri/pull/55) ([tomatoaiu](https://github.com/tomatoaiu))
+- Feat/kpt [\#54](https://github.com/tomatoaiu/Furikaeri/pull/54) ([tomatoaiu](https://github.com/tomatoaiu))
+- Feat/local storage [\#53](https://github.com/tomatoaiu/Furikaeri/pull/53) ([tomatoaiu](https://github.com/tomatoaiu))
+- refactor: move date methods to mixins vue [\#52](https://github.com/tomatoaiu/Furikaeri/pull/52) ([tomatoaiu](https://github.com/tomatoaiu))
+- fix: set new lamda [\#51](https://github.com/tomatoaiu/Furikaeri/pull/51) ([tomatoaiu](https://github.com/tomatoaiu))
+- feat: added the yarn-error.log to gitignore [\#50](https://github.com/tomatoaiu/Furikaeri/pull/50) ([tomatoaiu](https://github.com/tomatoaiu))
+- feat: \(lamda\) use actions of vuex [\#49](https://github.com/tomatoaiu/Furikaeri/pull/49) ([tomatoaiu](https://github.com/tomatoaiu))
+- fix: delete double brackets [\#48](https://github.com/tomatoaiu/Furikaeri/pull/48) ([tomatoaiu](https://github.com/tomatoaiu))
+- fat: \(experiental learning\) use actions of vuex [\#47](https://github.com/tomatoaiu/Furikaeri/pull/47) ([tomatoaiu](https://github.com/tomatoaiu))
+- feat: \(gap analysis\) use actions of vuex [\#46](https://github.com/tomatoaiu/Furikaeri/pull/46) ([tomatoaiu](https://github.com/tomatoaiu))
+- feat: \(pdca\) use actions of vuex [\#45](https://github.com/tomatoaiu/Furikaeri/pull/45) ([tomatoaiu](https://github.com/tomatoaiu))
+- feat: \(fourLinesDiary\) use actions of vuex [\#44](https://github.com/tomatoaiu/Furikaeri/pull/44) ([tomatoaiu](https://github.com/tomatoaiu))
+- feat: \(ywt\) use actions of vuex [\#43](https://github.com/tomatoaiu/Furikaeri/pull/43) ([tomatoaiu](https://github.com/tomatoaiu))
+- refactor: \(boards\) use actions of vuex [\#42](https://github.com/tomatoaiu/Furikaeri/pull/42) ([tomatoaiu](https://github.com/tomatoaiu))
+- refactor: use actions of vuex [\#41](https://github.com/tomatoaiu/Furikaeri/pull/41) ([tomatoaiu](https://github.com/tomatoaiu))
+- feat: remove note [\#39](https://github.com/tomatoaiu/Furikaeri/pull/39) ([tomatoaiu](https://github.com/tomatoaiu))
+
 ## [v0.1.1](https://github.com/tomatoaiu/Furikaeri/tree/v0.1.1) (2018-05-19)
 [Full Changelog](https://github.com/tomatoaiu/Furikaeri/compare/v0.1.0...v0.1.1)
 
