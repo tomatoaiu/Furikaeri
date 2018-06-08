@@ -116,7 +116,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Furikaeri v0.1.1',
+      title: 'Furikaeri v0.1.2',
       showAvatar: false,
       userLinks: [
         { title: 'SIGN OUT' }

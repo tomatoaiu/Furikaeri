@@ -8,7 +8,7 @@ Let's Furikaeri
 
 ## Progress
 Progress is slow because I am producing it as a hobby.  
-Now version [0.1.1](https://github.com/tomatoaiu/Furikaeri/releases)  
+Now version [0.1.2](https://github.com/tomatoaiu/Furikaeri/releases)  
 
 ## Build Setup
 
