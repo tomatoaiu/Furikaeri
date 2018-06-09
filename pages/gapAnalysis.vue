@@ -190,6 +190,9 @@ export default {
   mounted () {
     this.initFurikaeriLocalStorage()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    if (!this.hasDate(this.date)) {
+      this.setNewGapAnalysis(this.date)
+    }
     this.setRegisterDates()
   },
   methods: {
