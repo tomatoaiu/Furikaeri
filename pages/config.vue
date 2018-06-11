@@ -15,13 +15,18 @@
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-list-tile v-for="subItem in item.items" :key="subItem.title" @click="setBaseColor({ color: subItem.title })">
+            <v-list-tile v-for="subItem in item.items" :key="subItem.title"
+              @click="setBaseColor({ color: subItem.title })">
               <v-list-tile-content>
-                <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
+                <v-list-tile-title>
+                  <v-icon :color="subItem.title" style="margin-right: 1em;">color_lens</v-icon>{{ subItem.title }}
+                </v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-action>
                 <v-icon>{{ subItem.action }}</v-icon>
               </v-list-tile-action>
+              <v-spacer />
+              <v-list-tile-content class="color-box"></v-list-tile-content>
             </v-list-tile>
           </v-list-group>
         </v-list>
@@ -38,7 +43,7 @@ export default {
     return {
       items: [
         {
-          action: 'local_activity',
+          action: 'color_lens',
           title: 'Colors',
           items: [
             { title: 'light-blue' },
