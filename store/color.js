@@ -71,8 +71,14 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setBaseColor (state, payload) {
-    state.color.base = payload.color
+  SET_BASE_COLOR (state, { color }) {
+    state.color.base = color
+  }
+}
+
+export const actions = {
+  setBaseColor ({ commit }, { color }) {
+    commit('SET_BASE_COLOR', { color })
   }
 }
 
