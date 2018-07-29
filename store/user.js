@@ -16,6 +16,7 @@ export const mutations = {
     state.user.name = user.displayName
     state.user.email = user.email
     state.user.icon = user.photoURL
+    console.log('1.5', user, state)
   }
 }
 
@@ -24,6 +25,7 @@ export const actions = {
     firebase.auth().signInWithRedirect(provider)
   },
   async setCredential ({ commit }, { user }) {
+    console.log('1', user)
     if (!user) return
     await userRef.child(user.email.replace('@', '_at_').replace(/\./g, '_dot_')).set({
       name: user.displayName,
@@ -35,7 +37,7 @@ export const actions = {
       email: user.email,
       photoURL: user.photoURL
     })
-    console.log(user)
+    console.log('2', user)
   }
 }
 

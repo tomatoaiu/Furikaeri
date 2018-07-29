@@ -11,7 +11,7 @@
 
 <script>
 import auth from '~/plugins/auth'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -20,13 +20,16 @@ export default {
       credential: null
     }
   },
+  computed: {
+    ...mapGetters({
+      user: 'user/user'
+    })
+  },
   async mounted () {
-    if (!this.user) {
+    if (this.user.name === '') {
       this.credential = await auth()
     }
-    await Promise.all([
-      this.user ? Promise.resolve() : this.setCredential({ user: this.credential || null })
-    ])
+    await this.setCredential({ user: this.credential || null })
     this.isLoaded = true
   },
   methods: {

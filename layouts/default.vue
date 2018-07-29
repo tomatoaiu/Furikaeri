@@ -59,8 +59,14 @@
           <img :src="user.icon" alt="avatar">
         </v-avatar>
         <v-list>
-          <v-list-tile v-for="(item, i) in userLinks" :key="i" @click="">
+          <!-- <v-list-tile v-for="(item, i) in userLinks" :key="i" @click="">
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile> -->
+          <v-list-tile>
+            <v-list-tile-title @click="callAuth">SIGN IN</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-title>SIGN OUT</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
@@ -124,6 +130,9 @@ export default {
       ]
     }
   },
+  // async mounted () {
+  //   await this.callAuth()
+  // },
   computed: {
     ...mapGetters({
       baseColor: 'color/baseColor',
