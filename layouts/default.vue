@@ -130,9 +130,6 @@ export default {
       ]
     }
   },
-  // async mounted () {
-  //   await this.callAuth()
-  // },
   computed: {
     ...mapGetters({
       baseColor: 'color/baseColor',
