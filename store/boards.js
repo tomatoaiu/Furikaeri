@@ -1,56 +1,5 @@
 export const state = () => ({
-  columns: [
-    {
-      name: 'aiueo',
-      notes: [
-        {
-          title: '1',
-          content: 'Lorem ipsum dolor sit amet'
-        },
-        {
-          title: '2',
-          content: 'Lorem ipsum dolor sit amet'
-        },
-        {
-          title: '3',
-          content: 'Lorem ipsum dolor sit amet'
-        },
-        {
-          title: '4',
-          content: 'Lorem ipsum dolor sit amet'
-        },
-        {
-          title: '5',
-          content: 'Lorem ipsum dolor sit amet'
-        }
-      ]
-    },
-    {
-      name: 'aiueo333',
-      notes: [
-        {
-          title: '1',
-          content: 'Lorem ipsum dolor sit amet'
-        },
-        {
-          title: '2',
-          content: 'Lorem ipsum dolor sit amet'
-        },
-        {
-          title: '3',
-          content: 'Lorem ipsum dolor sit amet'
-        },
-        {
-          title: '4',
-          content: 'Lorem ipsum dolor sit amet'
-        },
-        {
-          title: '5',
-          content: 'Lorem ipsum dolor sit amet'
-        }
-      ]
-    }
-  ]
+  columns: []
 })
 
 export const mutations = {

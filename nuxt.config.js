@@ -1,5 +1,3 @@
-const webpack = require('webpack')
-
 module.exports = {
   /*
   ** Headers of the page
@@ -23,6 +21,17 @@ module.exports = {
   css: [
     '~/assets/style/app.styl'
   ],
+  modules: [
+    '@nuxtjs/dotenv'
+  ],
+  env: {
+    apiKey: process.env.APIKEY,
+    authDomain: process.env.AUTHDOMAIN,
+    databaseURL: process.env.DATABASEURL,
+    projectId: process.env.PROJECTID,
+    storageBucket: process.env.STORAGEBUCKET,
+    messagingSenderId: process.env.MESSAGINGSENDERID
+  },
   /*
   ** Customize the progress bar color
   */
@@ -48,9 +57,6 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-      config.plugins.push(
-        new webpack.EnvironmentPlugin(['APIKEY', 'AUTHDOMAIN', 'DATABASEURL', 'PROJECTID', 'STORAGEBUCKET', 'MESSAGINGSENDERID'])
-      )
     }
   }
 }

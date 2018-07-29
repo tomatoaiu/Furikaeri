@@ -14,7 +14,7 @@ dist
 .vscode
 
 # env
-.envrc
+.env
 
 # yarn
 yarn-error.log
