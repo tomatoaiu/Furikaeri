@@ -117,7 +117,7 @@ export default {
         { icon: 'replay', title: 'ExperientialLearning', to: '/experientialLearning' },
         { icon: 'replay', title: 'GapAnalysis', to: '/gapAnalysis' },
         { icon: 'replay', title: 'PDCA', to: '/pdca' },
-        { icon: 'apps', title: 'Calendar', to: '/calendar' },
+        { icon: 'date_range', title: 'Calendar', to: '/calendar' },
         { icon: 'settings', title: 'Config', to: '/config' }
       ],
       miniVariant: false,
