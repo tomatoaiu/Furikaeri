@@ -1,6 +1,7 @@
 # furikaeri-web
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cbb2daafec32460e99c92a83e23dd066)](https://app.codacy.com/app/tomatoaiu/Furikaeri?utm_source=github.com&utm_medium=referral&utm_content=tomatoaiu/Furikaeri&utm_campaign=badger)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftomatoaiu%2FFurikaeri.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftomatoaiu%2FFurikaeri?ref=badge_shield)
+[![dependencies Status](https://david-dm.org/tomatoaiu/Furikaeri/status.svg)](https://david-dm.org/tomatoaiu/Furikaeri)
 
 Let's Furikaeri  
 [Web Site](https://lets-furikaeri.firebaseapp.com/)
