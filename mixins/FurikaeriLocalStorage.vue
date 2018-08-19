@@ -44,7 +44,7 @@ function getFurikaeriFromLocalStorage () {
 export default {
   methods: {
     ...mapActions({
-      setKpt: 'kpt/setKpt',
+      // setKpt: 'kpt/setKpt',
       setYwt: 'ywt/setYwt',
       setFourLinesDiary: 'fourLinesDiary/setFourLinesDiary',
       setLamda: 'lamda/setLamda',
@@ -54,7 +54,7 @@ export default {
     }),
     initFurikaeriLocalStorage () {
       const state = getFurikaeriFromLocalStorage()
-      this.setKpt(state.kpt)
+      // this.setKpt(state.kpt)
       this.setYwt(state.ywt)
       this.setFourLinesDiary(state.fourLinesDiary)
       this.setLamda(state.lamda)

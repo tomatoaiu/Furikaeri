@@ -5,6 +5,7 @@ const provider = new firebase.auth.GoogleAuthProvider()
 
 export const state = () => ({
   user: {
+    id: '',
     name: '',
     email: '',
     icon: ''
@@ -13,6 +14,7 @@ export const state = () => ({
 
 export const mutations = {
   setUser (state, user) {
+    state.user.id = user.id
     state.user.name = user.displayName
     state.user.email = user.email
     state.user.icon = user.photoURL
@@ -25,12 +27,13 @@ export const actions = {
   },
   async setCredential ({ commit }, { user }) {
     if (!user) return
-    await userRef.child(user.email.replace('@', '_at_').replace(/\./g, '_dot_')).set({
+    await userRef.child(user.uid).update({
       name: user.displayName,
       email: user.email,
       icon: user.photoURL
     })
     commit('setUser', {
+      id: user.uid,
       displayName: user.displayName,
       email: user.email,
       photoURL: user.photoURL
@@ -40,5 +43,5 @@ export const actions = {
 
 export const getters = {
   user: state => state.user,
-  isSignUp: state => (state.user.name !== '' || state.user.name !== '')
+  isSignUp: state => (state.user.id !== '' || state.user.name !== '')
 }

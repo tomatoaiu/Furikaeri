@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeKeep({ date, item: data.item })"
+              @input="removeEachKpt({ each: 'keep', item: data.item })"
               :selected="data.selected"
               :color="kptColor.keep"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeProblem({ date, item: data.item })"
+              @input="removeEachKpt({ each: 'problem', item: data.item })"
               :selected="data.selected"
               :color="kptColor.problem"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeTry({ date, item: data.item })"
+              @input="removeEachKpt({ each: 'try', item: data.item })"
               :selected="data.selected"
               :color="kptColor.try"
               text-color="white"
@@ -151,63 +151,64 @@ export default {
   },
   computed: {
     ...mapGetters({
+      user: 'user/user',
+      isSignUp: 'user/isSignUp',
       baseColor: 'color/baseColor',
       kptColor: 'color/kptColor',
       kpt: 'kpt/kpt',
-      kptWithDate: 'kpt/kptWithDate'
+      itemIndex: 'kpt/itemIndex'
     }),
     kptKeep: {
       get () {
         return this.getEachKpt('keep')
       },
-      set (list) {
-        this.setKeep({ date: this.date, list })
+      async set (list) {
+        if (!this.hasDate(this.date)) {
+          await this.setNewKpt()
+        }
+        this.setKeep({ user: this.user, date: this.date, list })
       }
     },
     kptProblem: {
       get () {
         return this.getEachKpt('problem')
       },
-      set (list) {
-        this.setProblem({ date: this.date, list })
+      async set (list) {
+        if (!this.hasDate(this.date)) {
+          await this.setNewKpt()
+        }
+        this.setProblem({ user: this.user, date: this.date, list })
       }
     },
     kptTry: {
       get () {
         return this.getEachKpt('try')
       },
-      set (list) {
-        this.setTry({ date: this.date, list })
-      }
-    }
-  },
-  watch: {
-    date (next, prev) {
-      if (!this.hasDate(next)) {
-        this.setNewKpt(next)
+      async set (list) {
+        if (!this.hasDate(this.date)) {
+          await this.setNewKpt()
+        }
+        this.setTry({ user: this.user, date: this.date, list })
       }
     }
   },
   mounted () {
-    this.initFurikaeriLocalStorage()
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
-    if (!this.hasDate(this.date)) {
-      this.setNewKpt(this.date)
+    if (this.isSignUp) {
+      this.setKpt({ user: this.user })
     }
-    this.setRegisterDates()
   },
   methods: {
     ...mapActions({
       addKpt: 'kpt/addKpt',
+      setKpt: 'kpt/setKpt',
       setKeep: 'kpt/setKeep',
       setProblem: 'kpt/setProblem',
       setTry: 'kpt/setTry',
-      removeKeep: 'kpt/removeKeep',
-      removeProblem: 'kpt/removeProblem',
-      removeTry: 'kpt/removeTry'
+      removeKptItem: 'kpt/removeKptItem'
     }),
     hasDate (date) {
-      if (date in this.kpt) {
+      if (this.kpt && date in this.kpt) {
         return true
       } else {
         return false
@@ -216,11 +217,23 @@ export default {
     getEachKpt (kptWord) {
       if (this.hasDate(this.date)) {
         return this.kpt[this.date][kptWord]
+      } else {
+        return []
       }
     },
-    setNewKpt (date) {
-      this.addKpt({
-        date,
+    removeEachKpt ({ each, item }) {
+      const index = this.itemIndex(each, this.date, item)
+      this.removeKptItem({
+        user: this.user,
+        date: this.date,
+        each,
+        index
+      })
+    },
+    async setNewKpt () {
+      await this.addKpt({
+        user: this.user,
+        date: this.date,
         content: { keep: [], problem: [], try: [] }
       })
       this.setRegisterDates()
