@@ -166,7 +166,7 @@ export default {
         if (!this.hasDate(this.date)) {
           await this.setNewKpt()
         }
-        this.setKeep({ user: this.user, date: this.date, list })
+        this.setKptItem({ user: this.user, date: this.date, each: 'keep', list })
       }
     },
     kptProblem: {
@@ -177,7 +177,7 @@ export default {
         if (!this.hasDate(this.date)) {
           await this.setNewKpt()
         }
-        this.setProblem({ user: this.user, date: this.date, list })
+        this.setKptItem({ user: this.user, date: this.date, each: 'problem', list })
       }
     },
     kptTry: {
@@ -188,7 +188,7 @@ export default {
         if (!this.hasDate(this.date)) {
           await this.setNewKpt()
         }
-        this.setTry({ user: this.user, date: this.date, list })
+        this.setKptItem({ user: this.user, date: this.date, each: 'try', list })
       }
     }
   },
@@ -202,9 +202,7 @@ export default {
     ...mapActions({
       addKpt: 'kpt/addKpt',
       setKpt: 'kpt/setKpt',
-      setKeep: 'kpt/setKeep',
-      setProblem: 'kpt/setProblem',
-      setTry: 'kpt/setTry',
+      setKptItem: 'kpt/setKptItem',
       removeKptItem: 'kpt/removeKptItem'
     }),
     hasDate (date) {
