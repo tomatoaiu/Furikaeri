@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: 'keep', item: data.item })"
+              @input="removeEachKpt({ each: KEEP, item: data.item })"
               :selected="data.selected"
               :color="kptColor.keep"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: 'problem', item: data.item })"
+              @input="removeEachKpt({ each: PROBLEM, item: data.item })"
               :selected="data.selected"
               :color="kptColor.problem"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: 'try', item: data.item })"
+              @input="removeEachKpt({ each: TRY, item: data.item })"
               :selected="data.selected"
               :color="kptColor.try"
               text-color="white"
@@ -139,6 +139,10 @@
 import FurikaeriDate from '~/mixins/FurikaeriDate'
 import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
+
+const KEEP = 'keep'
+const PROBLEM = 'problem'
+const TRY = 'try'
 
 export default {
   mixins: [ FurikaeriDate, FurikaeriLocalStorage ],
@@ -160,35 +164,35 @@ export default {
     }),
     kptKeep: {
       get () {
-        return this.getEachKpt('keep')
+        return this.getEachKpt(KEEP)
       },
       async set (list) {
         if (!this.hasDate(this.date)) {
           await this.setNewKpt()
         }
-        this.setKptItem({ user: this.user, date: this.date, each: 'keep', list })
+        this.setKptItem({ user: this.user, date: this.date, each: KEEP, list })
       }
     },
     kptProblem: {
       get () {
-        return this.getEachKpt('problem')
+        return this.getEachKpt(PROBLEM)
       },
       async set (list) {
         if (!this.hasDate(this.date)) {
           await this.setNewKpt()
         }
-        this.setKptItem({ user: this.user, date: this.date, each: 'problem', list })
+        this.setKptItem({ user: this.user, date: this.date, each: PROBLEM, list })
       }
     },
     kptTry: {
       get () {
-        return this.getEachKpt('try')
+        return this.getEachKpt(TRY)
       },
       async set (list) {
         if (!this.hasDate(this.date)) {
           await this.setNewKpt()
         }
-        this.setKptItem({ user: this.user, date: this.date, each: 'try', list })
+        this.setKptItem({ user: this.user, date: this.date, each: TRY, list })
       }
     }
   },
@@ -232,7 +236,7 @@ export default {
       await this.addKpt({
         user: this.user,
         date: this.date,
-        content: { keep: [], problem: [], try: [] }
+        content: { [`${KEEP}`]: [], [`${PROBLEM}`]: [], [`${TRY}`]: [] }
       })
       this.setRegisterDates()
     },
