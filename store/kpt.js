@@ -17,7 +17,7 @@ export const mutations = {
     state.kpt[date][each] = list
   },
   REMOVE_KPT_ITEM (state, { date, each, index }) {
-    state.kpt[date][each].splice(index)
+    state.kpt[date][each].splice(index, 1)
   }
 }
 

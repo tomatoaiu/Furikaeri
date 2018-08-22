@@ -70,7 +70,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: KEEP, item: data.item })"
+              @input="removeEachKpt({ each: 'keep', item: data.item })"
               :selected="data.selected"
               :color="kptColor.keep"
               text-color="white"
@@ -95,7 +95,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: PROBLEM, item: data.item })"
+              @input="removeEachKpt({ each: 'problem', item: data.item })"
               :selected="data.selected"
               :color="kptColor.problem"
               text-color="white"
@@ -120,7 +120,7 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: TRY, item: data.item })"
+              @input="removeEachKpt({ each: 'try', item: data.item })"
               :selected="data.selected"
               :color="kptColor.try"
               text-color="white"
@@ -223,14 +223,9 @@ export default {
         return []
       }
     },
-    removeEachKpt ({ each, item }) {
+    async removeEachKpt ({ each, item }) {
       const index = this.itemIndex(each, this.date, item)
-      this.removeKptItem({
-        user: this.user,
-        date: this.date,
-        each,
-        index
-      })
+      this.removeKptItem({ user: this.user, date: this.date, each, index })
     },
     async setNewKpt () {
       await this.addKpt({
