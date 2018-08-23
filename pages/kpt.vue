@@ -217,8 +217,8 @@ export default {
       }
     },
     getEachKpt (kptWord) {
-      if (this.hasDate(this.date)) {
-        return this.kpt[this.date][kptWord]
+      if (this.hasDate(this.date) && this.kpt[this.date] && this.kpt[this.date][kptWord]) {
+        return this.kpt[this.date][kptWord].filter(item => item != null) || []
       } else {
         return []
       }
