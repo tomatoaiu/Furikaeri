@@ -139,6 +139,7 @@
 import FurikaeriDate from '~/mixins/FurikaeriDate'
 import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
+import auth from '~/plugins/auth'
 
 const KEEP = 'keep'
 const PROBLEM = 'problem'
@@ -196,9 +197,13 @@ export default {
       }
     }
   },
-  mounted () {
+  async mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (this.isSignUp) {
+      this.setKpt({ user: this.user })
+    } else {
+      const user = await auth()
+      await this.setCredential({ user: user || null })
       this.setKpt({ user: this.user })
     }
   },
@@ -207,7 +212,8 @@ export default {
       addKpt: 'kpt/addKpt',
       setKpt: 'kpt/setKpt',
       setKptItem: 'kpt/setKptItem',
-      removeKptItem: 'kpt/removeKptItem'
+      removeKptItem: 'kpt/removeKptItem',
+      setCredential: 'user/setCredential'
     }),
     hasDate (date) {
       if (this.kpt && date in this.kpt) {
