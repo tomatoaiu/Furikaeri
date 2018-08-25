@@ -137,7 +137,6 @@
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
-import FurikaeriLocalStorage from '~/mixins/FurikaeriLocalStorage'
 import { mapGetters, mapActions } from 'vuex'
 import auth from '~/plugins/auth'
 
@@ -146,7 +145,7 @@ const PROBLEM = 'problem'
 const TRY = 'try'
 
 export default {
-  mixins: [ FurikaeriDate, FurikaeriLocalStorage ],
+  mixins: [ FurikaeriDate ],
   data () {
     return {
       menu: false,
