@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <button @click="setRegisterDates">set</button> -->
     <v-layout row wrap>
       <v-flex xs12 sm5>
         <v-menu
@@ -196,6 +197,14 @@ export default {
       }
     }
   },
+  watch: {
+    kpt: {
+      deep: true,
+      handler () {
+        this.setRegisterDates()
+      }
+    }
+  },
   async mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
     if (this.isSignUp) {
@@ -238,7 +247,6 @@ export default {
         date: this.date,
         content: { [`${KEEP}`]: [], [`${PROBLEM}`]: [], [`${TRY}`]: [] }
       })
-      this.setRegisterDates()
     },
     setRegisterDates () {
       this.registerDates = Object.keys(this.kpt)
