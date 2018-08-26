@@ -159,7 +159,7 @@ export default {
       user: 'user/user',
       isSignUp: 'user/isSignUp',
       baseColor: 'color/baseColor',
-      kptColor: 'color/kptColor',
+      kptColor: 'color/kpt',
       kpt: 'kpt/kpt',
       itemIndex: 'kpt/itemIndex'
     }),
