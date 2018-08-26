@@ -203,6 +203,9 @@ export default {
       handler () {
         this.setRegisterDates()
       }
+    },
+    date () {
+      this.setRegisterDates()
     }
   },
   async mounted () {
