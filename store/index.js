@@ -10,7 +10,7 @@ const localStoragePlugin = store => {
     pdca
   }) => {
     window.localStorage.setItem('boards', JSON.stringify(boards))
-    window.localStorage.setItem('kpt', JSON.stringify(kpt))
+    // window.localStorage.setItem('kpt', JSON.stringify(kpt))
     window.localStorage.setItem('ywt', JSON.stringify(ywt))
     window.localStorage.setItem('fourLinesDiary', JSON.stringify(fourLinesDiary))
     window.localStorage.setItem('lamda', JSON.stringify(lamda))

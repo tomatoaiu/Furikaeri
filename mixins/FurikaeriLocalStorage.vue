@@ -3,11 +3,11 @@ import { mapActions } from 'vuex'
 
 function getFurikaeriFromLocalStorage () {
   const state = {}
-  if ('kpt' in window.localStorage) {
-    state.kpt = (JSON.parse(window.localStorage.getItem('kpt'))).kpt || {}
-  } else {
-    state.kpt = {}
-  }
+  // if ('kpt' in window.localStorage) {
+  //   state.kpt = (JSON.parse(window.localStorage.getItem('kpt'))).kpt || {}
+  // } else {
+  //   state.kpt = {}
+  // }
   if ('ywt' in window.localStorage) {
     state.ywt = (JSON.parse(window.localStorage.getItem('ywt'))).ywt || {}
   } else {
