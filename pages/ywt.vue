@@ -152,7 +152,7 @@ export default {
   computed: {
     ...mapGetters({
       baseColor: 'color/baseColor',
-      ywtColor: 'color/ywtColor',
+      ywtColor: 'color/ywt',
       ywt: 'ywt/ywt'
     }),
     ywtYattakoto: {
