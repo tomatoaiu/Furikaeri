@@ -202,7 +202,7 @@ export default {
   computed: {
     ...mapGetters({
       baseColor: 'color/baseColor',
-      lamdaColor: 'color/lamdaColor',
+      lamdaColor: 'color/lamda',
       lamda: 'lamda/lamda'
     }),
     Lamda: {
