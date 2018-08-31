@@ -177,7 +177,7 @@ export default {
   computed: {
     ...mapGetters({
       baseColor: 'color/baseColor',
-      experientialLearningColor: 'color/experientialLearningColor',
+      experientialLearningColor: 'color/experientialLearning',
       experientialLearning: 'experientialLearning/experientialLearning'
     }),
     experientialLearningConcreateExperience: {
