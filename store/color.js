@@ -89,6 +89,6 @@ export const getters = {
   fourLinesDiary: state => state.color.fourLinesDiary,
   lamda: state => state.color.lamda,
   experientialLearning: state => state.color.experientialLearning,
-  gapAnalysisColor: state => state.color.gapAnalysis,
+  gapAnalysis: state => state.color.gapAnalysis,
   pdcaColor: state => state.color.pdca
 }
