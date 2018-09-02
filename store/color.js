@@ -90,5 +90,5 @@ export const getters = {
   lamda: state => state.color.lamda,
   experientialLearning: state => state.color.experientialLearning,
   gapAnalysis: state => state.color.gapAnalysis,
-  pdcaColor: state => state.color.pdca
+  pdca: state => state.color.pdca
 }

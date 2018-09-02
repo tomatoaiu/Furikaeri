@@ -177,7 +177,7 @@ export default {
   computed: {
     ...mapGetters({
       baseColor: 'color/baseColor',
-      pdcaColor: 'color/pdcaColor',
+      pdcaColor: 'color/pdca',
       pdca: 'pdca/pdca'
     }),
     pdcaPlan: {
