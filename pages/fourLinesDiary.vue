@@ -176,7 +176,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      baseColor: 'color/baseColor',
+      baseColor: 'color/base',
       fourLinesDiaryColor: 'color/fourLinesDiary',
       fourLinesDiary: 'fourLinesDiary/fourLinesDiary'
     }),

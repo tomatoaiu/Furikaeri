@@ -90,7 +90,7 @@ export default {
     ...mapGetters({
       columns: 'boards/columns',
       existsColumn: 'boards/existsColumn',
-      baseColor: 'color/baseColor'
+      baseColor: 'color/base'
     })
   },
   mounted () {

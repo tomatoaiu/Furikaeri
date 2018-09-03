@@ -158,7 +158,7 @@ export default {
     ...mapGetters({
       user: 'user/user',
       isSignUp: 'user/isSignUp',
-      baseColor: 'color/baseColor',
+      baseColor: 'color/base',
       kptColor: 'color/kpt',
       kpt: 'kpt/kpt',
       itemIndex: 'kpt/itemIndex'

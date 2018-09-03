@@ -132,7 +132,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      baseColor: 'color/baseColor',
+      baseColor: 'color/base',
       user: 'user/user',
       isSignUp: 'user/isSignUp'
     })

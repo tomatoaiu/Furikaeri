@@ -83,7 +83,7 @@ export const actions = {
 }
 
 export const getters = {
-  baseColor: state => state.color.base,
+  base: state => state.color.base,
   kpt: state => state.color.kpt,
   ywt: state => state.color.ywt,
   fourLinesDiary: state => state.color.fourLinesDiary,

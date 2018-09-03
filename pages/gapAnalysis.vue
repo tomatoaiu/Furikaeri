@@ -151,7 +151,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      baseColor: 'color/baseColor',
+      baseColor: 'color/base',
       gapAnalysisColor: 'color/gapAnalysis',
       gapAnalysis: 'gapAnalysis/gapAnalysis'
     }),

@@ -83,7 +83,7 @@ export default {
     ...mapGetters({
       columnIndex: 'boards/getColumnIndex',
       noteIndex: 'boards/getNoteIndex',
-      baseColor: 'color/baseColor'
+      baseColor: 'color/base'
     })
   },
   methods: {
