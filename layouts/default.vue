@@ -3,6 +3,7 @@
     <v-navigation-drawer
       :mini-variant.sync="miniVariant"
       :clipped="clipped"
+      :color="baseColor"
       v-model="drawer"
       fixed
       app
@@ -13,6 +14,7 @@
           :to="item.to"
           :key="i"
           v-for="(item, i) in items"
+          :active-class="baseColor"
           exact
         >
           <v-list-tile-action>
