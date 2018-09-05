@@ -64,8 +64,8 @@ export const actions = {
 
 export const getters = {
   columns: state => state.columns,
-  getColumnIndex: state => columnName => state.columns.findIndex(({name}) => name === columnName),
+  getColumnIndex: state => columnName => state.columns.findIndex(({ name }) => name === columnName),
   getNotes: state => index => state.columns[index].notes,
-  getNoteIndex: state => (columnIndex, noteName) => state.columns[columnIndex].notes.findIndex(({title}) => title === noteName),
+  getNoteIndex: state => (columnIndex, noteName) => state.columns[columnIndex].notes.findIndex(({ title }) => title === noteName),
   existsColumn: state => columnName => state.columns.some(col => col.name === columnName)
 }
