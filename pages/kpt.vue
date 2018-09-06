@@ -1,60 +1,15 @@
 <template>
   <div>
-    <v-layout row wrap>
-      <v-flex xs12 sm5>
-        <v-menu
-          ref="menu"
-          lazy
-          :close-on-content-click="false"
-          v-model="menu"
-          transition="scale-transition"
-          offset-y
-          full-width
-          :nudge-right="40"
-          min-width="290px"
-          :return-value.sync="date"
-          :color="baseColor"
-        >
-          <v-text-field
-            :color="baseColor"
-            slot="activator"
-            label="Picker in menu"
-            v-model="date"
-            prepend-icon="event"
-            readonly
-          ></v-text-field>
-          <v-date-picker
-            v-model="date"
-            no-title scrollable
-            :color="baseColor"
-            event-color="green"
-            :events="registerDates">
-            <v-spacer></v-spacer>
-            <v-btn flat :color="baseColor" @click="menu = false">Cancel</v-btn>
-            <v-btn flat :color="baseColor" @click="$refs.menu.save(date)">OK</v-btn>
-          </v-date-picker>
-        </v-menu>
-      </v-flex>
-      <v-spacer />
-      <v-flex xs3 sm3>
-        <v-btn flat icon :color="baseColor"
-         @click="toNextWeek">
-          <v-icon>keyboard_arrow_up</v-icon>
-        </v-btn>
-        <v-btn flat icon :color="baseColor"
-         @click="toLastWeek">
-          <v-icon>keyboard_arrow_down</v-icon>
-        </v-btn>
-        <v-btn flat icon :color="baseColor"
-         @click="toYesterday">
-          <v-icon>keyboard_arrow_left</v-icon>
-        </v-btn>
-        <v-btn flat icon :color="baseColor"
-          @click="toTomorrow">
-          <v-icon>keyboard_arrow_right</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    <furikaeri-header
+      :date="date"
+      :menu="menu"
+      :color="baseColor"
+      :registerDates="registerDates"
+      @toNextWeek="toNextWeek"
+      @toLastWeek="toLastWeek"
+      @toYesterday="toYesterday"
+      @toTomorrow="toTomorrow">
+    </furikaeri-header>
     <v-layout row wrap>
       <badge-board
         :word="text.keep"
@@ -88,6 +43,7 @@
 import FurikaeriDate from '~/mixins/FurikaeriDate'
 import Furikaeri from '~/mixins/Furikaeri.vue'
 import BadgeBoard from '~/components/BadgeBoard.vue'
+import FurikaeriHeader from '~/components/FurikaeriHeader.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 const FURIKAERI = 'kpt'
@@ -111,7 +67,8 @@ export default {
     }
   },
   components: {
-    'badge-board': BadgeBoard
+    'badge-board': BadgeBoard,
+    'furikaeri-header': FurikaeriHeader
   },
   computed: {
     ...mapGetters({
