@@ -58,27 +58,27 @@
     <v-layout row wrap>
       <badge-board
         :word="text.keep"
-        :color="kptColor.keep"
-        :avatarColor="kptColor.keepAvatar"
+        :color="furikaeriColor.keep"
+        :avatarColor="furikaeriColor.keepAvatar"
         :model="keep"
-        @remove="removeEachKpt"
-        @set="setEachKpt">
+        @remove="removeEachFurikaeri"
+        @set="setEachFurikaeriList">
       </badge-board>
       <badge-board
         :word="text.problem"
-        :color="kptColor.problem"
-        :avatarColor="kptColor.problemAvatar"
+        :color="furikaeriColor.problem"
+        :avatarColor="furikaeriColor.problemAvatar"
         :model="problem"
-        @remove="removeEachKpt"
-        @set="setEachKpt">
+        @remove="removeEachFurikaeri"
+        @set="setEachFurikaeriList">
       </badge-board>
       <badge-board
         :word="text.try"
-        :color="kptColor.try"
-        :avatarColor="kptColor.tryAvatar"
+        :color="furikaeriColor.try"
+        :avatarColor="furikaeriColor.tryAvatar"
         :model="_try"
-        @remove="removeEachKpt"
-        @set="setEachKpt">
+        @remove="removeEachFurikaeri"
+        @set="setEachFurikaeriList">
       </badge-board>
     </v-layout>
   </div>
@@ -86,19 +86,17 @@
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
+import Furikaeri from '~/mixins/Furikaeri.vue'
 import BadgeBoard from '~/components/BadgeBoard.vue'
 import { mapGetters, mapActions } from 'vuex'
-import auth from '~/plugins/auth'
 
+const FURIKAERI = 'kpt'
 const KEEP = 'keep'
 const PROBLEM = 'problem'
 const TRY = 'try'
 
 export default {
-  mixins: [ FurikaeriDate ],
-  components: {
-    'badge-board': BadgeBoard
-  },
+  mixins: [ FurikaeriDate, Furikaeri ],
   data () {
     return {
       menu: false,
@@ -108,90 +106,46 @@ export default {
         keep: KEEP,
         problem: PROBLEM,
         try: TRY
-      }
+      },
+      name: FURIKAERI
     }
+  },
+  components: {
+    'badge-board': BadgeBoard
   },
   computed: {
     ...mapGetters({
       user: 'user/user',
       isSignUp: 'user/isSignUp',
       baseColor: 'color/base',
-      kptColor: 'color/kpt',
-      kpt: 'kpt/kpt',
-      itemIndex: 'kpt/itemIndex'
+      furikaeriColor: `color/${FURIKAERI}`,
+      furikaeri: `${FURIKAERI}/${FURIKAERI}`,
+      itemIndex: `${FURIKAERI}/itemIndex`
     }),
     keep () {
-      return this.getEachKpt(KEEP)
+      return this.getEachFurikaeriList(KEEP)
     },
     problem () {
-      return this.getEachKpt(PROBLEM)
+      return this.getEachFurikaeriList(PROBLEM)
     },
     _try () {
-      return this.getEachKpt(TRY)
-    }
-  },
-  watch: {
-    kpt: {
-      deep: true,
-      handler () {
-        this.setRegisterDates()
-      }
-    },
-    date () {
-      this.setRegisterDates()
-    }
-  },
-  async mounted () {
-    this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
-    if (this.isSignUp) {
-      this.setKpt({ user: this.user })
-    } else {
-      const user = await auth()
-      await this.setCredential({ user: user || null })
-      this.setKpt({ user: this.user })
+      return this.getEachFurikaeriList(TRY)
     }
   },
   methods: {
     ...mapActions({
-      addKpt: 'kpt/addKpt',
-      setKpt: 'kpt/setKpt',
-      setKptItem: 'kpt/setKptItem',
-      removeKptItem: 'kpt/removeKptItem',
+      addFurikaeri: `${FURIKAERI}/add${FURIKAERI.charAt(0).toUpperCase()}${FURIKAERI.slice(1)}`,
+      setFurikaeri: `${FURIKAERI}/set${FURIKAERI.charAt(0).toUpperCase()}${FURIKAERI.slice(1)}`,
+      setFurikaeriItem: `${FURIKAERI}/set${FURIKAERI.charAt(0).toUpperCase()}${FURIKAERI.slice(1)}Item`,
+      removeFurikaeriItem: `${FURIKAERI}/remove${FURIKAERI.charAt(0).toUpperCase()}${FURIKAERI.slice(1)}Item`,
       setCredential: 'user/setCredential'
     }),
-    hasDate (date) {
-      if (this.kpt && date in this.kpt) {
-        return true
-      } else {
-        return false
-      }
-    },
-    async setEachKpt ({ each, list }) {
-      if (!this.hasDate(this.date)) {
-        await this.setNewKpt()
-      }
-      this.setKptItem({ user: this.user, date: this.date, each, list })
-    },
-    getEachKpt (kptWord) {
-      if (this.hasDate(this.date) && this.kpt[this.date] && this.kpt[this.date][kptWord]) {
-        return this.kpt[this.date][kptWord].filter(item => item != null) || []
-      } else {
-        return []
-      }
-    },
-    removeEachKpt ({ each, item }) {
-      const index = this.itemIndex(each, this.date, item)
-      this.removeKptItem({ user: this.user, date: this.date, each, index })
-    },
-    async setNewKpt () {
-      await this.addKpt({
+    async setNewFurikaeri () {
+      await this.addFurikaeri({
         user: this.user,
         date: this.date,
         content: { [`${KEEP}`]: [], [`${PROBLEM}`]: [], [`${TRY}`]: [] }
       })
-    },
-    setRegisterDates () {
-      this.registerDates = Object.keys(this.kpt)
     }
   }
 }
