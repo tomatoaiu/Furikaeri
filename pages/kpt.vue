@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <button @click="setRegisterDates">set</button> -->
     <v-layout row wrap>
       <v-flex xs12 sm5>
         <v-menu
@@ -180,7 +179,7 @@ export default {
         return []
       }
     },
-    async removeEachKpt ({ each, item }) {
+    removeEachKpt ({ each, item }) {
       const index = this.itemIndex(each, this.date, item)
       this.removeKptItem({ user: this.user, date: this.date, each, index })
     },
