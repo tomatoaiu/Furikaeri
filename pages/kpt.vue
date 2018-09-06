@@ -58,9 +58,9 @@
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12 md4>
-        <p class="display-2">KEEP</p>
+        <p class="display-2">{{ text.keep.toUpperCase() }}</p>
         <v-select
-          label="KEEP"
+          :label="text.keep.toUpperCase()"
           chips
           tags
           solo
@@ -71,21 +71,21 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: 'keep', item: data.item })"
+              @input="removeEachKpt({ each: text.keep, item: data.item })"
               :selected="data.selected"
               :color="kptColor.keep"
               text-color="white"
             >
-              <v-avatar :color="kptColor.keepAvatar">K</v-avatar>
+              <v-avatar :color="kptColor.keepAvatar">{{ text.keep.charAt(0).toUpperCase() }}</v-avatar>
               <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
         </v-select>
       </v-flex>
       <v-flex xs12 md4>
-        <p class="display-2">PROBLEM</p>
+        <p class="display-2">{{ text.problem.toUpperCase() }}</p>
         <v-select
-          label="PROBLEM"
+          :label="text.problem.toUpperCase()"
           chips
           tags
           solo
@@ -96,21 +96,21 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: 'problem', item: data.item })"
+              @input="removeEachKpt({ each: text.problem, item: data.item })"
               :selected="data.selected"
               :color="kptColor.problem"
               text-color="white"
             >
-              <v-avatar :color="kptColor.problemAvatar">P</v-avatar>
+              <v-avatar :color="kptColor.problemAvatar">{{ text.problem.charAt(0).toUpperCase() }}</v-avatar>
               <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
         </v-select>
       </v-flex>
       <v-flex xs12 md4>
-        <p class="display-2">TRY</p>
+        <p class="display-2">{{ text.try.toUpperCase() }}</p>
         <v-select
-          label="TRY"
+          :label="text.try.toUpperCase()"
           chips
           tags
           solo
@@ -121,12 +121,12 @@
           <template slot="selection" slot-scope="data">
             <v-chip
               close
-              @input="removeEachKpt({ each: 'try', item: data.item })"
+              @input="removeEachKpt({ each: text.try, item: data.item })"
               :selected="data.selected"
               :color="kptColor.try"
               text-color="white"
             >
-              <v-avatar :color="kptColor.tryAvatar">T</v-avatar>
+              <v-avatar :color="kptColor.tryAvatar">{{ text.try.charAt(0).toUpperCase() }}</v-avatar>
               <strong>{{ data.item }}</strong>
             </v-chip>
           </template>
@@ -151,7 +151,12 @@ export default {
     return {
       menu: false,
       date: undefined,
-      registerDates: undefined
+      registerDates: undefined,
+      text: {
+        keep: KEEP,
+        problem: PROBLEM,
+        try: TRY
+      }
     }
   },
   computed: {
