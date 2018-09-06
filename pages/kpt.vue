@@ -57,87 +57,37 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex xs12 md4>
-        <p class="display-2">{{ text.keep.toUpperCase() }}</p>
-        <v-select
-          :label="text.keep.toUpperCase()"
-          chips
-          tags
-          solo
-          prepend-icon=""
-          append-icon=""
-          v-model="kptKeep"
-        >
-          <template slot="selection" slot-scope="data">
-            <v-chip
-              close
-              @input="removeEachKpt({ each: text.keep, item: data.item })"
-              :selected="data.selected"
-              :color="kptColor.keep"
-              text-color="white"
-            >
-              <v-avatar :color="kptColor.keepAvatar">{{ text.keep.charAt(0).toUpperCase() }}</v-avatar>
-              <strong>{{ data.item }}</strong>
-            </v-chip>
-          </template>
-        </v-select>
-      </v-flex>
-      <v-flex xs12 md4>
-        <p class="display-2">{{ text.problem.toUpperCase() }}</p>
-        <v-select
-          :label="text.problem.toUpperCase()"
-          chips
-          tags
-          solo
-          prepend-icon=""
-          append-icon=""
-          v-model="kptProblem"
-        >
-          <template slot="selection" slot-scope="data">
-            <v-chip
-              close
-              @input="removeEachKpt({ each: text.problem, item: data.item })"
-              :selected="data.selected"
-              :color="kptColor.problem"
-              text-color="white"
-            >
-              <v-avatar :color="kptColor.problemAvatar">{{ text.problem.charAt(0).toUpperCase() }}</v-avatar>
-              <strong>{{ data.item }}</strong>
-            </v-chip>
-          </template>
-        </v-select>
-      </v-flex>
-      <v-flex xs12 md4>
-        <p class="display-2">{{ text.try.toUpperCase() }}</p>
-        <v-select
-          :label="text.try.toUpperCase()"
-          chips
-          tags
-          solo
-          prepend-icon=""
-          append-icon=""
-          v-model="kptTry"
-        >
-          <template slot="selection" slot-scope="data">
-            <v-chip
-              close
-              @input="removeEachKpt({ each: text.try, item: data.item })"
-              :selected="data.selected"
-              :color="kptColor.try"
-              text-color="white"
-            >
-              <v-avatar :color="kptColor.tryAvatar">{{ text.try.charAt(0).toUpperCase() }}</v-avatar>
-              <strong>{{ data.item }}</strong>
-            </v-chip>
-          </template>
-        </v-select>
-      </v-flex>
+      <badge-board
+        :word="text.keep"
+        :color="kptColor.keep"
+        :avatarColor="kptColor.keepAvatar"
+        :model="keep"
+        @remove="removeEachKpt"
+        @set="setEachKpt">
+      </badge-board>
+      <badge-board
+        :word="text.problem"
+        :color="kptColor.problem"
+        :avatarColor="kptColor.problemAvatar"
+        :model="problem"
+        @remove="removeEachKpt"
+        @set="setEachKpt">
+      </badge-board>
+      <badge-board
+        :word="text.try"
+        :color="kptColor.try"
+        :avatarColor="kptColor.tryAvatar"
+        :model="_try"
+        @remove="removeEachKpt"
+        @set="setEachKpt">
+      </badge-board>
     </v-layout>
   </div>
 </template>
 
 <script>
 import FurikaeriDate from '~/mixins/FurikaeriDate'
+import BadgeBoard from '~/components/BadgeBoard.vue'
 import { mapGetters, mapActions } from 'vuex'
 import auth from '~/plugins/auth'
 
@@ -147,6 +97,9 @@ const TRY = 'try'
 
 export default {
   mixins: [ FurikaeriDate ],
+  components: {
+    'badge-board': BadgeBoard
+  },
   data () {
     return {
       menu: false,
@@ -168,38 +121,14 @@ export default {
       kpt: 'kpt/kpt',
       itemIndex: 'kpt/itemIndex'
     }),
-    kptKeep: {
-      get () {
-        return this.getEachKpt(KEEP)
-      },
-      async set (list) {
-        if (!this.hasDate(this.date)) {
-          await this.setNewKpt()
-        }
-        this.setKptItem({ user: this.user, date: this.date, each: KEEP, list })
-      }
+    keep () {
+      return this.getEachKpt(KEEP)
     },
-    kptProblem: {
-      get () {
-        return this.getEachKpt(PROBLEM)
-      },
-      async set (list) {
-        if (!this.hasDate(this.date)) {
-          await this.setNewKpt()
-        }
-        this.setKptItem({ user: this.user, date: this.date, each: PROBLEM, list })
-      }
+    problem () {
+      return this.getEachKpt(PROBLEM)
     },
-    kptTry: {
-      get () {
-        return this.getEachKpt(TRY)
-      },
-      async set (list) {
-        if (!this.hasDate(this.date)) {
-          await this.setNewKpt()
-        }
-        this.setKptItem({ user: this.user, date: this.date, each: TRY, list })
-      }
+    _try () {
+      return this.getEachKpt(TRY)
     }
   },
   watch: {
@@ -237,6 +166,12 @@ export default {
       } else {
         return false
       }
+    },
+    async setEachKpt ({ each, list }) {
+      if (!this.hasDate(this.date)) {
+        await this.setNewKpt()
+      }
+      this.setKptItem({ user: this.user, date: this.date, each, list })
     },
     getEachKpt (kptWord) {
       if (this.hasDate(this.date) && this.kpt[this.date] && this.kpt[this.date][kptWord]) {
