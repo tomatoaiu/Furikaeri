@@ -5,7 +5,7 @@
         ref="menu"
         lazy
         :close-on-content-click="false"
-        v-model="menu"
+        v-model="headerMenu"
         transition="scale-transition"
         offset-y
         full-width
@@ -59,7 +59,12 @@
 <script>
 export default {
   name: 'furikaeri-header',
-  props: ['date', 'menu', 'color', 'registerDates']
+  props: ['date', 'menu', 'color', 'registerDates'],
+  data () {
+    return {
+      headerMenu: this.menu
+    }
+  }
 }
 </script>
 

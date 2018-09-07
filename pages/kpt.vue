@@ -62,8 +62,7 @@ export default {
         keep: KEEP,
         problem: PROBLEM,
         try: TRY
-      },
-      name: FURIKAERI
+      }
     }
   },
   components: {
