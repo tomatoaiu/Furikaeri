@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import auth from '~/plugins/auth'
 import FurikaeriDate from '~/mixins/FurikaeriDate'
 import Furikaeri from '~/mixins/Furikaeri.vue'
 import BadgeBoard from '~/components/BadgeBoard.vue'
@@ -75,8 +76,8 @@ export default {
       isSignUp: 'user/isSignUp',
       baseColor: 'color/base',
       furikaeriColor: `color/${FURIKAERI}`,
-      furikaeri: `${FURIKAERI}/${FURIKAERI}`,
-      itemIndex: `${FURIKAERI}/itemIndex`
+      furikaeri: `furikaeri/${FURIKAERI}`,
+      itemIndex: `furikaeri/itemIndex`
     }),
     keep () {
       return this.getEachFurikaeriList(KEEP)
@@ -88,16 +89,37 @@ export default {
       return this.getEachFurikaeriList(TRY)
     }
   },
+  async mounted () {
+    this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
+    if (this.isSignUp) {
+      this.setFurikaeri({ furikaeri: FURIKAERI, user: this.user })
+    } else {
+      const user = await auth()
+      await this.setCredential({ user: user || null })
+      this.setFurikaeri({ furikaeri: FURIKAERI, user: this.user })
+    }
+  },
   methods: {
     ...mapActions({
-      addFurikaeri: `${FURIKAERI}/add${FURIKAERI.charAt(0).toUpperCase()}${FURIKAERI.slice(1)}`,
-      setFurikaeri: `${FURIKAERI}/set${FURIKAERI.charAt(0).toUpperCase()}${FURIKAERI.slice(1)}`,
-      setFurikaeriItem: `${FURIKAERI}/set${FURIKAERI.charAt(0).toUpperCase()}${FURIKAERI.slice(1)}Item`,
-      removeFurikaeriItem: `${FURIKAERI}/remove${FURIKAERI.charAt(0).toUpperCase()}${FURIKAERI.slice(1)}Item`,
+      addFurikaeri: 'furikaeri/addFurikaeri',
+      setFurikaeri: 'furikaeri/setFurikaeri',
+      setFurikaeriItem: 'furikaeri/setFurikaeriItem',
+      removeFurikaeriItem: 'furikaeri/removeFurikaeriItem',
       setCredential: 'user/setCredential'
     }),
+    async setEachFurikaeriList ({ each, list }) {
+      if (!this.hasDate(this.date)) {
+        await this.setNewFurikaeri()
+      }
+      this.setFurikaeriItem({ furikaeri: FURIKAERI, user: this.user, date: this.date, each, list })
+    },
+    removeEachFurikaeri ({ each, item }) {
+      const index = this.itemIndex(FURIKAERI, each, this.date, item)
+      this.removeFurikaeriItem({ furikaeri: FURIKAERI, user: this.user, date: this.date, each, index })
+    },
     async setNewFurikaeri () {
       await this.addFurikaeri({
+        furikaeri: FURIKAERI,
         user: this.user,
         date: this.date,
         content: { [`${KEEP}`]: [], [`${PROBLEM}`]: [], [`${TRY}`]: [] }
@@ -106,4 +128,3 @@ export default {
   }
 }
 </script>
-
