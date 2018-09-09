@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "Nuxt.js + Vuetify.js project",
   "author": "Shunsuke Toba <boushi_sukaimu@yahoo.co.jp>",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
