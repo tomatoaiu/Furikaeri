@@ -12,26 +12,11 @@
     </furikaeri-header>
     <v-layout row wrap>
       <badge-board
-        :word="text.keep"
-        :color="furikaeriColor.keep"
-        :avatarColor="furikaeriColor.keepAvatar"
-        :model="keep"
-        @remove="removeEachFurikaeri"
-        @set="setEachFurikaeriList">
-      </badge-board>
-      <badge-board
-        :word="text.problem"
-        :color="furikaeriColor.problem"
-        :avatarColor="furikaeriColor.problemAvatar"
-        :model="problem"
-        @remove="removeEachFurikaeri"
-        @set="setEachFurikaeriList">
-      </badge-board>
-      <badge-board
-        :word="text.try"
-        :color="furikaeriColor.try"
-        :avatarColor="furikaeriColor.tryAvatar"
-        :model="_try"
+        v-for="(w, i) in word" :key="i"
+        :word="w"
+        :color="furikaeriColor[w]"
+        :avatarColor="furikaeriColor[`${w}Avatar`]"
+        :model="date in furikaeri && w in furikaeri[date] ? furikaeri[date][w] : []"
         @remove="removeEachFurikaeri"
         @set="setEachFurikaeriList">
       </badge-board>
@@ -48,9 +33,7 @@ import FurikaeriHeader from '~/components/FurikaeriHeader.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 const FURIKAERI = 'kpt'
-const KEEP = 'keep'
-const PROBLEM = 'problem'
-const TRY = 'try'
+const WORD = ['keep', 'problem', 'try']
 
 export default {
   mixins: [ FurikaeriDate, Furikaeri ],
@@ -59,11 +42,7 @@ export default {
       menu: false,
       date: undefined,
       registerDates: undefined,
-      text: {
-        keep: KEEP,
-        problem: PROBLEM,
-        try: TRY
-      }
+      word: WORD
     }
   },
   components: {
@@ -78,16 +57,7 @@ export default {
       furikaeriColor: `color/${FURIKAERI}`,
       furikaeri: `furikaeri/${FURIKAERI}`,
       itemIndex: `furikaeri/itemIndex`
-    }),
-    keep () {
-      return this.getEachFurikaeriList(KEEP)
-    },
-    problem () {
-      return this.getEachFurikaeriList(PROBLEM)
-    },
-    _try () {
-      return this.getEachFurikaeriList(TRY)
-    }
+    })
   },
   async mounted () {
     this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '-')
@@ -118,12 +88,11 @@ export default {
       this.removeFurikaeriItem({ furikaeri: FURIKAERI, user: this.user, date: this.date, each, index })
     },
     async setNewFurikaeri () {
-      await this.addFurikaeri({
-        furikaeri: FURIKAERI,
-        user: this.user,
-        date: this.date,
-        content: { [`${KEEP}`]: [], [`${PROBLEM}`]: [], [`${TRY}`]: [] }
-      })
+      let content = {}
+      for (const w of this.word) {
+        content[w] = []
+      }
+      await this.addFurikaeri({ furikaeri: FURIKAERI, user: this.user, date: this.date, content })
     }
   }
 }
