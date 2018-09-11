@@ -1,7 +1,7 @@
 const localStoragePlugin = store => {
   store.subscribe((mutation, {
     boards,
-    kpt,
+    // kpt,
     ywt,
     fourLinesDiary,
     lamda,
