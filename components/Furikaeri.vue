@@ -16,7 +16,7 @@
         :word="w"
         :color="color[w]"
         :avatarColor="color[`${w}Avatar`]"
-        :model="date in furikaeri && w in furikaeri[date] ? furikaeri[date][w] : []"
+        :model="furikaeri && furikaeri != {} && date in furikaeri && w in furikaeri[date] ? furikaeri[date][w] : {}"
         @remove="removeEachFurikaeri"
         @set="setEachFurikaeriList">
       </badge-board>
@@ -75,11 +75,11 @@ export default {
       removeFurikaeriItem: 'furikaeri/removeFurikaeriItem',
       setCredential: 'user/setCredential'
     }),
-    async setEachFurikaeriList ({ each, list }) {
+    async setEachFurikaeriList ({ each, item }) {
       if (!this.hasDate(this.date)) {
         await this.setNewFurikaeri()
       }
-      this.setFurikaeriItem({ furikaeri: this.name, user: this.user, date: this.date, each, list })
+      this.setFurikaeriItem({ furikaeri: this.name, user: this.user, date: this.date, each, item })
     },
     removeEachFurikaeri ({ each, item }) {
       const index = this.itemIndex(this.name, each, this.date, item)
@@ -88,7 +88,7 @@ export default {
     async setNewFurikaeri () {
       let content = {}
       for (const w of this.word) {
-        content[w] = []
+        content[w] = {}
       }
       await this.addFurikaeri({
         furikaeri: this.name,

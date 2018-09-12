@@ -33,7 +33,9 @@ export default {
       }
     },
     setRegisterDates () {
-      this.registerDates = Object.keys(this.furikaeri)
+      if (this.furikaeri) {
+        this.registerDates = Object.keys(this.furikaeri)
+      }
     }
   }
 }

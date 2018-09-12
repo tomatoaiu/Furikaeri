@@ -33,10 +33,11 @@ export default {
   computed: {
     item: {
       get () {
-        return this.model
+        return (Object.values(this.model).filter(item => item))
       },
       set (list) {
-        this.$emit('set', { each: this.word, list })
+        const item = list[list.length - 1]
+        this.$emit('set', { each: this.word, item })
       }
     }
   }
