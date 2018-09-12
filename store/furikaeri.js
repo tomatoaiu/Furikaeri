@@ -4,7 +4,7 @@ const db = firebase.database()
 const userRef = db.ref('/user')
 
 export const state = () => ({
-  kpt: {},
+  kpt: {}, // keep: {}, problem: {}, try: {}
   ywt: {},
   fourLinesDiary: {},
   lamda: {},
@@ -18,8 +18,7 @@ export const mutations = {
     state[furikaeri] = list
   },
   ADD_FURIKAERI (state, { furikaeri, date, content }) {
-    state[furikaeri] = date
-    state[furikaeri][date] = content
+    Vue.set(state[furikaeri], date, content)
   },
   SET_FURIKAERI_ITEM (state, { furikaeri, date, each, id, item }) {
     Vue.set(state[furikaeri][date][each], `${id}`, item)
@@ -34,8 +33,9 @@ export const actions = {
     userRef.child(`${user.id}/${furikaeri}`).once('value')
       .then((snapshot) => {
         const list = snapshot.val()
-        console.log(list)
-        commit('SET_FURIKAERI', { furikaeri, list })
+        if (list) {
+          commit('SET_FURIKAERI', { furikaeri, list })
+        }
       })
   },
   async addFurikaeri ({ commit }, { furikaeri, user, date, content }) {

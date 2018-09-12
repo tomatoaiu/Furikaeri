@@ -16,7 +16,7 @@
         :word="w"
         :color="color[w]"
         :avatarColor="color[`${w}Avatar`]"
-        :model="furikaeri && date in furikaeri && w in furikaeri[date] ? furikaeri[date][w] : {}"
+        :model="furikaeri && furikaeri != {} && date in furikaeri && w in furikaeri[date] ? furikaeri[date][w] : {}"
         @remove="removeEachFurikaeri"
         @set="setEachFurikaeriList">
       </badge-board>

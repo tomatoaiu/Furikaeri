@@ -33,7 +33,6 @@ export default {
   computed: {
     item: {
       get () {
-        console.log(this.model)
         return (Object.values(this.model).filter(item => item))
       },
       set (list) {
