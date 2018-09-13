@@ -4,7 +4,7 @@ const db = firebase.database()
 const userRef = db.ref('/user')
 
 export const state = () => ({
-  kpt: {}, // keep: {}, problem: {}, try: {}
+  kpt: {},
   ywt: {},
   fourLinesDiary: {},
   lamda: {},
