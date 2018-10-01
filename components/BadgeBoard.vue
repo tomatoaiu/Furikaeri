@@ -1,10 +1,10 @@
 <template>
   <v-flex xs12 md4>
     <p class="display-2">{{ word.toUpperCase() }}</p>
-    <v-select
+    <v-combobox
       :label="word.toUpperCase()"
       chips
-      tags
+      multiple
       solo
       prepend-icon=""
       append-icon=""
@@ -22,7 +22,7 @@
           <strong>{{ data.item }}</strong>
         </v-chip>
       </template>
-    </v-select>
+    </v-combobox>
   </v-flex>
 </template>
 
