@@ -51,11 +51,10 @@
                         ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field
+                      <v-textarea
                         label="context"
                         v-model="noteContent"
-                        multi-line
-                      ></v-text-field>
+                      ></v-textarea>
                     </v-flex>
                     <v-flex xs12 sm6>
                       <v-select
