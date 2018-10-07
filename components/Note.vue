@@ -9,7 +9,6 @@
       </v-btn>
 
       <v-dialog v-model="configDialog" persistent max-width="500px">
-        <!-- <v-btn :color="baseColor" flat icon slot="activator"><v-icon>add</v-icon></v-btn> -->
         <v-btn :color="baseColor" small flat icon slot="activator"><v-icon size="15">settings</v-icon></v-btn>
         <v-card>
           <v-card-title>
