@@ -61,9 +61,6 @@
           <img :src="user.icon" alt="avatar">
         </v-avatar>
         <v-list>
-          <!-- <v-list-tile v-for="(item, i) in userLinks" :key="i" @click="">
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile> -->
           <v-list-tile>
             <v-list-tile-title @click="callAuth">SIGN IN</v-list-tile-title>
           </v-list-tile>
