@@ -36,29 +36,29 @@ export const mutations = {
 }
 
 export const actions = {
-  addColumn ({ commit }, { name }) {
-    commit('ADD_COLUMN', { name })
+  addColumn ({ commit }, name) {
+    commit('ADD_COLUMN', name)
   },
-  addNote ({ commit }, { title, content, index }) {
-    commit('ADD_NOTE', { title, content, index })
+  addNote ({ commit }, note) {
+    commit('ADD_NOTE', note)
   },
-  setColumn ({ commit }, { index, column }) {
-    commit('SET_COLUMN', { index, column })
+  setColumn ({ commit }, column) {
+    commit('SET_COLUMN', column)
   },
-  setNote ({ commit }, { index, note }) {
-    commit('SET_NOTE', { index, note })
+  setNote ({ commit }, note) {
+    commit('SET_NOTE', note)
   },
-  setNoteTitle ({ commit }, { columnIndex, noteIndex, title }) {
-    commit('SET_NOTE_TITLE', { columnIndex, noteIndex, title })
+  setNoteTitle ({ commit }, noteTitle) {
+    commit('SET_NOTE_TITLE', noteTitle)
   },
-  setNoteContent ({ commit }, { columnIndex, noteIndex, content }) {
-    commit('SET_NOTE_CONTENT', { columnIndex, noteIndex, content })
+  setNoteContent ({ commit }, noteContent) {
+    commit('SET_NOTE_CONTENT', noteContent)
   },
-  removeColumn ({ commit }, { index }) {
-    commit('REMOVE_COLUMN', { index })
+  removeColumn ({ commit }, index) {
+    commit('REMOVE_COLUMN', index)
   },
-  removeNote ({ commit }, { columnIndex, noteIndex }) {
-    commit('REMOVE_NOTE', { columnIndex, noteIndex })
+  removeNote ({ commit }, note) {
+    commit('REMOVE_NOTE', note)
   }
 }
 
