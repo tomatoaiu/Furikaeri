@@ -15,8 +15,8 @@ export const mutations = {
       content
     })
   },
-  SET_COLUMN (state, { index, column }) {
-    state.columns[index] = column
+  SET_COLUMNS (state, { columns }) {
+    state.columns = columns
   },
   SET_NOTE (state, { index, note }) {
     state.columns[index].notes = note
@@ -42,8 +42,8 @@ export const actions = {
   addNote ({ commit }, note) {
     commit('ADD_NOTE', note)
   },
-  setColumn ({ commit }, column) {
-    commit('SET_COLUMN', column)
+  setColumns ({ commit }, columns) {
+    commit('SET_COLUMNS', columns)
   },
   setNote ({ commit }, note) {
     commit('SET_NOTE', note)

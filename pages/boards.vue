@@ -52,16 +52,14 @@
     </v-flex>
     <v-flex xs12>
       <v-card color="shades" height="800">
-        <v-container grid-list-md text-xs-center class="height-100 overflow-scroll" style="display: flex;">
-          <!-- <v-layout row wrap class="height-100 overflow-scroll" style="flex-wrap: nowrap;"> -->
-            <!-- <draggable v-model="columns" :options="{group:'column', animation: 400}" style="min-height: 3em;"> -->
-              <boards-column
-                style="width: 300px; min-width: 300px; margin-right: 1rem;"
-                v-for="(column, index) of columns" :key="index"
-                :column="column">
-              </boards-column>
-            <!-- </draggable> -->
-          <!-- </v-layout> -->
+        <v-container grid-list-md text-xs-center class="height-100 overflow-scroll">
+          <draggable v-model="draggableColumns" :options="{group:'column', animation: 400}" style="display: flex; min-height: 3em;">
+            <boards-column
+              style="width: 300px; min-width: 300px; margin-right: 1rem; min-height: 800px;"
+              v-for="(column, index) of draggableColumns" :key="index"
+              :column="column">
+            </boards-column>
+          </draggable>
         </v-container>
       </v-card>
     </v-flex>
@@ -69,7 +67,7 @@
 </template>
 
 <script>
-// import draggable from 'vuedraggable'
+import draggable from 'vuedraggable'
 import BoardsColumn from '~/components/BoardsColumn.vue'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -95,14 +93,23 @@ export default {
       columns: 'boards/columns',
       existsColumn: 'boards/existsColumn',
       baseColor: 'color/base'
-    })
+    }),
+    draggableColumns: {
+      get () {
+        return this.columns
+      },
+      set (list) {
+        this.setColumns({ columns: list })
+      }
+    }
   },
   mounted () {
     this.onResize()
   },
   methods: {
     ...mapActions({
-      addColumn: 'boards/addColumn'
+      addColumn: 'boards/addColumn',
+      setColumns: 'boards/setColumns'
     }),
     onResize () {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight }
@@ -139,7 +146,7 @@ export default {
     }
   },
   components: {
-    // draggable,
+    draggable,
     'boards-column': BoardsColumn
   }
 }
