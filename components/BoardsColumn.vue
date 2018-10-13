@@ -83,7 +83,7 @@
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex xs12>
-            <draggable v-model="notes" :options="{group:'note', animation: 400}" style="min-height: 3em;">
+            <draggable v-model="notes" :options="{group:'note', animation: 400}" style="min-height: 750px;">
               <v-card v-for="(note, index) of notes" :key="index">
                 <boards-note
                   :name="column.name"
