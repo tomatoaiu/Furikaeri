@@ -52,13 +52,16 @@
     </v-flex>
     <v-flex xs12>
       <v-card color="shades" height="800">
-        <v-container grid-list-md text-xs-center class="height-100">
-          <v-layout row wrap class="height-100 overflow-scroll">
-            <boards-column 
-              v-for="(column, index) of columns" :key="index"
-              :column="column">
-            </boards-column>
-          </v-layout>
+        <v-container grid-list-md text-xs-center class="height-100 overflow-scroll" style="display: flex;">
+          <!-- <v-layout row wrap class="height-100 overflow-scroll" style="flex-wrap: nowrap;"> -->
+            <!-- <draggable v-model="columns" :options="{group:'column', animation: 400}" style="min-height: 3em;"> -->
+              <boards-column
+                style="width: 300px; min-width: 300px; margin-right: 1rem;"
+                v-for="(column, index) of columns" :key="index"
+                :column="column">
+              </boards-column>
+            <!-- </draggable> -->
+          <!-- </v-layout> -->
         </v-container>
       </v-card>
     </v-flex>
@@ -66,6 +69,7 @@
 </template>
 
 <script>
+// import draggable from 'vuedraggable'
 import BoardsColumn from '~/components/BoardsColumn.vue'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -135,6 +139,7 @@ export default {
     }
   },
   components: {
+    // draggable,
     'boards-column': BoardsColumn
   }
 }

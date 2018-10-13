@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm4 md3 xl2>
+  <!-- <v-flex xs12 sm4 md3 xl2> -->
     <v-card style="height: 100%; overflow: scroll;">
       <v-card-title class="pb-0 pt-0 pr-0">
         <div class="title">{{ column.name }}</div>
@@ -97,7 +97,7 @@
         </v-layout>
       </v-container>
     </v-card>
-  </v-flex>
+  <!-- </v-flex> -->
 </template>
 
 <script>
