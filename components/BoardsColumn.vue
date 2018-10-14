@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm4 md3 xl2>
+  <!-- <v-flex xs12 sm4 md3 xl2> -->
     <v-card style="height: 100%; overflow: scroll;">
       <v-card-title class="pb-0 pt-0 pr-0">
         <div class="title">{{ column.name }}</div>
@@ -83,7 +83,7 @@
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex xs12>
-            <draggable v-model="notes" :options="{group:'note', animation: 400}" style="min-height: 3em;">
+            <draggable v-model="notes" :options="{group:'note', animation: 400}" style="min-height: 750px;">
               <v-card v-for="(note, index) of notes" :key="index">
                 <boards-note
                   :name="column.name"
@@ -97,7 +97,7 @@
         </v-layout>
       </v-container>
     </v-card>
-  </v-flex>
+  <!-- </v-flex> -->
 </template>
 
 <script>
