@@ -45,19 +45,17 @@
       </v-dialog>
       
     </v-card-title>
-    <v-card-text class="px-2 pt-1"
-      v-if="!editableNoteContent">
-      <p class="text-xs-left">
-        {{ note.content }}
-      </p>
+    <v-card-text class="px-2 pt-1 pb-1">
+      <v-textarea
+        ref="noteContent"
+        background-color="#f7f7f7"
+        full-width
+        hide-details
+        :color="baseColor"
+        v-model="editingNoteContent"
+        v-on:blur="changeNoteContent(index, editingNoteContent)">
+      </v-textarea>
     </v-card-text>
-    <v-text-field
-      v-else
-      ref="noteContent"
-      multi-line
-      v-model="editingNoteContent"
-      v-on:blur="changeNoteContent(index, editingNoteContent)">
-    </v-text-field>
   </div>
 </template>
 
