@@ -3,10 +3,6 @@
     <v-card-title class="pt-1 pl-2 pb-1 pr-0">
       <div class="subheading">{{ note.title }}</div>
       <v-spacer></v-spacer>
-      <v-btn :color="baseColor" small flat icon
-        @click="applyEditableNoteContent(index)">
-        <v-icon size="15">mode_edit</v-icon>
-      </v-btn>
 
       <v-dialog v-model="configDialog" persistent max-width="500px">
         <v-btn :color="baseColor" small flat icon slot="activator"><v-icon size="15">settings</v-icon></v-btn>
@@ -47,6 +43,7 @@
     </v-card-title>
     <v-card-text class="px-2 pt-1 pb-1">
       <v-textarea
+        class="pt-0"
         ref="noteContent"
         background-color="#f7f7f7"
         full-width
@@ -67,7 +64,6 @@ export default {
   props: ['name', 'note', 'index'],
   data () {
     return {
-      editableNoteContent: false,
       editingNoteContent: this.note.content,
       configDialog: false,
       noteTitle: this.note.title,
@@ -83,18 +79,17 @@ export default {
       baseColor: 'color/base'
     })
   },
+  mounted () {
+    this.setPaddingZeroToTextarea()
+  },
   methods: {
     ...mapActions({
       setNoteTitle: 'boards/setNoteTitle',
       setNoteContent: 'boards/setNoteContent',
       removeNote: 'boards/removeNote'
     }),
-    applyEditableNoteContent () {
-      this.editableNoteContent = true
-      this.$nextTick(() => this.$refs.noteContent.focus())
-    },
-    notApplyEditableNoteContent () {
-      this.editableNoteContent = false
+    setPaddingZeroToTextarea () {
+      this.$refs['noteContent'].$el.firstChild.style.paddingTop = '0'
     },
     changeNoteTitle (index) {
       this.setNoteTitle({
@@ -110,7 +105,6 @@ export default {
         noteIndex: index,
         content: content
       })
-      this.notApplyEditableNoteContent()
     },
     closeConfigDialog () {
       this.configDialog = false
@@ -132,3 +126,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.v-input__control {
+  padding-top: 0;
+}
+</style>
+
