@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/storage'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(

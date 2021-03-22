@@ -37,3 +37,24 @@ firebase
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftomatoaiu%2FFurikaeri.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftomatoaiu%2FFurikaeri?ref=badge_large)
+
+
+## Note (Lang: Ja)
+
+### デプロイの仕方
+
+#### 必要なもの
+
+- node v10.24.0
+- firebase-tools
+
+#### 流れ
+
+```sh
+npm run generate
+firebase -V
+firebase login
+firebase serve
+firebase deploy
+```
+

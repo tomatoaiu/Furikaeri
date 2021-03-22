@@ -61,15 +61,17 @@
           <img :src="user.icon" alt="avatar">
         </v-avatar>
         <v-list>
-          <v-list-tile>
-            <v-list-tile-title @click="callAuth">SIGN IN</v-list-tile-title>
+          <v-list-tile :to="'/profile'">
+            <v-list-tile-title>PROFILE</v-list-tile-title>
           </v-list-tile>
+          <!-- <v-list-tile>
+            <v-list-tile-title @click="callAuth">SIGN IN</v-list-tile-title>
+          </v-list-tile> -->
           <v-list-tile>
             <v-list-tile-title>SIGN OUT</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
-      
     </v-toolbar>
     <v-content>
       <v-container>
